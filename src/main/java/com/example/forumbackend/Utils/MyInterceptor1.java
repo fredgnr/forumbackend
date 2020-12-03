@@ -47,6 +47,7 @@ public class MyInterceptor1 implements HandlerInterceptor {
         logger.info("拦截器1 在控制器执行之前执行");
         Cookie[] cookies=request.getCookies();
         Cookie usercookie=null,tokencookie=null;
+        if(cookies!=null&&cookies.length>0)
         for(Cookie cookie:cookies){
             if (cookie.getName().equals("UID")) {
                 usercookie = cookie;

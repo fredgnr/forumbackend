@@ -23,7 +23,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
          * addPathPatterns 配置拦截规则
          */
         registry.addInterceptor(myInterceptor1)
-            .addPathPatterns("login/**").excludePathPatterns("login/in")
-            .addPathPatterns("user/**").excludePathPatterns("/user/singup");
+            .addPathPatterns("/login/**").excludePathPatterns("/login/in")
+            .addPathPatterns("/user/**").excludePathPatterns("/user/singup");
     }
 }
