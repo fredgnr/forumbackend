@@ -45,6 +45,7 @@ public class MyInterceptor1 implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         logger.info("拦截器1 在控制器执行之前执行");
+        System.out.println("test1");
         Cookie[] cookies=request.getCookies();
         Cookie usercookie=null,tokencookie=null;
         if(cookies!=null&&cookies.length>0)
@@ -61,7 +62,7 @@ public class MyInterceptor1 implements HandlerInterceptor {
 
         ResponseResult<User> result=null;
         if(usercookie==null||tokencookie==null)
-            result= Response.makeErrRsp("Error");
+            result= Response.makeErrRsp("无所需cookie携带");
         else{
             ValueOperations<String,Role> vop=redisTemplate.opsForValue();
             Role role=vop.get(usercookie.getValue());
@@ -82,10 +83,12 @@ public class MyInterceptor1 implements HandlerInterceptor {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json; charset=utf-8");
         PrintWriter out = null ;
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         out = response.getWriter();
         out.write(objectMapper.writeValueAsString(result));
         out.flush();
         out.close();
+
         return false;
     }
 

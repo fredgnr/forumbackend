@@ -21,22 +21,22 @@ public class User implements Serializable {
     private static final long serialVersionUID = -1L;
 
     @TableId(value="uid",type = IdType.AUTO)
-    @ApiModelProperty("用户UID")
+    @ApiModelProperty(value = "用户UID",example = "0")
     private Integer UID;
 
     @TableField(value = "user_account")
-    @ApiModelProperty("账号")
+    @ApiModelProperty(value = "账号",example = "513317651")
     private String Account;
 
     @TableField(value = "user_name")
-    @ApiModelProperty("用户姓名")
+    @ApiModelProperty(value = "用户姓名",example = "fred")
     private String Name;
 
-    @ApiModelProperty("密码")
+    @ApiModelProperty(value = "密码",example = "123456789")
     @TableField(value = "user_password")
     private String Password;
 
-    @ApiModelProperty("邮箱")
+    @ApiModelProperty(value = "邮箱",example = "513317651@qq.com")
     @TableField(value="user_email")
     private String email;
 }

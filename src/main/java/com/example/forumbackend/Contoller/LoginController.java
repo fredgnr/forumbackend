@@ -6,6 +6,7 @@ import com.example.forumbackend.Service.LoginService;
 import com.example.forumbackend.Utils.ResponseUitls.Response;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/login")
+@Api(tags = "除了login/in都需要在cookie中携带认证信息，若没有或不合法或已过期，拦截器会进行拦截，此时返回状态码为401")
 public class LoginController {
     @Autowired
     private LoginService loginService;

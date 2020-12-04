@@ -1,20 +1,20 @@
 package com.example.forumbackend.Contoller;
 
-import com.example.forumbackend.Domain.Role;
+
 import com.example.forumbackend.Domain.User;
 import com.example.forumbackend.Domain.User_Info;
-import com.example.forumbackend.Mapper.UserInfoMapper;
 import com.example.forumbackend.Service.UserInfoService;
 import com.example.forumbackend.Service.UserService;
 import com.example.forumbackend.Utils.ResponseUitls.Response;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/user")
+@Api(tags = "除了/user/singup，其余都需要在cookie中携带认证信息，若没有或不合法或已过期，拦截器会进行拦截，返回状态码为401")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -53,6 +54,11 @@ public class UserController {
     @Transactional
     @PostMapping("/singup")
     @ApiOperation(value="注册账号")
+    @ApiResponses({
+            @ApiResponse(code=108,message = "账号已被注册"),
+            @ApiResponse(code=109,message = "邮箱已被注册"),
+            @ApiResponse(code=102,message = "成功注册")
+    })
     public ResponseResult<User> singup(@RequestBody User user){
         if(userService.findByAccount(user.getAccount())!=null){
             return Response.makeRsp(
@@ -100,7 +106,5 @@ public class UserController {
         userInfoService.addintro(uidincookie,intro);
         return Response.makeOKRsp("修改信息成功");
     }
-
-
 
 }

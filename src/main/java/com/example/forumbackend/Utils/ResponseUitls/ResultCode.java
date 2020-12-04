@@ -9,10 +9,9 @@ public enum ResultCode {
     UID_WRONG(107),//使用了其他用户的uid请求信息
     ACCOUNT_DUPLICATED(108),
     EMAIL_DUPLICATED(109),
-
     INTERNAL_SERVER_ERROR(500);
 
-    public int code;
+    public final int code;
 
     ResultCode(int code) {
         this.code = code;
