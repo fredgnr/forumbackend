@@ -12,7 +12,7 @@ import lombok.ToString;
 @TableName("upfile")
 @Data
 @ToString
-public class upfile {
+public class Upfile {
     /*
    upfile_id            int not null  auto_increment,
    upfile_resource_id   int,

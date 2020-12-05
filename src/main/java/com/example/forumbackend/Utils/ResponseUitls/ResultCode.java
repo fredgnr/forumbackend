@@ -9,6 +9,8 @@ public enum ResultCode {
     UID_WRONG(107),//使用了其他用户的uid请求信息
     ACCOUNT_DUPLICATED(108),
     EMAIL_DUPLICATED(109),
+    UPLOAD_FAILED(110),
+    SECTION_NOT_EXIST(111),
     INTERNAL_SERVER_ERROR(500);
 
     public final int code;
