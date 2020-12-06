@@ -70,11 +70,11 @@ public class UserController {
         else{
             userService.insertUser(user);
             User_Info userInfo=new User_Info();
-            userInfo.setUser_ID(user.getUID());
-            userInfo.setUser_Intro("");
-            userInfo.setUser_Zan(0);
-            userInfo.setUser_Balance(0);
-            userInfo.setUser_Point(0);
+            userInfo.setUserID(user.getUID());
+            userInfo.setUserIntro("");
+            userInfo.setUserZan(0);
+            userInfo.setUserBalance(0);
+            userInfo.setUserPoint(0);
             userInfoService.insertinfo(userInfo);
             return Response.makeOKRsp(user);
         }

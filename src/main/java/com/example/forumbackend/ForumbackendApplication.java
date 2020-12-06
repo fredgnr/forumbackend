@@ -5,13 +5,23 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
+import java.util.TimeZone;
+
 @MapperScan("com.example.forumbackend.Mapper")
 @SpringBootApplication
 @EnableSwagger2
 public class ForumbackendApplication {
 
     public static void main(String[] args) {
+       // System.out.println(LocalDateTime.now());
         SpringApplication.run(ForumbackendApplication.class, args);
+    }
+
+    @PostConstruct
+    void started() {
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT+8"));
     }
 
 }

@@ -45,18 +45,15 @@ public class MyInterceptor1 implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         logger.info("拦截器1 在控制器执行之前执行");
-        System.out.println("test1");
         Cookie[] cookies=request.getCookies();
         Cookie usercookie=null,tokencookie=null;
         if(cookies!=null&&cookies.length>0)
         for(Cookie cookie:cookies){
             if (cookie.getName().equals("UID")) {
                 usercookie = cookie;
-                System.out.println(cookie.getValue());
             }
             else if (cookie.getName().equals("token")) {
                 tokencookie = cookie;
-                System.out.println(cookie.getValue());
             }
         }
 

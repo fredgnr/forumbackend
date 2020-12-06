@@ -11,6 +11,7 @@ public enum ResultCode {
     EMAIL_DUPLICATED(109),
     UPLOAD_FAILED(110),
     SECTION_NOT_EXIST(111),
+    RESOURCE_NOT_EXIST(112),
     INTERNAL_SERVER_ERROR(500);
 
     public final int code;

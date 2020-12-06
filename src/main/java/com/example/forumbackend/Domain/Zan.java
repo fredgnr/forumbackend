@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 @TableName("zan")
 @ApiModel(description = "赞")
-public class zan {
+public class Zan {
     /*
     zan_id               int not null  auto_increment,
    zan_resource_id      int,

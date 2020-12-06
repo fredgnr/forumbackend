@@ -26,25 +26,25 @@ public class User_Info implements Serializable {
      */
     @TableId(value = "info_id",type = IdType.AUTO)
     @ApiModelProperty(value = "info id",example = "0")
-    private Integer info_id;
+    private Integer infoid;
 
     @TableField("user_id")
     @ApiModelProperty(value = "对应的用户UID",example = "0")
-    private Integer User_ID;
+    private Integer UserID;
 
     @TableField("user_Intro")
     @ApiModelProperty(value = "用户自我介绍",example = "test test")
-    private String User_Intro;
+    private String UserIntro;
 
     @TableField("user_zan")
     @ApiModelProperty(value = "用户得到的赞的数量",example = "0")
-    private Integer User_Zan;
+    private Integer UserZan;
 
     @TableField("user_point")
     @ApiModelProperty(value = "用户经验值",example = "0")
-    private Integer User_Point;
+    private Integer UserPoint;
 
     @TableField("user_balance")
     @ApiModelProperty(value = "用户余额",example = "0")
-    private Integer User_Balance;
+    private Integer UserBalance;
 }

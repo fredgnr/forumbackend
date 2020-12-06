@@ -6,6 +6,7 @@ import com.example.forumbackend.Domain.Upfile;
 import com.example.forumbackend.Service.ResourceService;
 import com.example.forumbackend.Service.SectionService;
 import com.example.forumbackend.Service.UpFileService;
+import com.example.forumbackend.Utils.CookieUtil;
 import com.example.forumbackend.Utils.ResponseUitls.Response;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
@@ -48,14 +49,9 @@ public class UpfileController {
     @Autowired
     private UpFileService upFileService;
 
+    @Autowired
+    private CookieUtil cookieUtil;
 
-    private static Integer getuid(HttpServletRequest request){
-        Cookie[] cookies=request.getCookies();
-        for(Cookie cookie:cookies)
-            if(cookie.getName().equals("UID"))
-                return new Integer(cookie.getValue());
-        return null;
-    }
 
 
     @PostMapping("/upload")
@@ -76,15 +72,15 @@ public class UpfileController {
             return Response.makeRsp(ResultCode.SECTION_NOT_EXIST.code,"板块不存在");
         }
         ForumResource resource=new ForumResource();
-        resource.setResource_Section_ID(sectionid);
-        Integer uid=getuid(request);
-        resource.setResource_user_id(uid);
-        resource.setResource_zan(0);
-        resource.setResource_last_reply_uid(null);
-        resource.setResource_type(filetype);
-        resource.setResource_price(price!=null?price:0);
-        resource.setResource_created_time(LocalDateTime.now());
-        resource.setResource_last_reply_time(null);
+        resource.setResourceSectionID(sectionid);
+        Integer uid=cookieUtil.getuid(request);
+        resource.setResourceuserid(uid);
+        resource.setResourcezan(0);
+        resource.setResourcelastreplyuid(null);
+        resource.setResourcetype(filetype);
+        resource.setResourceprice(price!=null?price:0);
+        resource.setResourcecreatedtime(LocalDateTime.now());
+        resource.setResourcelastreplytime(null);
         resourceService.addresource(resource);
 
         //生成文件存储路径
@@ -96,7 +92,7 @@ public class UpfileController {
 
         Upfile upfile=new Upfile();
 
-        upfile.setResourceid(resource.getResource_ID());
+        upfile.setResourceid(resource.getResourceID());
         upfile.setFilename(file.getOriginalFilename());
         upfile.setPath(newfile.getPath());
         upfile.setIntro(introduction);
