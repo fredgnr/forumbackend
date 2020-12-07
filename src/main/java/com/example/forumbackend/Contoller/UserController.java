@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/user")
-@Api(tags = "除了/user/singup，其余都需要在cookie中携带认证信息，若没有或不合法或已过期，拦截器会进行拦截，返回状态码为401")
+@Api(tags = "用户信息")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -53,7 +53,7 @@ public class UserController {
 
     @Transactional
     @PostMapping("/singup")
-    @ApiOperation(value="注册账号")
+    @ApiOperation(value="注册账号",tags = "不需要过携带cookie做信息验证")
     @ApiResponses({
             @ApiResponse(code=108,message = "账号已被注册"),
             @ApiResponse(code=109,message = "邮箱已被注册"),

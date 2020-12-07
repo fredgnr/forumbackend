@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/login")
-@Api(tags = "除了login/in都需要在cookie中携带认证信息，若没有或不合法或已过期，拦截器会进行拦截，此时返回状态码为401")
+@Api(tags = "登录登出")
 public class LoginController {
     @Autowired
     private LoginService loginService;

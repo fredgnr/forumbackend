@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ResourceMapper extends BaseMapper<ForumResource> {
     public void addzan(@Param("rid") Integer rid);
+    public void subzan(@Param("rid") Integer rid);
 }

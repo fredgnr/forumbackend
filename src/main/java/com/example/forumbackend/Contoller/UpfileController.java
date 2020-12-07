@@ -59,8 +59,8 @@ public class UpfileController {
     public ResponseResult<Upfile> upload(
             HttpServletRequest request,
             @RequestParam MultipartFile file,
-            @RequestParam Integer sectionid,
             @RequestParam(required = false) Integer price,
+            @RequestParam Integer sectionid,
             @RequestParam String introduction,
             @RequestParam String keywords,
             @RequestParam String title){
@@ -72,15 +72,15 @@ public class UpfileController {
             return Response.makeRsp(ResultCode.SECTION_NOT_EXIST.code,"板块不存在");
         }
         ForumResource resource=new ForumResource();
-        resource.setResourceSectionID(sectionid);
+        resource.setSectionID(sectionid);
         Integer uid=cookieUtil.getuid(request);
-        resource.setResourceuserid(uid);
-        resource.setResourcezan(0);
-        resource.setResourcelastreplyuid(null);
-        resource.setResourcetype(filetype);
-        resource.setResourceprice(price!=null?price:0);
-        resource.setResourcecreatedtime(LocalDateTime.now());
-        resource.setResourcelastreplytime(null);
+        resource.setUID(uid);
+        resource.setZan(0);
+        resource.setLastReplyUID(null);
+        resource.setType(filetype);
+        resource.setPrice(price!=null?price:0);
+        resource.setCreatedtime(LocalDateTime.now());
+        resource.setLastreplytime(null);
         resourceService.addresource(resource);
 
         //生成文件存储路径
@@ -92,7 +92,7 @@ public class UpfileController {
 
         Upfile upfile=new Upfile();
 
-        upfile.setResourceid(resource.getResourceID());
+        upfile.setResourceid(resource.getRID());
         upfile.setFilename(file.getOriginalFilename());
         upfile.setPath(newfile.getPath());
         upfile.setIntro(introduction);
@@ -109,6 +109,27 @@ public class UpfileController {
             return Response.makeRsp(ResultCode.UPLOAD_FAILED.code, "上传失败，请重传");
         }
         return Response.makeOKRsp(upfile);
+    }
+
+    @PostMapping("/changeinfo")
+    @Transactional
+    public ResponseResult<Upfile> changeinfo(
+            HttpServletRequest request,
+            Integer fid,
+            @RequestParam(required = false) String introduction,
+            @RequestParam(required = false) String keywords,
+            @RequestParam(required = false) String title
+    ){
+        Upfile upfile=upFileService.findByID(fid);
+        if(upfile==null){
+            return Response.makeRsp(ResultCode.FILE_NOT_EXIST.code, "此文件不存在");
+        }
+        ForumResource forumResource=resourceService.findresourceByrid(upfile.getResourceid());
+        if(!forumResource.getUID().equals(cookieUtil.getuid(request))){
+            return Response.makeRsp(ResultCode.FILE_NOT_BELONGS_TO_YOU.code, "修改的资源不是由本账号上传");
+        }
+        upFileService.changeinfo(fid,introduction,keywords,title);
+        return Response.makeOKRsp();
     }
 
 }

@@ -24,6 +24,9 @@ public class UserInfoService {
     public void addzan(Integer uid){
         userInfoMapper.addzan(uid);
     }
+    public void subzan(Integer uid){
+        userInfoMapper.subzan(uid);
+    }
 
     public void addpoint(Integer uid,Integer point){
         userInfoMapper.addpoint(point,uid);

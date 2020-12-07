@@ -30,39 +30,39 @@ public class ForumResource implements Serializable {
      */
     @ApiModelProperty(value = "主键",example = "0")
     @TableId(value = "resource_id",type = IdType.AUTO)
-    private Integer ResourceID;
+    private Integer RID;
 
     @ApiModelProperty(value = "资源所属的板块",example = "0")
     @TableField("resource_section_id")
-    private Integer ResourceSectionID;
+    private Integer SectionID;
 
     @ApiModelProperty(value = "资源上传者的UID",example = "0")
     @TableField("resource_user_id")
-    private Integer resourceuserid;
+    private Integer UID;
 
     @ApiModelProperty(value="资源获得的赞的数量",example = "0")
     @TableField("resource_zan")
-    private Integer resourcezan;
+    private Integer Zan;
 
     @ApiModelProperty(value = "资源最后一个回复者的uid",example = "")
     @TableField("resource_last_reply_uid")
-    private Integer resourcelastreplyuid;
+    private Integer LastReplyUID;
 
     @ApiModelProperty(value = "资源的类型",example = "1")
     @TableField("resource_type")
-    private Integer resourcetype;
+    private Integer Type;
 
     @ApiModelProperty(value = "资源的价格",example = "0")
     @TableField("resource_price")
-    private Integer resourceprice;
+    private Integer Price;
 
     @JsonFormat(locale = "zh",timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "资源上传时间",example = "2020-11-22 12:23:11")
     @TableField("resource_created_time")
-    private LocalDateTime resourcecreatedtime;
+    private LocalDateTime Createdtime;
 
     @JsonFormat(locale = "zh",timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "最后评论时间",example = "")
     @TableField("resource_last_reply_time")
-    private LocalDateTime resourcelastreplytime;
+    private LocalDateTime Lastreplytime;
 }

@@ -32,7 +32,7 @@ public class Zan {
     @TableField("zan_uid")
     private Integer UID;
 
-    @ApiModelProperty(example = "0")
+    @ApiModelProperty(example = "0",hidden = true)
     @TableField("zan_status")
     private Integer Status;
 }

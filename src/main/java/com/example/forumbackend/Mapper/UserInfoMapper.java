@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface UserInfoMapper extends BaseMapper<User_Info> {
 
     public void addzan(@Param("uid") Integer uid);
+    public void subzan(@Param("uid") Integer uid);
 
     public void addpoint(@Param("extra") Integer extra,@Param("uid") Integer uid);
 
