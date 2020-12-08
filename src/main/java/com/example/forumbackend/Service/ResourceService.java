@@ -8,6 +8,7 @@ import com.example.forumbackend.Mapper.ResourceMapper;
 import com.example.forumbackend.Mapper.ZanMapper;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -22,6 +23,12 @@ public class ResourceService {
 
     @Autowired
     private UserInfoService userInfoService;
+
+    @Value("${resourcetype.file}")
+    private Integer filetype;
+
+    @Value("${resourcetype.artical}")
+    private Integer articaltype;
 
     public void addresource(ForumResource forumResource){
         resourceMapper.insert(forumResource);
@@ -54,6 +61,18 @@ public class ResourceService {
         userInfoService.subzan(resource.getUID());
         resourceMapper.addzan(rid);
         zanService.DeleteBYRID_UID(rid,uid);
+    }
+
+    public Integer getfilecountbyuid(Integer uid){
+        QueryWrapper<ForumResource> qw=new QueryWrapper<>();
+        qw.eq("resource_user_id",uid).eq("resource_type",filetype);
+        return resourceMapper.selectCount(qw);
+    }
+
+    public Integer getarticalcountbyuid(Integer uid){
+        QueryWrapper<ForumResource> qw=new QueryWrapper<>();
+        qw.eq("resource_user_id",uid).eq("resource_type",articaltype);
+        return resourceMapper.selectCount(qw);
     }
 
 }

@@ -15,6 +15,9 @@ public enum ResultCode {
     RESOURCE_ZAN_ALREADY(113),//此资源已被用户点赞
     FILE_NOT_BELONGS_TO_YOU(114),//试图修改不属于自己上传的资源的信息
     FILE_NOT_EXIST(115),//资源不存在
+    BALANCE_NOT_ENOUGH(116),//余额不足
+    RESOURCE_PURCHASED(117),
+    RESOURCE_NOT_PURCHASED(118),//没有购买资源
     INTERNAL_SERVER_ERROR(500);
 
     public final int code;

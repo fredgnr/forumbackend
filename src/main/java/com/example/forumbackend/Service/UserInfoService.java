@@ -1,5 +1,6 @@
 package com.example.forumbackend.Service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.example.forumbackend.Domain.User_Info;
 import com.example.forumbackend.Mapper.UserInfoMapper;
@@ -21,6 +22,11 @@ public class UserInfoService {
         userInfoMapper.update(null,uw);
     }
 
+    public User_Info findByUID(Integer uid){
+        QueryWrapper<User_Info> qw=new QueryWrapper<>();
+        qw.eq("user_id",uid);
+        return userInfoMapper.selectOne(qw);
+    }
     public void addzan(Integer uid){
         userInfoMapper.addzan(uid);
     }
@@ -34,6 +40,10 @@ public class UserInfoService {
 
     public void addbalance(Integer uid,Integer extra){
         userInfoMapper.addbalance(extra,uid);
+    }
+
+    public void update(User_Info userInfo){
+        userInfoMapper.updateById(userInfo);
     }
 
 }

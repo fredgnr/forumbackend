@@ -10,6 +10,7 @@ import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +34,7 @@ public class ReplyController {
 
     @PostMapping("/replyresource")
     @Transactional
+    @ApiOperation(value = "评论资源")
     public ResponseResult<Reply> replyresource(HttpServletRequest request,Integer rid,String content){
         ForumResource resource=resourceService.findresourceByrid(rid);
         System.out.println(resource);

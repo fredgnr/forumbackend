@@ -1,8 +1,11 @@
 package com.example.forumbackend.Contoller;
 
+import com.example.forumbackend.Domain.Communication.Downfile;
 import com.example.forumbackend.Domain.ForumResource;
+import com.example.forumbackend.Domain.Purchase;
 import com.example.forumbackend.Domain.Section;
 import com.example.forumbackend.Domain.Upfile;
+import com.example.forumbackend.Service.PurchaseService;
 import com.example.forumbackend.Service.ResourceService;
 import com.example.forumbackend.Service.SectionService;
 import com.example.forumbackend.Service.UpFileService;
@@ -11,6 +14,11 @@ import com.example.forumbackend.Utils.ResponseUitls.Response;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.apache.logging.log4j.spi.CopyOnWrite;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +27,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -52,10 +60,14 @@ public class UpfileController {
     @Autowired
     private CookieUtil cookieUtil;
 
+    @Autowired
+    private PurchaseService purchaseService;
+
 
 
     @PostMapping("/upload")
     @Transactional
+    @ApiOperation(value = "上传文件")
     public ResponseResult<Upfile> upload(
             HttpServletRequest request,
             @RequestParam MultipartFile file,
@@ -111,11 +123,12 @@ public class UpfileController {
         return Response.makeOKRsp(upfile);
     }
 
-    @PostMapping("/changeinfo")
+    @PutMapping("/changeinfo")
     @Transactional
+    @ApiOperation(value = "修改文件信息")
     public ResponseResult<Upfile> changeinfo(
             HttpServletRequest request,
-            Integer fid,
+            @ApiParam("文件fid") Integer fid,
             @RequestParam(required = false) String introduction,
             @RequestParam(required = false) String keywords,
             @RequestParam(required = false) String title
@@ -130,6 +143,46 @@ public class UpfileController {
         }
         upFileService.changeinfo(fid,introduction,keywords,title);
         return Response.makeOKRsp();
+    }
+
+    @GetMapping("/all")
+    @Transactional
+    public ResponseResult<Integer> getallcount(){
+        return Response.makeOKRsp(upFileService.getcount());
+    }
+
+    @GetMapping("/byuser")
+    @Transactional
+    public ResponseResult<Integer> getbyuser(Integer uid){
+        return Response.makeOKRsp(resourceService.getfilecountbyuid(uid));
+    }
+
+    @GetMapping("/download")
+    public ResponseResult<Upfile> download(HttpServletRequest request, HttpServletResponse response, Integer fid){
+        Integer uid=cookieUtil.getuid(request);
+        /*Upfile upfile=upFileService.findByID(fid);
+        if(upfile==null)
+            return Response.makeRsp(ResultCode.RESOURCE_NOT_EXIST.code, "下载文件不存在");
+        Purchase purchase=purchaseService.findByUIDRID(uid,upfile.getResourceid());
+        if(purchase==null){
+            return  Response.makeRsp(ResultCode.RESOURCE_NOT_PURCHASED.code, "还未购买资源");
+        }*/
+        ResponseResult<Upfile> result=upFileService.download(fid,uid);
+        if(result.getData()==null)
+            return  result;
+        Downfile downfile=new Downfile();
+        Upfile upfile=result.getData();
+        downfile.setUpfile(upfile);
+        try (InputStream inputStream=new FileInputStream(new File(upfile.getPath()));
+             OutputStream outputStream=response.getOutputStream();){
+            response.setContentType("application/x-download");
+            response.addHeader("Content-Disposition","attachment;filename="+upfile.getFilename());
+            IOUtils.copy(inputStream,outputStream);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return  result;
     }
 
 }

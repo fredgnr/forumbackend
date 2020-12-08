@@ -27,4 +27,10 @@ public class ReplyService {
         replyMapper.insert(reply);
         resourceService.replyresource(localDateTime,uid,rid);
     }
+
+    public Integer getbyrid(Integer rid){
+        QueryWrapper<Reply> qw=new QueryWrapper<>();
+        qw.eq("reply_resource_id",rid);
+        return  replyMapper.selectCount(qw);
+    }
 }
