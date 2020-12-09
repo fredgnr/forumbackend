@@ -2,6 +2,7 @@ package com.example.forumbackend.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.forumbackend.Domain.Purchase;
 import com.example.forumbackend.Domain.Upfile;
 import com.example.forumbackend.Mapper.UpfileMapper;
@@ -11,6 +12,8 @@ import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class UpFileService {
@@ -24,6 +27,12 @@ public class UpFileService {
 
     public Upfile findByID(Integer fid){
         return upfileMapper.selectById(fid);
+    }
+
+    public Upfile findByRID(Integer rid){
+        QueryWrapper<Upfile> qw=new QueryWrapper<>();
+        qw.eq("upfile_resource_id",rid);
+        return upfileMapper.selectOne(qw);
     }
 
     public void addupfile(Upfile upfile){
@@ -60,4 +69,6 @@ public class UpFileService {
         }
         else return Response.makeOKRsp(upfile);
     }
+
+
 }

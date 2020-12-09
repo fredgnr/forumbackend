@@ -14,24 +14,21 @@ import com.example.forumbackend.Utils.ResponseUitls.Response;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.logging.log4j.spi.CopyOnWrite;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -145,28 +142,28 @@ public class UpfileController {
         return Response.makeOKRsp();
     }
 
-    @GetMapping("/all")
+    @GetMapping("/allcount")
     @Transactional
     public ResponseResult<Integer> getallcount(){
         return Response.makeOKRsp(upFileService.getcount());
     }
 
-    @GetMapping("/byuser")
+    @GetMapping("/files")
+    @Transactional
+    public ResponseResult<List<ForumResource>> getfiles(Integer pageindex,Integer pagesize){
+        return Response.makeOKRsp(resourceService.getfiles(pageindex,pagesize));
+    }
+
+    @GetMapping("/getcountbyuser")
     @Transactional
     public ResponseResult<Integer> getbyuser(Integer uid){
         return Response.makeOKRsp(resourceService.getfilecountbyuid(uid));
     }
 
     @GetMapping("/download")
+    @Transactional
     public ResponseResult<Upfile> download(HttpServletRequest request, HttpServletResponse response, Integer fid){
         Integer uid=cookieUtil.getuid(request);
-        /*Upfile upfile=upFileService.findByID(fid);
-        if(upfile==null)
-            return Response.makeRsp(ResultCode.RESOURCE_NOT_EXIST.code, "下载文件不存在");
-        Purchase purchase=purchaseService.findByUIDRID(uid,upfile.getResourceid());
-        if(purchase==null){
-            return  Response.makeRsp(ResultCode.RESOURCE_NOT_PURCHASED.code, "还未购买资源");
-        }*/
         ResponseResult<Upfile> result=upFileService.download(fid,uid);
         if(result.getData()==null)
             return  result;
@@ -184,5 +181,28 @@ public class UpfileController {
         }
         return  result;
     }
+
+    @GetMapping("/getfilecountbyuid")
+    @ApiOperation(value = "获取某一用户上传的文件数量")
+    @Transactional
+    public ResponseResult<Integer> getfilecountbyuid(Integer uid){
+        return Response.makeOKRsp(resourceService.getfilecountbyuid(uid));
+    }
+
+    @GetMapping("/getfilesbyuid")
+    @ApiOperation(value = "获取某一用户上传的文件")
+    @Transactional
+    public ResponseResult<List<ForumResource>> getfilesbyuid(Integer uid,Integer pageindex,Integer pagesize){
+        return Response.makeOKRsp(resourceService.getfilesbyuid(uid,pageindex,pagesize));
+    }
+
+
+    @GetMapping("/getbyrid")
+    @ApiOperation(value = "获取文件信息")
+    @Transactional
+    public ResponseResult<Upfile> getbyrid(Integer rid){
+        return Response.makeOKRsp(upFileService.findByRID(rid));
+    }
+
 
 }

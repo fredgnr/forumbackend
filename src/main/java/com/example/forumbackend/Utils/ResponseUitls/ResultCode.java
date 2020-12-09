@@ -13,6 +13,8 @@ public enum ResultCode {
     SECTION_NOT_EXIST(111),
     RESOURCE_NOT_EXIST(112),
     RESOURCE_ZAN_ALREADY(113),//此资源已被用户点赞
+    RESOURCE_NOT_ZAN_YET(119),//此资源用户尚未点赞
+    RESOURCE_NOT_BELONGS_TO_YOU(120),//资源不属于你
     FILE_NOT_BELONGS_TO_YOU(114),//试图修改不属于自己上传的资源的信息
     FILE_NOT_EXIST(115),//资源不存在
     BALANCE_NOT_ENOUGH(116),//余额不足

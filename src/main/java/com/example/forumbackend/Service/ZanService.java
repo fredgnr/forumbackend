@@ -2,6 +2,7 @@ package com.example.forumbackend.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.forumbackend.Domain.Zan;
 import com.example.forumbackend.Mapper.ZanMapper;
 import org.apache.ibatis.annotations.Update;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class ZanService {
@@ -55,5 +57,14 @@ public class ZanService {
                 .eq("zan_uid",uid)
                 .eq("zan_status",UNDELETED)
                 .set("zan_status",DELETED);
+    }
+
+    public List<Zan> getzansbyRID(Integer rid,Integer pageindex,Integer pagesize){
+        Page<Zan> page=new Page<>(pageindex,pagesize);
+        QueryWrapper<Zan> qw=new QueryWrapper<>();
+        qw.eq("zan_resource_id",rid)
+            .eq("zan_status",UNDELETED);
+        zanMapper.selectPage(page,qw);
+        return page.getRecords();
     }
 }
