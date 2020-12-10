@@ -8,11 +8,13 @@ import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 @ApiModel(description = "上传的文件")
 @TableName("upfile")
 @Data
 @ToString
-public class Upfile {
+public class Upfile implements Serializable {
     /*
    upfile_id            int not null  auto_increment,
    upfile_resource_id   int,

@@ -18,8 +18,10 @@ public class UserInfoService {
 
     public void addintro(Integer uid,String intro){
         UpdateWrapper<User_Info> uw=new UpdateWrapper<>();
-        uw.eq("user_id",uid).set("user_Intro",intro);
-        userInfoMapper.update(null,uw);
+        uw.eq("user_id",uid);
+        User_Info userInfo=new User_Info();
+        userInfo.setUserIntro(intro);
+        userInfoMapper.update(userInfo,uw);
     }
 
     public User_Info findByUID(Integer uid){

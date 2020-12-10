@@ -19,6 +19,7 @@ public class MyBatisPlusConfig {
     public PaginationInterceptor paginationInterceptor() {
         PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
 
+        paginationInterceptor.setDialectType("mysql");
         // 默认false
         // 设置请求的页面大于最大页后操作， true调回到首页;false继续请求,返回空数据.
         paginationInterceptor.setOverflow(false);

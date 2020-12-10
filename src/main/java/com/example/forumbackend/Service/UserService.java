@@ -51,14 +51,18 @@ public class UserService {
 
     public void changeName(Integer uid,String name){
         UpdateWrapper<User> uw=new UpdateWrapper<>();
-        uw.eq("uid",uid).set("user_name",name);
-        userMapper.update(null,uw);
+        uw.eq("uid",uid);
+        User user=new User();
+        user.setName(name);
+        userMapper.update(user,uw);
     }
 
     public void changePassword(Integer uid,String password){
         UpdateWrapper<User> uw=new UpdateWrapper<>();
-        uw.eq("uid",uid).set("user_password",password);
-        userMapper.update(null,uw);
+        uw.eq("uid",uid);
+        User user=new User();
+        user.setPassword(password);
+        userMapper.update(user,uw);
     }
 
     public void insertUser(User user){

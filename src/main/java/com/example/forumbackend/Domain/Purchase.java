@@ -42,5 +42,5 @@ public class Purchase {
     @ApiModelProperty("购买时间")
     @JsonFormat(locale = "zh",timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField("purchase_time")
-    private LocalDateTime localDateTime;
+    private LocalDateTime PurchaseTime;
 }

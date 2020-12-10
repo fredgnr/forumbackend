@@ -1,8 +1,6 @@
 package com.example.forumbackend.Contoller;
 
-import com.example.forumbackend.Domain.Communication.Downfile;
 import com.example.forumbackend.Domain.ForumResource;
-import com.example.forumbackend.Domain.Purchase;
 import com.example.forumbackend.Domain.Section;
 import com.example.forumbackend.Domain.Upfile;
 import com.example.forumbackend.Service.PurchaseService;
@@ -13,9 +11,7 @@ import com.example.forumbackend.Utils.CookieUtil;
 import com.example.forumbackend.Utils.ResponseUitls.Response;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,7 +29,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/upfile")
-@Api(tags = "文件API")
+@Api(tags = "文件API(完成测试)")
 public class UpfileController {
 
     @Value("${web.upload-path}")
@@ -64,17 +60,23 @@ public class UpfileController {
 
     @PostMapping("/upload")
     @Transactional
-    @ApiOperation(value = "上传文件")
+    @ApiOperation(value = "上传文件(测试完成)")
+    @ApiResponses({
+            @ApiResponse(code = 121,message = "上传文件为空"),
+            @ApiResponse(code = 110,message = "上传失败，请重传"),
+            @ApiResponse(code=111,message = "板块不存在"),
+            @ApiResponse(code = 102,message = "上传成功")
+    })
     public ResponseResult<Upfile> upload(
             HttpServletRequest request,
-            @RequestParam MultipartFile file,
-            @RequestParam(required = false) Integer price,
-            @RequestParam Integer sectionid,
-            @RequestParam String introduction,
-            @RequestParam String keywords,
-            @RequestParam String title){
+            @ApiParam(value = "文件本身")@RequestParam MultipartFile file,
+            @ApiParam(value = "价格，缺省时为0")@RequestParam(required = false) Integer price,
+            @ApiParam(value = "资源所属板块")@RequestParam Integer sectionid,
+            @ApiParam(value = "介绍")@RequestParam() String introduction,
+            @ApiParam(value = "关键词")@RequestParam String keywords,
+            @ApiParam(value = "标题")@RequestParam String title){
         if(file.isEmpty()){
-            return Response.makeRsp(ResultCode.UPLOAD_FAILED.code, "上传失败，请重传");
+            return Response.makeRsp(ResultCode.FILE_EMPTY.code, "上传文件为空");
         }
         Section section=sectionService.findByID(sectionid);
         if(section==null){
@@ -125,7 +127,7 @@ public class UpfileController {
     @ApiOperation(value = "修改文件信息")
     public ResponseResult<Upfile> changeinfo(
             HttpServletRequest request,
-            @ApiParam("文件fid") Integer fid,
+            @RequestParam @ApiParam("文件fid") Integer fid,
             @RequestParam(required = false) String introduction,
             @RequestParam(required = false) String keywords,
             @RequestParam(required = false) String title
@@ -144,32 +146,33 @@ public class UpfileController {
 
     @GetMapping("/allcount")
     @Transactional
+    @ApiOperation(value = "获得论坛所有文件数量")
     public ResponseResult<Integer> getallcount(){
         return Response.makeOKRsp(upFileService.getcount());
     }
 
     @GetMapping("/files")
     @Transactional
-    public ResponseResult<List<ForumResource>> getfiles(Integer pageindex,Integer pagesize){
+    @ApiOperation(value = "分页查询文件的资源信息（Resource）")
+    public ResponseResult<List<ForumResource>> getfiles(@RequestParam @ApiParam(value = "页码号") Integer pageindex,@RequestParam @ApiParam(value = "页大小")Integer pagesize){
         return Response.makeOKRsp(resourceService.getfiles(pageindex,pagesize));
     }
 
-    @GetMapping("/getcountbyuser")
-    @Transactional
-    public ResponseResult<Integer> getbyuser(Integer uid){
-        return Response.makeOKRsp(resourceService.getfilecountbyuid(uid));
-    }
-
     @GetMapping("/download")
+    @ApiOperation(value = "下载文件(完成测试)")
+    @ApiResponses({
+            @ApiResponse(code = 112,message = "下载文件不存在"),
+            @ApiResponse(code=118,message = "还未购买资源"),
+            @ApiResponse(code = 102,message = "成功下载")
+    })
     @Transactional
-    public ResponseResult<Upfile> download(HttpServletRequest request, HttpServletResponse response, Integer fid){
+    public ResponseResult<Upfile> download(HttpServletRequest request, HttpServletResponse response,
+                                           @RequestParam @ApiParam(value = "要下载文件的FID") Integer fid){
         Integer uid=cookieUtil.getuid(request);
         ResponseResult<Upfile> result=upFileService.download(fid,uid);
         if(result.getData()==null)
             return  result;
-        Downfile downfile=new Downfile();
         Upfile upfile=result.getData();
-        downfile.setUpfile(upfile);
         try (InputStream inputStream=new FileInputStream(new File(upfile.getPath()));
              OutputStream outputStream=response.getOutputStream();){
             response.setContentType("application/x-download");
@@ -192,7 +195,9 @@ public class UpfileController {
     @GetMapping("/getfilesbyuid")
     @ApiOperation(value = "获取某一用户上传的文件")
     @Transactional
-    public ResponseResult<List<ForumResource>> getfilesbyuid(Integer uid,Integer pageindex,Integer pagesize){
+    public ResponseResult<List<ForumResource>> getfilesbyuid(@RequestParam @ApiParam(value = "所查询用户的UID") Integer uid,
+                                                             @RequestParam @ApiParam(value = "页码号") Integer pageindex,
+                                                             @RequestParam @ApiParam(value = "页大小")Integer pagesize){
         return Response.makeOKRsp(resourceService.getfilesbyuid(uid,pageindex,pagesize));
     }
 
@@ -200,7 +205,7 @@ public class UpfileController {
     @GetMapping("/getbyrid")
     @ApiOperation(value = "获取文件信息")
     @Transactional
-    public ResponseResult<Upfile> getbyrid(Integer rid){
+    public ResponseResult<Upfile> getbyrid(@RequestParam @ApiParam(value = "所查询文件的RID") Integer rid){
         return Response.makeOKRsp(upFileService.findByRID(rid));
     }
 

@@ -3,11 +3,11 @@ package com.example.forumbackend.Contoller;
 import com.example.forumbackend.Domain.Role;
 import com.example.forumbackend.Domain.User;
 import com.example.forumbackend.Service.LoginService;
+import com.example.forumbackend.Utils.CookieUtil;
 import com.example.forumbackend.Utils.ResponseUitls.Response;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,32 +22,45 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/login")
-@Api(tags = "登录登出")
+@Api(tags = "登录登出(测试完成)")
 public class LoginController {
     @Autowired
     private LoginService loginService;
 
 
     @Value("${PasswordWrong}")
-    private  static String PasswordWrong;
+    private  String PasswordWrong;
 
     @Value("${AccountNotExist}")
-    static public String AccountNotExist;
+    private String AccountNotExist;
 
     @Value("${cookie.timeout}")
     private Integer cookie_timeout;
+
+    @Autowired
+    private CookieUtil cookieUtil;
 
 
     @GetMapping("/in")
     @ApiOperation(value = "登录")
     @Transactional
-    public ResponseResult<User> logintest(HttpServletResponse response, String account, String password){
+    @ApiResponses({
+            @ApiResponse(code = 104,message = "账号错误"),
+            @ApiResponse(code=103,message = "密码错误"),
+            @ApiResponse(code=102,message = "成功登录")
+    })
+    public ResponseResult<User> logintest(
+            HttpServletResponse response,
+            @ApiParam(value = "账号",example = "513317651") @RequestParam String account,
+            @ApiParam(value = "密码",example = "zz123456") @RequestParam String password){
         Role role=new Role();
         String token=loginService.login(account,password,role);
-        if(token.equals(AccountNotExist)){
-            return Response.makeRsp(ResultCode.ACCOUNTNOTEXIST.code,"账号不存在");
+        System.out.println("token:\t"+token);
+        System.out.println("test account"+AccountNotExist);
+        if(AccountNotExist.equals(token)){
+            return Response.makeRsp(ResultCode.ACCOUNTNOTEXIST.code,"账号错误");
         }
-        else if(token.equals(PasswordWrong)){
+        else if(PasswordWrong.equals(token)){
             return Response.makeRsp(ResultCode.PASSWORDWRONG.code, "密码错误");
         }
         else{
@@ -66,14 +79,12 @@ public class LoginController {
 
     @GetMapping("/out")
     @ApiOperation("登出")
+    @ApiResponses({
+            @ApiResponse(code=102,message = "成功登出")
+    })
     public ResponseResult<User> logout(HttpServletRequest request){
-        Cookie[] cookies=request.getCookies();
-        for(Cookie cookie:cookies){
-            if(cookie.getName().equals("UID")) {
-                loginService.logout(new Integer(cookie.getValue()));
-                return Response.makeRsp(ResultCode.LOGOUT_SUCCESS.code, "成功登出");
-            }
-        }
-        return Response.makeRsp(ResultCode.LOGOUT_FAILED.code, "登出失败");
-    }
+        Integer uid=cookieUtil.getuid(request);
+        loginService.logout(uid);
+        return Response.makeRsp(ResultCode.LOGOUT_SUCCESS.code, "成功登出");
+       }
 }

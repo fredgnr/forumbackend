@@ -50,6 +50,7 @@ public class ResourceService {
         return resourceMapper.selectById(rid);
     }
 
+
     //为某资源点赞
     public Zan Add_Zan(Integer rid, Integer uid){
         ForumResource resource=findresourceByrid(rid);

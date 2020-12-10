@@ -26,7 +26,7 @@ public class User_Info implements Serializable {
      */
     @TableId(value = "info_id",type = IdType.AUTO)
     @ApiModelProperty(value = "info id",example = "0")
-    private Integer infoid;
+    private Integer infoID;
 
     @TableField("user_id")
     @ApiModelProperty(value = "对应的用户UID",example = "0")

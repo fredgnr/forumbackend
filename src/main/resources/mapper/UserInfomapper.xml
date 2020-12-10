@@ -8,9 +8,9 @@
     </update>
 
     <update id="subzan">
-        update resources
-        set resource_zan=resource_zan-1
-        where resource_id=#{rid}
+       update user_info
+        set user_zan=user_zan-1
+        where user_id=#{uid}
     </update>
 
     <update id="addpoint">

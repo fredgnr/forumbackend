@@ -23,10 +23,10 @@ public class ZanService {
     private UserService userService;
 
     @Value("${logic.deleted}")
-    private static Integer DELETED;
+    private  Integer DELETED;
 
     @Value("${logic.undeleted}")
-    private static Integer UNDELETED;
+    private  Integer UNDELETED;
 
     //向zan表中添加一条记录
     public Zan addzan(Integer rid, Integer uid){
@@ -55,8 +55,10 @@ public class ZanService {
         UpdateWrapper<Zan> uw=new UpdateWrapper<>();
         uw.eq("zan_resource_id",rid)
                 .eq("zan_uid",uid)
-                .eq("zan_status",UNDELETED)
-                .set("zan_status",DELETED);
+                .eq("zan_status",UNDELETED);
+        Zan zan=new Zan();
+        zan.setStatus(DELETED);
+        zanMapper.update(zan,uw);
     }
 
     public List<Zan> getzansbyRID(Integer rid,Integer pageindex,Integer pagesize){

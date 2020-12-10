@@ -22,10 +22,10 @@ public class LoginService {
     UserService userService;
 
     @Value("${AccountNotExist}")
-    public static String AccountNotExist;
+    public String AccountNotExist;
 
     @Value("${PasswordWrong}")
-    public static String PasswordWrong;
+    public String PasswordWrong;
 
 
     public String login(String account,String password,Role rtmp){
@@ -33,26 +33,28 @@ public class LoginService {
         String token="";
         rtmp.setToken(token);
         if(user==null){
-            token=AccountNotExist;
+            System.out.println(1);
+            return AccountNotExist;
         }
-        else if(!user.getPassword().equals(password))
-            token=PasswordWrong;
+        else if(!user.getPassword().equals(password)) {
+            System.out.println(2);
+            return PasswordWrong;
+        }
         else{
             //ValueOperations<String,Role> vop=redisTemplate.opsForValue();
             Role tmp=redisTemplate.opsForValue().get(user.getUID().toString());
             if(tmp!=null){
                 rtmp.setUser(user);
                 token=tmp.getToken();
+                System.out.println(3);
             }
             else{
+                System.out.println(4);
                 token=UUID.randomUUID().toString();
                 Role role=new Role(user,token);
                 rtmp.setUser(user);
                 rtmp.setToken(token);
-                System.out.println("insertin:\t"+token+role.toString());
                 redisTemplate.opsForValue().set(user.getUID().toString(),new Role(user,token),60, TimeUnit.MINUTES);
-                role=redisTemplate.opsForValue().get(user.getUID().toString());
-                System.out.println("testinsert:\t"+role);
             }
         }
         return token;

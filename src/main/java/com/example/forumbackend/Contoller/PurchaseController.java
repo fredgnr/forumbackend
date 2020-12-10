@@ -10,13 +10,10 @@ import com.example.forumbackend.Utils.CookieUtil;
 import com.example.forumbackend.Utils.ResponseUitls.Response;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/purchase")
+@Api(tags = "购买资源")
 public class PurchaseController {
     @Autowired
     private PurchaseService purchaseService;
@@ -41,7 +39,14 @@ public class PurchaseController {
     @PostMapping("/purchase")
     @Transactional
     @ApiOperation(value = "购买资源")
-    public ResponseResult<Purchase> pur(HttpServletRequest request,Integer rid){
+    @ApiResponses({
+            @ApiResponse(code = 112,message = "请求资源不存在"),
+            @ApiResponse(code = 117,message = "此资源已购买"),
+            @ApiResponse(code=116,message = "余额不足"),
+            @ApiResponse(code=102,message = "成功购买")
+    })
+    public ResponseResult<Purchase> pur(HttpServletRequest request,
+                                        @RequestParam @ApiParam(value = "购买资源的RID") Integer rid){
         Integer uid=cookieUtil.getuid(request);
         ForumResource resource=resourceService.findresourceByrid(rid);
         if(resource==null)
@@ -59,7 +64,7 @@ public class PurchaseController {
         purchase.setUID(uid);
         purchase.setRID(rid);
         purchase.setPrice(resource.getPrice());
-        purchase.setLocalDateTime(LocalDateTime.now());
+        purchase.setPurchaseTime(LocalDateTime.now());
         purchaseService.addpur(purchase);
         return Response.makeOKRsp(purchase);
     }
@@ -77,26 +82,31 @@ public class PurchaseController {
     @ApiOperation(value = "获取用户的购买记录")
     public ResponseResult<List<Purchase>> getpurchasesbyuid(
             HttpServletRequest request,
-            Integer pageindex,
-            Integer pagesize){
+            @RequestParam @ApiParam(value = "页索引") Integer pageindex,
+            @RequestParam @ApiParam(value = "页号码")Integer pagesize){
         Integer uid=cookieUtil.getuid(request);
         return Response.makeOKRsp(purchaseService.getpurchasesbyuid(uid,pageindex,pagesize));
     }
 
     @GetMapping("/getpurchasesbyrid")
     @Transactional
+    @ApiResponses({
+            @ApiResponse(code = 115,message ="请求资源不存在" ),
+            @ApiResponse(code=120,message ="请求资源不属于此用户上传" ),
+            @ApiResponse(code = 102,message = "请求成功")
+    })
     @ApiOperation(value = "获取用户发布的某资源的购买记录")
     public ResponseResult<List<Purchase>> getpurchasesbyrid(
             HttpServletRequest request,
-            Integer rid,
-            Integer pageindex,
-            Integer pagesize){
+            @RequestParam @ApiParam(value = "资源RID")Integer rid,
+            @RequestParam @ApiParam(value = "页索引") Integer pageindex,
+            @RequestParam @ApiParam(value = "页号码")Integer pagesize){
         Integer uid=cookieUtil.getuid(request);
         ForumResource resource=resourceService.findresourceByrid(rid);
         if(resource==null)
             return  Response.makeRsp(ResultCode.RESOURCE_NOT_EXIST.code, "请求资源不存在");
         else if(!resource.getUID().equals(uid))
             return Response.makeRsp(ResultCode.RESOURCE_NOT_BELONGS_TO_YOU.code, "请求资源不属于此用户上传");
-        return Response.makeOKRsp(purchaseService.getpurchasesbyuid(uid,pageindex,pagesize));
+        return Response.makeOKRsp(purchaseService.getpurchasesbyrid(uid,pageindex,pagesize));
     }
 }

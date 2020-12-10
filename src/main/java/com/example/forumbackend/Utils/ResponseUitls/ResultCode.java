@@ -20,6 +20,7 @@ public enum ResultCode {
     BALANCE_NOT_ENOUGH(116),//余额不足
     RESOURCE_PURCHASED(117),
     RESOURCE_NOT_PURCHASED(118),//没有购买资源
+    FILE_EMPTY(121),
     INTERNAL_SERVER_ERROR(500);
 
     public final int code;

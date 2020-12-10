@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/zan")
-@Api(tags = "点赞相关api")
+@Api(tags = "点赞相关api(测试完成)")
 public class ZanController {
     @Autowired
     private ResourceService resourceService;
