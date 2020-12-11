@@ -28,6 +28,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
             .addPathPatterns("/reply/**")
             .addPathPatterns("/upfile/**")
             .addPathPatterns("/zan/**")
-            .addPathPatterns("/purchase/**");
+            .addPathPatterns("/purchase/**")
+            .addPathPatterns("/artical/**");
     }
 }
