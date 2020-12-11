@@ -36,7 +36,7 @@ public class Artical {
 
     @ApiModelProperty(example = "")
     @TableField("article_keywords")
-    private String ArticalKeywords;
+    private String Keywords;
 
     @ApiModelProperty(example = "introduction test")
     @TableField("article_intro")

@@ -16,13 +16,23 @@
     <update id="addpoint">
         update user_info
         set user_point=user_point+#{extra}
-        where where user_id=#{uid}
+        where  user_id=#{uid}
     </update>
 
     <update id="addbalance">
         update user_info
         set user_balance=user_balance+#{extra}
-        where where user_id=#{uid}
+        where  user_id=#{uid}
+    </update>
+
+    <update id="addpointbyrid">
+        update user_info
+        set user_point=user_point+#{newpoint}
+        where  user_id in(
+            select resource_user_id
+            from resources
+            where resource_id=#{rid}
+            )
     </update>
 
 

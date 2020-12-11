@@ -15,7 +15,7 @@ import java.io.Serializable;
 @ToString
 @EqualsAndHashCode
 @ApiModel(description = "用户额外信息")
-public class User_Info implements Serializable {
+public class User_Info implements Serializable{
     /*
     info_id              int not null  auto_increment,
     user_id              int,
@@ -47,4 +47,6 @@ public class User_Info implements Serializable {
     @TableField("user_balance")
     @ApiModelProperty(value = "用户余额",example = "0")
     private Integer UserBalance;
+
+
 }

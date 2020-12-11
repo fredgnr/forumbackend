@@ -14,4 +14,6 @@ public interface UserInfoMapper extends BaseMapper<User_Info> {
     public void addpoint(@Param("extra") Integer extra,@Param("uid") Integer uid);
 
     public void addbalance(@Param("extra") Integer extra,@Param("uid") Integer uid);
+
+    public void addpointbyrid(@Param("newpoint") Integer point,@Param("rid") Integer rid);
 }

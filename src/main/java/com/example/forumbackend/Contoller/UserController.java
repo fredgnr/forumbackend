@@ -9,6 +9,7 @@ import com.example.forumbackend.Utils.CookieUtil;
 import com.example.forumbackend.Utils.ResponseUitls.Response;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
+import io.lettuce.core.GeoArgs;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -18,9 +19,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import sun.security.util.Length;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 @RestController
 @RequestMapping("/user")
@@ -136,4 +139,41 @@ public class UserController {
         return Response.makeOKRsp("修改信息成功");
     }
 
+    @Transactional
+    @GetMapping("/getrankbyuid")
+    @ApiOperation(value = "获取某用户的排名")
+    public ResponseResult<Integer> getrankbyuid(Integer uid){
+        User_Info tmp=userInfoService.findByUID(uid);
+        if(tmp==null)
+            return Response.makeRsp(ResultCode.USER_NOT_EXIST.code, "查询用户不存在");
+        List<User_Info> userInfos=userInfoService.findAlldesc();
+       /* userInfos.sort(new Comparator<User_Info>() {
+            @Override
+            public int compare(User_Info o1, User_Info o2) {
+                if(o1.getUserPoint()>o2.getUserPoint())
+                    return 1;
+                else if(o1.getUserPoint().equals(o2.getUserPoint()))
+                    return 0;
+                else return -1;
+            }
+        });*/
+        int i=0;
+        for(i=0;i< userInfos.size();i++){
+            if(userInfos.get(i).getUserID().equals(uid))
+                return Response.makeOKRsp(i);
+        }
+        return Response.makeErrRsp("查询失败");
+    }
+
+    @Transactional
+    @GetMapping("/getranks")
+    @ApiOperation(value = "获取排行榜某页所有人的UID")
+    public ResponseResult<List<Integer>> getranks(Integer pageindex,Integer pagesize){
+        List<User_Info> userInfos=userInfoService.finddescbypage(pageindex,pagesize);
+        List<Integer> integerList = new ArrayList<>();
+        for(User_Info userInfo:userInfos){
+            integerList.add(userInfo.getUserID());
+        }
+        return Response.makeOKRsp(integerList);
+    }
 }

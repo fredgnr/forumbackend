@@ -3,10 +3,7 @@ package com.example.forumbackend.Contoller;
 import com.example.forumbackend.Domain.ForumResource;
 import com.example.forumbackend.Domain.Section;
 import com.example.forumbackend.Domain.Upfile;
-import com.example.forumbackend.Service.PurchaseService;
-import com.example.forumbackend.Service.ResourceService;
-import com.example.forumbackend.Service.SectionService;
-import com.example.forumbackend.Service.UpFileService;
+import com.example.forumbackend.Service.*;
 import com.example.forumbackend.Utils.CookieUtil;
 import com.example.forumbackend.Utils.ResponseUitls.Response;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
@@ -54,8 +51,13 @@ public class UpfileController {
     private CookieUtil cookieUtil;
 
     @Autowired
-    private PurchaseService purchaseService;
+    private UserInfoService userInfoService;
 
+    @Value("${points.downloadfile}")
+    private Integer pointsdownloadfile;
+
+    @Value("${points.uploadfile}")
+    private Integer pointsuploadfile;
 
 
     @PostMapping("/upload")
@@ -119,6 +121,7 @@ public class UpfileController {
             e.printStackTrace();
             return Response.makeRsp(ResultCode.UPLOAD_FAILED.code, "上传失败，请重传");
         }
+        userInfoService.addpointbyrid(pointsuploadfile,upfile.getResourceid());
         return Response.makeOKRsp(upfile);
     }
 
@@ -182,6 +185,7 @@ public class UpfileController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        userInfoService.addpointbyrid(pointsdownloadfile,upfile.getResourceid());
         return  result;
     }
 

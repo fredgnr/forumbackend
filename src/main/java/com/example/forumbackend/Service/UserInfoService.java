@@ -2,10 +2,15 @@ package com.example.forumbackend.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.forumbackend.Domain.User;
 import com.example.forumbackend.Domain.User_Info;
 import com.example.forumbackend.Mapper.UserInfoMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserInfoService {
@@ -48,4 +53,25 @@ public class UserInfoService {
         userInfoMapper.updateById(userInfo);
     }
 
+    public List<User_Info> findAll(){
+        return userInfoMapper.selectList(null);
+    }
+
+    public List<User_Info> findAlldesc(){
+        QueryWrapper<User_Info> qw=new QueryWrapper<>();
+        qw.orderByDesc("user_point");
+        return userInfoMapper.selectList(qw);
+    }
+
+    public List<User_Info> finddescbypage(Integer pageindex,Integer pagesize){
+        QueryWrapper<User_Info> qw=new QueryWrapper<>();
+        Page<User_Info> page=new Page<>(pageindex,pagesize);
+        qw.orderByDesc("user_point");
+        userInfoMapper.selectPage(page,qw);
+        return page.getRecords();
+    }
+
+    public void addpointbyrid(Integer point, Integer rid){
+        userInfoMapper.addpointbyrid(point,rid);
+    };
 }

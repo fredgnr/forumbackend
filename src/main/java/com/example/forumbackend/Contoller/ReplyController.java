@@ -4,12 +4,14 @@ import com.example.forumbackend.Domain.ForumResource;
 import com.example.forumbackend.Domain.Reply;
 import com.example.forumbackend.Service.ReplyService;
 import com.example.forumbackend.Service.ResourceService;
+import com.example.forumbackend.Service.UserInfoService;
 import com.example.forumbackend.Utils.CookieUtil;
 import com.example.forumbackend.Utils.ResponseUitls.Response;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +29,13 @@ public class ReplyController {
     private ReplyService replyService;
 
     @Autowired
+    private UserInfoService userInfoService;
+
+    @Autowired
     private CookieUtil cookieUtil;
+
+    @Value("${points.replyresouce}")
+    private Integer pointsreplyresouce;
 
     @PostMapping("/replyresource")
     @Transactional
@@ -44,6 +52,7 @@ public class ReplyController {
         if(resource==null){
             return Response.makeRsp(ResultCode.RESOURCE_NOT_EXIST.code,"resource_id为"+rid+"的资源不存在");
         }
+        userInfoService.addpointbyrid(pointsreplyresouce,rid);
         replyService.addreply(content,rid,cookieUtil.getuid(request));
         return Response.makeOKRsp();
     }

@@ -23,5 +23,10 @@ class ForumbackendApplicationTests {
         dest.createNewFile();
     }
 
+    @Test
+    void test2(){
+        String test="test1"+File.separator+"test2";
+        System.out.println(test);
+    }
 
 }
