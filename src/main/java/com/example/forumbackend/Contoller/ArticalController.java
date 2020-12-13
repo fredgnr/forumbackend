@@ -172,7 +172,7 @@ public class ArticalController {
 
     @GetMapping("/articalsbyrids")
     @Transactional
-    public ResponseResult<List<Artical>> getarticalsbyrids(List<Integer> rids){
+    public ResponseResult<List<Artical>> getarticalsbyrids(@RequestBody List<Integer> rids){
         List<Artical> articals=articalService.findByRIDlist(rids);
         List<Integer> aids=new ArrayList<>();
         for(Artical artical:articals) {
