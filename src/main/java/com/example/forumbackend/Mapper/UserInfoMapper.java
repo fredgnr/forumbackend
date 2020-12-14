@@ -2,10 +2,13 @@ package com.example.forumbackend.Mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.forumbackend.Domain.User_Info;
+import com.example.forumbackend.Utils.MybatisRedisCache;
+import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@CacheNamespace(implementation = MybatisRedisCache.class,eviction=MybatisRedisCache.class)
 public interface UserInfoMapper extends BaseMapper<User_Info> {
 
     public void addzan(@Param("uid") Integer uid);
