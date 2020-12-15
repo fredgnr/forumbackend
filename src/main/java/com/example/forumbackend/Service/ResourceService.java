@@ -106,4 +106,10 @@ public class ResourceService {
         return page.getRecords();
     }
 
+    public List<ForumResource> getbyrids(List<Integer> rids){
+        QueryWrapper<ForumResource> qw=new QueryWrapper<>();
+        qw.in("resource_id",rids);
+        return resourceMapper.selectList(qw);
+    }
+
 }

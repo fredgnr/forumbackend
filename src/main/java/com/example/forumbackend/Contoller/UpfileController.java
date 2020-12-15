@@ -109,6 +109,7 @@ public class UpfileController {
         upfile.setFilename(file.getOriginalFilename());
         upfile.setPath(newfile.getPath());
         upfile.setIntro(introduction);
+        upfile.setCreatedtime(resource.getCreatedtime());
         upfile.setTitle(title);
         upfile.setKeywords(keywords);
         try {

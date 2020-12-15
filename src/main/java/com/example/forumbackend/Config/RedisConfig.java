@@ -43,14 +43,6 @@ public class RedisConfig {
     @Resource
     private LettuceConnectionFactory lettuceConnectionFactory;
 
-    @Autowired
-    private MybatisRedisCache mybatisRedisCache;
-
-    @Bean
-    public void test(){
-        System.out.println("hello_world");
-        mybatisRedisCache.hello_world();
-    }
 
     /**
      * RedisTemplate配置

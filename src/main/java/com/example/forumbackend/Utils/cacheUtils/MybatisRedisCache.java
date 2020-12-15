@@ -21,6 +21,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 @Component
 public class MybatisRedisCache implements Cache {
 
+    @Resource
+    private RedisUtil redisUtil;
+
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
 

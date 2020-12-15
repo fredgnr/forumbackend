@@ -19,8 +19,7 @@ public class ReplyService {
     @Autowired
     private ResourceService resourceService;
 
-    public void addreply(String content,Integer rid,Integer uid){
-        LocalDateTime localDateTime=LocalDateTime.now();
+    public void addreply(String content,Integer rid,Integer uid, LocalDateTime localDateTime){
         //System.out.println("time_now:\t"+localDateTime);
         Reply reply=new Reply();
         reply.setUID(uid);

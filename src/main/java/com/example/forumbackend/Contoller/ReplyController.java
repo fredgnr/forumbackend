@@ -2,6 +2,7 @@ package com.example.forumbackend.Contoller;
 
 import com.example.forumbackend.Domain.ForumResource;
 import com.example.forumbackend.Domain.Reply;
+import com.example.forumbackend.Service.ArticalService;
 import com.example.forumbackend.Service.ReplyService;
 import com.example.forumbackend.Service.ResourceService;
 import com.example.forumbackend.Service.UserInfoService;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -29,6 +31,9 @@ public class ReplyController {
     private ReplyService replyService;
 
     @Autowired
+    private ArticalService articalService;
+
+    @Autowired
     private UserInfoService userInfoService;
 
     @Autowired
@@ -36,6 +41,9 @@ public class ReplyController {
 
     @Value("${points.replyresouce}")
     private Integer pointsreplyresouce;
+
+    @Value("${resourcetype.artical}")
+    private Integer articaltype;
 
     @PostMapping("/replyresource")
     @Transactional
@@ -52,8 +60,11 @@ public class ReplyController {
         if(resource==null){
             return Response.makeRsp(ResultCode.RESOURCE_NOT_EXIST.code,"resource_id为"+rid+"的资源不存在");
         }
+        LocalDateTime localDateTime=LocalDateTime.now();
+        if(resource.getType().equals(articaltype))
+            articalService.setlastrepliedtime(resource.getRID(),localDateTime);
         userInfoService.addpointbyrid(pointsreplyresouce,rid);
-        replyService.addreply(content,rid,cookieUtil.getuid(request));
+        replyService.addreply(content,rid,cookieUtil.getuid(request),localDateTime);
         return Response.makeOKRsp();
     }
 
