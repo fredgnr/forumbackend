@@ -3,6 +3,7 @@ package com.example.forumbackend;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +16,6 @@ import java.util.TimeZone;
 public class ForumbackendApplication {
 
     public static void main(String[] args) {
-       // System.out.println(LocalDateTime.now());
         SpringApplication.run(ForumbackendApplication.class, args);
     }
 

@@ -3,10 +3,13 @@ package com.example.forumbackend.Domain;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
+
+import java.time.LocalDateTime;
 
 @Data
 @ToString
@@ -49,5 +52,15 @@ public class Artical {
     @ApiModelProperty(example = "0")
     @TableField("article_view")
     private Integer View;
+
+    @JsonFormat(locale = "zh",timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "资源上传时间",example = "2020-11-22 12:23:11",hidden = true)
+    @TableField("created_time")
+    private LocalDateTime Createdtime;
+
+    @JsonFormat(locale = "zh",timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "最后评论时间",example = "2020-11-22 12:23:11",hidden = true)
+    @TableField("last_reply_time")
+    private LocalDateTime Lastreplytime;
 
 }

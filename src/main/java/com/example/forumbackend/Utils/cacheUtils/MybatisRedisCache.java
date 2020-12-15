@@ -1,9 +1,15 @@
-package com.example.forumbackend.Utils;
+package com.example.forumbackend.Utils.cacheUtils;
 
+import lombok.Getter;
 import lombok.Setter;
 import org.apache.ibatis.cache.Cache;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -15,13 +21,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 @Component
 public class MybatisRedisCache implements Cache {
 
-    private RedisUtil redisUtil;
-
-    private RedisUtil getRedis(){
-        return SpringContextUtils.getBean(RedisUtil.class);
-    }
-
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+
 
     /**
      * 缓存刷新时间（秒）
@@ -29,9 +30,11 @@ public class MybatisRedisCache implements Cache {
     @Setter
     private long flushInterval = 0L;
 
+    @Getter
     private String id;
 
     public MybatisRedisCache() {}
+    public void hello_world(){}
 
     public MybatisRedisCache(final String id) {
         if (id == null) {
@@ -40,38 +43,33 @@ public class MybatisRedisCache implements Cache {
         this.id = id;
     }
 
-    @Override
-    public String getId() {
-        return this.id;
-    }
 
     @Override
     public void putObject(Object o, Object o1) {
-        getRedis().hset(getId(), o.toString(), o1);
-
+       SpringContextUtils.getBean(RedisUtil.class).hset(getId(), o.toString(), o1);
         if (flushInterval > 0L) {
-            getRedis().expire(getId(), flushInterval);
+            SpringContextUtils.getBean(RedisUtil.class).expire(getId(), flushInterval);
         }
     }
 
     @Override
     public Object getObject(Object o) {
-        return getRedis().hget(getId(), o.toString());
+        return SpringContextUtils.getBean(RedisUtil.class).hget(getId(), o.toString());
     }
 
     @Override
     public Object removeObject(Object o) {
-        return getRedis().hdel(getId(), o);
+        return SpringContextUtils.getBean(RedisUtil.class).hdel(getId(), o);
     }
 
     @Override
     public void clear() {
-        getRedis().del(getId());
+        SpringContextUtils.getBean(RedisUtil.class).del(getId());
     }
 
     @Override
     public int getSize() {
-        return getRedis().hsize(getId());
+        return SpringContextUtils.getBean(RedisUtil.class).hsize(getId());
     }
 
     @Override

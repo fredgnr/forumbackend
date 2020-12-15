@@ -3,9 +3,12 @@ package com.example.forumbackend.Config;
 
 import com.example.forumbackend.Domain.Role;
 import com.example.forumbackend.Utils.RedisUtils.RedisObjectSerializer;
+import com.example.forumbackend.Utils.cacheUtils.MybatisRedisCache;
+import com.example.forumbackend.Utils.cacheUtils.RedisUtil;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -39,6 +42,15 @@ public class RedisConfig {
 
     @Resource
     private LettuceConnectionFactory lettuceConnectionFactory;
+
+    @Autowired
+    private MybatisRedisCache mybatisRedisCache;
+
+    @Bean
+    public void test(){
+        System.out.println("hello_world");
+        mybatisRedisCache.hello_world();
+    }
 
     /**
      * RedisTemplate配置
@@ -89,4 +101,14 @@ public class RedisConfig {
         return cacheManager;
     }
 
+  /* @Bean
+    public RedisUtil redisUtil(){
+        return new RedisUtil();
+    }
+
+    @Bean
+    public MybatisRedisCache mybatisRedisCache(){
+        return new MybatisRedisCache();
+    }
+*/
 }
