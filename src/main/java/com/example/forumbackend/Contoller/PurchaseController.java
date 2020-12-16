@@ -5,6 +5,7 @@ import com.example.forumbackend.Domain.Purchase;
 import com.example.forumbackend.Domain.User_Info;
 import com.example.forumbackend.Service.PurchaseService;
 import com.example.forumbackend.Service.ResourceService;
+import com.example.forumbackend.Service.UpFileService;
 import com.example.forumbackend.Service.UserInfoService;
 import com.example.forumbackend.Utils.CookieUtil;
 import com.example.forumbackend.Utils.ResponseUitls.Response;
@@ -12,6 +13,7 @@ import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +36,13 @@ public class PurchaseController {
     private UserInfoService userInfoService;
 
     @Autowired
+    private UpFileService upFileService;
+
+    @Autowired
     private CookieUtil cookieUtil;
+
+    @Value("${resourcetype.artical}")
+    private Integer articaltype;
 
     @PostMapping("/purchase")
     @Transactional
@@ -43,6 +51,7 @@ public class PurchaseController {
             @ApiResponse(code = 112,message = "请求资源不存在"),
             @ApiResponse(code = 117,message = "此资源已购买"),
             @ApiResponse(code=116,message = "余额不足"),
+            @ApiResponse(code = 125,message = "文章不需要购买"),
             @ApiResponse(code=102,message = "成功购买")
     })
     public ResponseResult<Purchase> pur(HttpServletRequest request,
@@ -51,6 +60,8 @@ public class PurchaseController {
         ForumResource resource=resourceService.findresourceByrid(rid);
         if(resource==null)
             return Response.makeRsp(ResultCode.RESOURCE_NOT_EXIST.code, "请求资源不存在");
+        if(resource.getType().equals(articaltype))
+            return Response.makeRsp(ResultCode.ARTICAL_CANNOT_PURCHASE.code, "无法购买文章");
         User_Info info=userInfoService.findByUID(uid);
         if(purchaseService.findByUIDRID(uid,rid)!=null){
             return  Response.makeRsp(ResultCode.RESOURCE_PURCHASED.code, "此资源已购买");
@@ -66,6 +77,7 @@ public class PurchaseController {
         purchase.setPrice(resource.getPrice());
         purchase.setPurchaseTime(LocalDateTime.now());
         purchaseService.addpur(purchase);
+        upFileService.add_purchasetime(resource.getRID());
         return Response.makeOKRsp(purchase);
     }
 

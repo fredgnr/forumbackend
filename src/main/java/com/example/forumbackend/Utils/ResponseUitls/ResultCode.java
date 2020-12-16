@@ -23,6 +23,7 @@ public enum ResultCode {
     ARTICAL_CHANGE_FAILED(123),//文章修改失败
     FILE_EMPTY(121),
     USER_NOT_EXIST(124),//查询用户不存在
+    ARTICAL_CANNOT_PURCHASE(125),
     INTERNAL_SERVER_ERROR(500);
 
     public final int code;

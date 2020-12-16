@@ -10,9 +10,13 @@ import com.example.forumbackend.Mapper.UpfileMapper;
 import com.example.forumbackend.Utils.ResponseUitls.Response;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
+import io.swagger.annotations.ApiParam;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -81,5 +85,42 @@ public class UpFileService {
         else return Response.makeOKRsp(upfile);
     }
 
+    public void add_purchasetime(Integer rid){
+        upfileMapper.add_purchasetime(rid);
+    }
+
+    public List<Upfile> search(Integer pageindex,Integer pagesize,
+                         Boolean latest,Boolean hottest,List<String> strings){
+        QueryWrapper<Upfile> qw=new QueryWrapper<>();
+        qw.orderByDesc(latest!=null&&latest.equals(true),"created_time");
+        qw.orderByDesc(hottest!=null&&hottest.equals(true),"purchase_time");
+        if(strings!=null&&strings.size()>0) {
+            for (String str : strings) {
+                qw.or().like("upfile_title", str);
+                qw.or().like("upfile_filename", str);
+                qw.or().like("upfile_keywords", str);
+                qw.or().like("upfile_intro", str);
+            }
+        }
+        Page<Upfile> page=new Page<>(pageindex,pagesize);
+        upfileMapper.selectPage(page,qw);
+        return page.getRecords();
+    }
+
+    public Integer searchcount(
+                               Boolean latest,Boolean hottest,List<String> strings){
+        QueryWrapper<Upfile> qw=new QueryWrapper<>();
+        qw.orderByDesc(latest!=null&&latest.equals(true),"created_time");
+        qw.orderByDesc(hottest!=null&&hottest.equals(true),"purchase_time");
+        if(strings!=null&&strings.size()>0) {
+            for (String str : strings) {
+                qw.or().like("upfile_title", str);
+                qw.or().like("upfile_filename", str);
+                qw.or().like("upfile_keywords", str);
+                qw.or().like("upfile_intro", str);
+            }
+        }
+        return upfileMapper.selectCount(qw);
+    }
 
 }

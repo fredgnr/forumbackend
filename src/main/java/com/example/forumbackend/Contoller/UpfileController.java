@@ -1,5 +1,6 @@
 package com.example.forumbackend.Contoller;
 
+import com.example.forumbackend.Domain.Artical;
 import com.example.forumbackend.Domain.ForumResource;
 import com.example.forumbackend.Domain.Section;
 import com.example.forumbackend.Domain.Upfile;
@@ -21,6 +22,7 @@ import java.io.*;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -111,6 +113,7 @@ public class UpfileController {
         upfile.setIntro(introduction);
         upfile.setCreatedtime(resource.getCreatedtime());
         upfile.setTitle(title);
+        upfile.setPurchasetime(0);
         upfile.setKeywords(keywords);
         try {
             File parent=newfile.getParentFile();
@@ -212,6 +215,31 @@ public class UpfileController {
     @Transactional
     public ResponseResult<Upfile> getbyrid(@RequestParam @ApiParam(value = "所查询文件的RID") Integer rid){
         return Response.makeOKRsp(upFileService.findByRID(rid));
+    }
+
+    @GetMapping("/search")
+    @Transactional
+    public ResponseResult<List<ForumResource>> search(
+            @RequestParam @ApiParam(value = "页码号") Integer pageindex,
+            @RequestParam @ApiParam(value = "页大小")Integer pagesize,
+            @RequestParam(required = false) @ApiParam(value = "是否为最新文件" ) Boolean latest,
+            @RequestParam(required = false) @ApiParam(value = "是否为最火文件") Boolean hottest,
+            @RequestBody(required = false) @ApiParam(value = "搜索关键词")List<String> strings){
+        List<Upfile> upfiles=upFileService.search(pageindex,pagesize,latest,hottest,strings);
+        List<Integer> rids=new ArrayList<>();
+        for(Upfile upfile:upfiles)
+            rids.add(upfile.getResourceid());
+        return Response.makeOKRsp(resourceService.getbyrids(rids));
+    }
+
+    @GetMapping("/searchcount")
+    @Transactional
+    public ResponseResult<Integer> searchcount(
+            @RequestParam(required = false) @ApiParam(value = "是否为最新文件" ) Boolean latest,
+            @RequestParam(required = false) @ApiParam(value = "是否为最火文件") Boolean hottest,
+            @RequestBody(required = false) @ApiParam(value = "搜索关键词")List<String> strings){
+        Integer integer=upFileService.searchcount(latest,hottest,strings);
+        return Response.makeOKRsp(integer);
     }
 
 

@@ -10,12 +10,14 @@ import com.example.forumbackend.Utils.ResponseUitls.Response;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
 import io.swagger.annotations.*;
+import org.apache.velocity.runtime.directive.Foreach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.bind.ValidationEvent;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -103,6 +105,8 @@ public class ArticalController {
         resourceService.addresource(resource);
         artical.setResourceID(resource.getRID());
         artical.setView(0);
+        artical.setCreatedtime(resource.getCreatedtime());
+        artical.setLastreplytime(null);
         articalService.insert(artical);
         userInfoService.addpointbyrid(pointsuploadartical,resource.getRID());
         return Response.makeOKRsp(resource);
@@ -183,5 +187,34 @@ public class ArticalController {
         return Response.makeOKRsp(articals);
     }
 
+    @GetMapping("/search")
+    @Transactional
+    public ResponseResult<List<ForumResource>> search(
+            @RequestParam @ApiParam(value = "页码号") Integer pageindex,
+            @RequestParam @ApiParam(value = "页大小")Integer pagesize,
+            @RequestParam(required = false) @ApiParam(value = "是否为最新文章" ) Boolean latest,
+            @RequestParam(required = false) @ApiParam(value = "是否为最火文章") Boolean hottest,
+            @RequestParam(required = false) @ApiParam(value = "是否为最近被回复的文章") Boolean latestreplied,
+            @RequestBody(required = false) @ApiParam(value = "搜索关键词")List<String> strings){
+        List<Artical> articals=articalService.search(pageindex,pagesize,latest,hottest,latestreplied,strings);
+        List<Integer> rids=new ArrayList<>();
+        for (Artical artical:articals){
+            rids.add(artical.getResourceID());
+        }
+        List<ForumResource> resources=resourceService.getbyrids(rids);
+        return Response.makeOKRsp(resources);
+    }
+
+    @GetMapping("/searchcount")
+    @Transactional
+    public ResponseResult<Integer> searchcount(
+            @RequestParam @ApiParam(value = "页码号") Integer pageindex,
+            @RequestParam @ApiParam(value = "页大小")Integer pagesize,
+            @RequestParam(required = false) @ApiParam(value = "是否为最新文章" ) Boolean latest,
+            @RequestParam(required = false) @ApiParam(value = "是否为最火文章") Boolean hottest,
+            @RequestParam(required = false) @ApiParam(value = "是否为最近被回复的文章") Boolean latestreplied,
+            @RequestBody(required = false) @ApiParam(value = "搜索关键词")List<String> strings){
+        return Response.makeOKRsp(articalService.searchcount(latest,hottest,latestreplied,strings));
+    }
 
 }

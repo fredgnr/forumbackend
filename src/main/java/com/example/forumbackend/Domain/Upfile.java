@@ -49,6 +49,9 @@ public class Upfile implements Serializable {
     @TableField("upfile_intro")
     private String intro;
 
+    @TableId("purchase_time")
+    private Integer purchasetime;
+
     @JsonFormat(locale = "zh",timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "资源上传时间",example = "2020-11-22 12:23:11",hidden = true)
     @TableField("created_time")
