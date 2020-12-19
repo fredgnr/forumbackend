@@ -24,6 +24,7 @@ public enum ResultCode {
     FILE_EMPTY(121),
     USER_NOT_EXIST(124),//查询用户不存在
     ARTICAL_CANNOT_PURCHASE(125),
+    GROUP_NOT_EXIST(126),//群不存在
     INTERNAL_SERVER_ERROR(500);
 
     public final int code;

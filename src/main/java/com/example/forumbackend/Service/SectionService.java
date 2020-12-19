@@ -1,7 +1,7 @@
 package com.example.forumbackend.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.forumbackend.Domain.Section;
+import com.example.forumbackend.Domain.Normal.Section;
 import com.example.forumbackend.Mapper.SectionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

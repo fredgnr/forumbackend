@@ -1,8 +1,8 @@
 package com.example.forumbackend.Contoller;
 
-import com.example.forumbackend.Domain.ForumResource;
-import com.example.forumbackend.Domain.Purchase;
-import com.example.forumbackend.Domain.User_Info;
+import com.example.forumbackend.Domain.Normal.ForumResource;
+import com.example.forumbackend.Domain.Normal.Purchase;
+import com.example.forumbackend.Domain.Normal.User_Info;
 import com.example.forumbackend.Service.PurchaseService;
 import com.example.forumbackend.Service.ResourceService;
 import com.example.forumbackend.Service.UpFileService;
@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.List;
 

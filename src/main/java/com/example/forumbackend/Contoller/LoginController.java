@@ -1,7 +1,7 @@
 package com.example.forumbackend.Contoller;
 
-import com.example.forumbackend.Domain.Role;
-import com.example.forumbackend.Domain.User;
+import com.example.forumbackend.Domain.Utils.Role;
+import com.example.forumbackend.Domain.Normal.User;
 import com.example.forumbackend.Service.LoginService;
 import com.example.forumbackend.Utils.CookieUtil;
 import com.example.forumbackend.Utils.ResponseUitls.Response;

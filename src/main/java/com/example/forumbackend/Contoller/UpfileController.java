@@ -1,9 +1,8 @@
 package com.example.forumbackend.Contoller;
 
-import com.example.forumbackend.Domain.Artical;
-import com.example.forumbackend.Domain.ForumResource;
-import com.example.forumbackend.Domain.Section;
-import com.example.forumbackend.Domain.Upfile;
+import com.example.forumbackend.Domain.Normal.ForumResource;
+import com.example.forumbackend.Domain.Normal.Section;
+import com.example.forumbackend.Domain.Normal.Upfile;
 import com.example.forumbackend.Service.*;
 import com.example.forumbackend.Utils.CookieUtil;
 import com.example.forumbackend.Utils.ResponseUitls.Response;

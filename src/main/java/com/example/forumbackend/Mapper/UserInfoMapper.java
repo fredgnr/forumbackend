@@ -1,7 +1,7 @@
 package com.example.forumbackend.Mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.forumbackend.Domain.User_Info;
+import com.example.forumbackend.Domain.Normal.User_Info;
 import com.example.forumbackend.Utils.cacheUtils.MybatisRedisCache;
 import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Param;

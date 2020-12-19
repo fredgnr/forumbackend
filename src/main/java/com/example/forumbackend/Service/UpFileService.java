@@ -3,20 +3,16 @@ package com.example.forumbackend.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.forumbackend.Domain.ForumResource;
-import com.example.forumbackend.Domain.Purchase;
-import com.example.forumbackend.Domain.Upfile;
+import com.example.forumbackend.Domain.Normal.ForumResource;
+import com.example.forumbackend.Domain.Normal.Purchase;
+import com.example.forumbackend.Domain.Normal.Upfile;
 import com.example.forumbackend.Mapper.UpfileMapper;
 import com.example.forumbackend.Utils.ResponseUitls.Response;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
-import io.swagger.annotations.ApiParam;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 

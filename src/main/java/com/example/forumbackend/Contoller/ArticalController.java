@@ -1,7 +1,7 @@
 package com.example.forumbackend.Contoller;
 
-import com.example.forumbackend.Domain.Artical;
-import com.example.forumbackend.Domain.ForumResource;
+import com.example.forumbackend.Domain.Normal.Artical;
+import com.example.forumbackend.Domain.Normal.ForumResource;
 import com.example.forumbackend.Service.ArticalService;
 import com.example.forumbackend.Service.ResourceService;
 import com.example.forumbackend.Service.UserInfoService;
@@ -10,14 +10,12 @@ import com.example.forumbackend.Utils.ResponseUitls.Response;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
 import io.swagger.annotations.*;
-import org.apache.velocity.runtime.directive.Foreach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.bind.ValidationEvent;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;

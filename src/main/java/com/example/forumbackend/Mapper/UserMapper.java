@@ -1,8 +1,7 @@
 package com.example.forumbackend.Mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.forumbackend.Domain.User;
-import org.apache.ibatis.annotations.CacheNamespace;
+import com.example.forumbackend.Domain.Normal.User;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -2,7 +2,7 @@ package com.example.forumbackend.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.example.forumbackend.Domain.User;
+import com.example.forumbackend.Domain.Normal.User;
 import com.example.forumbackend.Mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

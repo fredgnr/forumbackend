@@ -1,6 +1,5 @@
 package com.example.forumbackend.Domain.Utils;
 
-import com.example.forumbackend.Domain.Upfile;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import lombok.Data;
 

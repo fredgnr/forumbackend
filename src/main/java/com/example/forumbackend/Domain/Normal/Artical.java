@@ -1,4 +1,4 @@
-package com.example.forumbackend.Domain;
+package com.example.forumbackend.Domain.Normal;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;

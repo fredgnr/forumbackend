@@ -1,7 +1,7 @@
 package com.example.forumbackend.Mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.forumbackend.Domain.ForumResource;
+import com.example.forumbackend.Domain.Normal.ForumResource;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
 package com.example.forumbackend.Contoller;
 
-import com.example.forumbackend.Domain.ForumResource;
-import com.example.forumbackend.Domain.Reply;
+import com.example.forumbackend.Domain.Normal.ForumResource;
+import com.example.forumbackend.Domain.Normal.Reply;
 import com.example.forumbackend.Service.ArticalService;
 import com.example.forumbackend.Service.ReplyService;
 import com.example.forumbackend.Service.ResourceService;

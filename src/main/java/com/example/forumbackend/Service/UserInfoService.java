@@ -3,10 +3,8 @@ package com.example.forumbackend.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.forumbackend.Domain.User;
-import com.example.forumbackend.Domain.User_Info;
+import com.example.forumbackend.Domain.Normal.User_Info;
 import com.example.forumbackend.Mapper.UserInfoMapper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

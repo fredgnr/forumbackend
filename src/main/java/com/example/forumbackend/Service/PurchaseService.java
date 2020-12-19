@@ -2,7 +2,7 @@ package com.example.forumbackend.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.forumbackend.Domain.Purchase;
+import com.example.forumbackend.Domain.Normal.Purchase;
 import com.example.forumbackend.Mapper.PurchaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

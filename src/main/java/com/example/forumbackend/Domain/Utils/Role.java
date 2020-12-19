@@ -1,5 +1,6 @@
-package com.example.forumbackend.Domain;
+package com.example.forumbackend.Domain.Utils;
 
+import com.example.forumbackend.Domain.Normal.User;
 import lombok.*;
 
 import java.io.Serializable;

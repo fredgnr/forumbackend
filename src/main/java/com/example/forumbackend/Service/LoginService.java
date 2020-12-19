@@ -1,8 +1,8 @@
 package com.example.forumbackend.Service;
 
 
-import com.example.forumbackend.Domain.Role;
-import com.example.forumbackend.Domain.User;
+import com.example.forumbackend.Domain.Utils.Role;
+import com.example.forumbackend.Domain.Normal.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -64,5 +64,12 @@ public class LoginService {
     @Transactional
     public void logout(Integer uid){
         redisTemplate.delete(uid.toString());
+    }
+
+    public boolean verify(Integer uid ,String token){//验证账号是否登录
+        Role tmp=redisTemplate.opsForValue().get(uid.toString());
+        if(tmp!=null&&token.equals(tmp.getToken()))
+            return true;
+        else return false;
     }
 }

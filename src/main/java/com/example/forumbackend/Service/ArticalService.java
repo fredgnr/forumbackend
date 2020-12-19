@@ -3,16 +3,11 @@ package com.example.forumbackend.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.forumbackend.Domain.Artical;
-import com.example.forumbackend.Domain.ForumResource;
+import com.example.forumbackend.Domain.Normal.Artical;
 import com.example.forumbackend.Mapper.ArticalMapper;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.security.acl.LastOwnerException;
 import java.time.LocalDateTime;
 import java.util.List;
 

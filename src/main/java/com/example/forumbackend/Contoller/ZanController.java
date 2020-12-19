@@ -1,7 +1,7 @@
 package com.example.forumbackend.Contoller;
 
-import com.example.forumbackend.Domain.ForumResource;
-import com.example.forumbackend.Domain.Zan;
+import com.example.forumbackend.Domain.Normal.ForumResource;
+import com.example.forumbackend.Domain.Normal.Zan;
 import com.example.forumbackend.Service.ResourceService;
 import com.example.forumbackend.Service.ZanService;
 import com.example.forumbackend.Utils.CookieUtil;

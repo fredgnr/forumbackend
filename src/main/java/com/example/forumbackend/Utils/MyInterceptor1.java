@@ -1,7 +1,7 @@
 package com.example.forumbackend.Utils;
 
-import com.example.forumbackend.Domain.Role;
-import com.example.forumbackend.Domain.User;
+import com.example.forumbackend.Domain.Utils.Role;
+import com.example.forumbackend.Domain.Normal.User;
 import com.example.forumbackend.Utils.ResponseUitls.Response;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

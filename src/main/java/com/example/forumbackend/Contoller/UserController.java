@@ -1,15 +1,14 @@
 package com.example.forumbackend.Contoller;
 
 
-import com.example.forumbackend.Domain.User;
-import com.example.forumbackend.Domain.User_Info;
+import com.example.forumbackend.Domain.Normal.User;
+import com.example.forumbackend.Domain.Normal.User_Info;
 import com.example.forumbackend.Service.UserInfoService;
 import com.example.forumbackend.Service.UserService;
 import com.example.forumbackend.Utils.CookieUtil;
 import com.example.forumbackend.Utils.ResponseUitls.Response;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
-import io.lettuce.core.GeoArgs;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -19,9 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import sun.security.util.Length;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 

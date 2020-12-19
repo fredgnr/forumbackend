@@ -4,6 +4,9 @@
 /*==============================================================*/
 use forum;
 
+drop table if exists Chat;
+drop table if exists GroupItem;
+drop table if exists chatgroup;
 
 drop table if exists zan;
 drop table if exists upfile;
@@ -15,6 +18,32 @@ drop table if exists section;
 drop table if exists user_info;
 drop table if exists Users;
 
+
+/*==============================================================*/
+/* Table: Chat                                                  */
+/*==============================================================*/
+create table Chat
+(
+   CID                  int not null  auto_increment,
+   receiveUID           int,
+   sendUID              int,
+   GroupID              int,
+   message              varchar(1000),
+   mtype                int,
+   CreateTime           datetime,
+   primary key (CID)
+);
+
+/*==============================================================*/
+/* Table: GroupItem                                             */
+/*==============================================================*/
+create table GroupItem
+(
+   ID                   int not null  auto_increment,
+   uid                  int,
+   GID                  int,
+   primary key (ID)
+);
 /*==============================================================*/
 /* Table: Users                                                 */
 /*==============================================================*/
@@ -27,6 +56,19 @@ create table Users
    user_email           varchar(40) not null,
    primary key (uid)
 );
+
+/*==============================================================*/
+/* Table: chatgroup                                             */
+/*==============================================================*/
+create table chatgroup
+(
+   GID                  int not null  auto_increment,
+   Groupname            varchar(50),
+   Introduce            varchar(500),
+   create_time			datetime,
+   primary key (GID)
+);
+
 
 /*==============================================================*/
 /* Table: user_info                                             */
@@ -111,6 +153,7 @@ create table upfile
    upfile_filename      varchar(200),
    upfile_keywords      varchar(200),
    upfile_intro         varchar(300),
+   purchase_time		int,
    created_time datetime,
    primary key (upfile_id)
 );
@@ -174,4 +217,21 @@ alter table purchase add constraint FK_Reference_11 foreign key (purchase_resour
 alter table purchase add constraint FK_Reference_12 foreign key (purchase_user_id)
       references  Users (uid) on delete restrict on update restrict;
       
+
+
+#test
+alter table Chat add constraint FK_Reference_a foreign key (receiveUID)
+      references Users (uid) on delete restrict on update restrict;
+
+alter table Chat add constraint FK_Reference_b foreign key (sendUID)
+      references Users (uid) on delete restrict on update restrict;
+
+alter table Chat add constraint FK_Reference_c foreign key (GroupID)
+      references chatgroup (GID) on delete restrict on update restrict;
+
+alter table GroupItem add constraint FK_Reference_d foreign key (uid)
+      references Users (uid) on delete restrict on update restrict;
+
+alter table GroupItem add constraint FK_Reference_e foreign key (GID)
+      references chatgroup (GID) on delete restrict on update restrict;
 insert into section(section_name,section_count) value("JAVA",0);

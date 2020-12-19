@@ -2,7 +2,7 @@ package com.example.forumbackend.Utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.example.forumbackend.Domain.User;
+import com.example.forumbackend.Domain.Normal.User;
 
 public class TokenUtils {
     public String gettoken(User user){
