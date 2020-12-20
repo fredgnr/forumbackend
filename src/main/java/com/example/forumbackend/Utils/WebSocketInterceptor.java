@@ -27,22 +27,22 @@ public class WebSocketInterceptor implements HandshakeInterceptor {
     @Override
     public boolean beforeHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Map<String, Object> map) throws Exception {
         if(serverHttpRequest instanceof ServletServerHttpRequest){
-         /*   ServletServerHttpRequest request=(ServletServerHttpRequest) serverHttpRequest;
+            ServletServerHttpRequest request=(ServletServerHttpRequest) serverHttpRequest;
             Integer uid=cookieUtil.getuid(request.getServletRequest());
             String token=cookieUtil.gettoken(request.getServletRequest());
             if (loginService.verify(uid,token)){
                 map.put(WEBSOCKET_USER_ID,uid);
                 return true;
-            }*/
+            }
 
-            ServletServerHttpRequest request = (ServletServerHttpRequest)serverHttpRequest;
+           /* ServletServerHttpRequest request = (ServletServerHttpRequest)serverHttpRequest;
             // 将 url 分割成两部分, userId= 前和 userId= 后
             // 比如 http://localhost:8080/chat/userId=1234
             // 被分割成 http://localhost:8080/chat 和 1234, 1234就是我们需要的id
             String userId = request.getURI().toString().split("userId=")[1];
             map.put(WEBSOCKET_USER_ID, new Integer(userId));
             System.out.println("新加入：\t"+userId);
-            return true;
+            return true;*/
         }
         return false;
     }
