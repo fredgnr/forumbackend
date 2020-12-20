@@ -1,14 +1,35 @@
 package com.example.forumbackend;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.forumbackend.Domain.ChatRoom.Chat;
+import com.example.forumbackend.Mapper.ChatMapper;
+import com.example.forumbackend.Service.ChatService;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
+
 
 @SpringBootTest
 class ForumbackendApplicationTests {
+
+    @Value("${chatype.group}")
+    private Integer GroupType;
+
+    @Value("${chatype.private}")
+    private Integer PrivateType;
+
+    @Autowired
+    private ChatMapper chatMapper;
+
+    @Autowired
+    private ChatService chatService;
 
     @Test
     void contextLoads() {
@@ -29,4 +50,23 @@ class ForumbackendApplicationTests {
         System.out.println(test);
     }
 
+    @Test
+    void test3(){
+        QueryWrapper<Chat> qw=new QueryWrapper<>();
+        qw.eq("receiveUID",1);
+        qw.eq("mtype",PrivateType);
+        qw.select("max(CreateTime) as CreateTime,sendUID");
+        qw.groupBy("sendUID");
+        qw.orderByDesc("CreateTime");
+        List<Chat> list=chatMapper.selectList(qw);
+        for(Chat chat:list)
+            System.out.println(chat);
+    }
+
+    @Test
+    public void test4(){
+        List<Integer> list=chatService.getgroupchatbytime(1,0,20);
+        for(Integer i:list)
+            System.out.println(i);
+    }
 }

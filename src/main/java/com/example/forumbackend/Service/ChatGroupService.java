@@ -43,8 +43,14 @@ public class ChatGroupService {
 
     public List<GroupItem> getlist(Integer gid){
         QueryWrapper<GroupItem> qw=new QueryWrapper<>();
-
         qw.eq("GID",gid);
         return groupItemMapper.selectList(qw);
+    }
+
+    public Boolean verify(Integer gid,Integer uid){//验证某人是否加群
+        QueryWrapper<GroupItem> qw=new QueryWrapper<>();
+        qw.eq("uid",uid);
+        qw.eq("GID",gid);
+        return groupItemMapper.selectCount(qw) > 0;
     }
 }
