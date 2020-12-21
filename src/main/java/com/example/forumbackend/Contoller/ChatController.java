@@ -12,6 +12,7 @@ import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,20 +47,28 @@ public class ChatController {
     @Value("${chatype.private}")
     private Integer PrivateType;
 
-
+/*
     @PostMapping("{sendID}/to/{receiveID}")
     public void sendToUser (@PathVariable("sendID") Integer sendID,
                             @PathVariable("receiveID") Integer receiveID,String message){
         System.out.println("sendid:\t"+sendID+"\treceiveID:\t"+receiveID+"\tmessage\t"+message);
         if(sendID!=null&&receiveID!=null)
             handler.sendMessageToUser(receiveID,new TextMessage(message));
-    }
+    }*/
 
     @PostMapping("/sendprivate")
     @Transactional
-    public ResponseResult<Chat> sendprivate(@CookieValue("UID") Integer uid, Integer receivedid,String message) throws JsonProcessingException {
+    @ApiOperation("发送私聊信息")
+    @ApiResponses({
+            @ApiResponse(code = 102,message = "成功发送"),
+            @ApiResponse(code = 124,message = "发送对象不存在"),
+            @ApiResponse(code=129,message = "不能自己给自己发")
+    })
+    public ResponseResult<Chat> sendprivate(@CookieValue("UID") Integer uid,
+                                            @RequestParam @ApiParam("发送对象uid") Integer receivedid,
+                                            @RequestParam @ApiParam("发送内容") String message) throws JsonProcessingException {
         if(uid.equals(receivedid))
-            return Response.makeErrRsp("不能直接给自己发");
+            return Response.makeRsp(ResultCode.CANNOT_SEND_TO_YOURSELF.code, "不能自己给自己发");
         Chat chat=new Chat();
         chat.setCreateTime(LocalDateTime.now());
         chat.setReceiveUID(receivedid);
@@ -75,7 +84,14 @@ public class ChatController {
 
     @PostMapping("/sendgroup")
     @Transactional
-    public ResponseResult<Chat> sendgroup(@CookieValue("UID") Integer uid, Integer GID,String message) throws JsonProcessingException {
+    @ApiOperation("发送群聊")
+    @ApiResponses({
+            @ApiResponse(code = 127,message = "未加群"),
+            @ApiResponse(code=102,message = "成功发送"),
+    })
+    public ResponseResult<Chat> sendgroup(@CookieValue("UID") Integer uid,
+                                         @RequestParam @ApiParam("群id") Integer GID,
+                                          @RequestParam @ApiParam("发送内容") String message) throws JsonProcessingException {
         Chat chat=new Chat();
         chat.setCreateTime(LocalDateTime.now());
         chat.setGroupID(GID);
@@ -97,7 +113,10 @@ public class ChatController {
 
     @PostMapping("/CreateGroup")
     @Transactional
-    public ResponseResult<ChatGroup> CreateGroup(String name, String introduce){
+    @ApiOperation("创建群聊")
+    public ResponseResult<ChatGroup> CreateGroup(
+            @RequestParam @ApiParam("群名称") String name,
+            @RequestParam @ApiParam("群介绍") String introduce){
         LocalDateTime now=LocalDateTime.now();
         ChatGroup group=new ChatGroup();
         group.setName(name);
@@ -109,7 +128,13 @@ public class ChatController {
 
     @PostMapping("/addgroup")
     @Transactional
-    public ResponseResult<Boolean> AddGroup(@CookieValue("UID") Integer uid,Integer GID){
+    @ApiOperation("加群")
+    @ApiResponses({
+            @ApiResponse(code = 126,message = "群不存在"),
+            @ApiResponse(code = 102,message = "成功")
+    })
+    public ResponseResult<Boolean> AddGroup(@CookieValue("UID") Integer uid,
+                                            @RequestParam @ApiParam("群id") Integer GID){
         ChatGroup group=chatGroupService.findByGID(GID);
         if(group==null){
             return Response.makeRsp(ResultCode.GROUP_NOT_EXIST.code, "群不存在",false);
@@ -120,27 +145,87 @@ public class ChatController {
 
     @GetMapping("/getgroupitemlist")
     @Transactional
+    @ApiOperation("获取论坛群总数量")
     public ResponseResult<List<GroupItem>> getlist(Integer GID){
         return Response.makeOKRsp(chatGroupService.getlist(GID));
     }
 
     @GetMapping("/getprivatecount")
     @Transactional
+    @ApiOperation("获取某用户的存在的私聊的人的数量")
     public  ResponseResult<Integer> getprivatecount(@CookieValue("UID") Integer uid){
         return Response.makeOKRsp(chatService.getprivatecount(uid));
     }
 
     @GetMapping("/getprivatechatbytime")
     @Transactional
+    @ApiOperation("获取与某用户存在的私聊的人的列表，按照最后发送时间来确定")
     public ResponseResult<List<Integer>> getprivatechatbytime(@CookieValue("UID")Integer uid,Integer pageindex,Integer pagesize){
         return Response.makeOKRsp(chatService.getprivatechatbytime(uid,pageindex,pagesize));
     }
 
     @GetMapping("/getgroupchatbytime")
     @Transactional
+    @ApiOperation("获取与某用户存在聊天记录的群的列表，按照最后发送时间来确定")
     public ResponseResult<List<Integer>> getgroupchatbytime(@CookieValue("UID")Integer uid,Integer pageindex,Integer pagesize){
         return Response.makeOKRsp(chatService.getgroupchatbytime(uid,pageindex,pagesize));
     }
 
+    @GetMapping("/getprivatechat")
+    @Transactional
+    @ApiOperation("获取与某用户最近的特定条数的聊天记录")
+    public ResponseResult<List<Chat>> getprivatechat(
+            @CookieValue("UID")Integer uid,
+            Integer senduid,Integer pagesize){
+        return Response.makeOKRsp(chatService.getprivatechat(uid, senduid,  pagesize));
+    }
 
+    @GetMapping("/getprivatechatbefore")
+    @Transactional
+    @ApiOperation("分页获取与某用户的聊天记录中早于某条特定记录的记录")
+    public ResponseResult<List<Chat>> getprivatechat2(
+            @CookieValue("UID")Integer uid,
+            Integer senduid,Integer CID,Integer size){
+        return Response.makeOKRsp(chatService.getprivatechat2(uid, senduid, CID,size));
+    }
+
+    @GetMapping("/getprivatechat")
+    @Transactional
+    @ApiOperation("获取某群中最近的特定数量的聊天记录")
+    @ApiResponses({
+            @ApiResponse(code = 127,message = "未加群"),
+            @ApiResponse(code=102,message = "成功"),
+    })
+    public ResponseResult<List<Chat>> getgroupchat(@CookieValue("UID")Integer uid,Integer gid, Integer pagesize){
+        if(!chatGroupService.verify(gid,uid))
+            return Response.makeRsp(ResultCode.NOT_JOIN_GROUP.code, "尚未加群");
+        return Response.makeOKRsp(chatService.getgroupchat(gid,  pagesize));
+    }
+
+    @GetMapping("/getprivatechatbefore")
+    @Transactional
+    @ApiResponses({
+            @ApiResponse(code = 127,message = "未加群"),
+            @ApiResponse(code=102,message = "成功"),
+    })
+    @ApiOperation("分页获取某群的聊天记录中早于某条特定记录的记录")
+    public ResponseResult<List<Chat>> getgroupchat2(@CookieValue("UID")Integer uid,Integer gid,Integer cid, Integer size){
+        if(!chatGroupService.verify(gid,uid))
+            return Response.makeRsp(ResultCode.NOT_JOIN_GROUP.code, "尚未加群");
+        return Response.makeOKRsp(chatService.getgroupchat2(gid, cid,size));
+    }
+
+    @GetMapping("/searchgroupbyid")
+    @Transactional
+    @ApiOperation("通过GID搜索群")
+    public  ResponseResult<ChatGroup> search(Integer gid){
+        return Response.makeOKRsp(chatGroupService.search(gid));
+    }
+
+    @GetMapping("/searchbystring")
+    @Transactional
+    @ApiOperation("模糊搜索群")
+    public ResponseResult<List<ChatGroup>> search(String str,Integer pageindex,Integer pagesize){
+        return Response.makeOKRsp(chatGroupService.search(str, pageindex, pagesize));
+    }
 }

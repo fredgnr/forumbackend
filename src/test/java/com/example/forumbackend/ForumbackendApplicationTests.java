@@ -65,8 +65,6 @@ class ForumbackendApplicationTests {
 
     @Test
     public void test4(){
-        List<Integer> list=chatService.getgroupchatbytime(1,0,20);
-        for(Integer i:list)
-            System.out.println(i);
+       chatService.getprivatechatbytime(1,0,20);
     }
 }

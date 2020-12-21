@@ -14,7 +14,7 @@ import java.util.TimeZone;
 @MapperScan("com.example.forumbackend.Mapper")
 @SpringBootApplication
 @EnableSwagger2
-@EnableAsync
+@EnableAsync(proxyTargetClass = true)
 public class ForumbackendApplication {
 
     public static void main(String[] args) {

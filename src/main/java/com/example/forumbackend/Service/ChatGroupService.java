@@ -1,6 +1,7 @@
 package com.example.forumbackend.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.forumbackend.Domain.ChatRoom.ChatGroup;
 import com.example.forumbackend.Domain.ChatRoom.GroupItem;
 import com.example.forumbackend.Mapper.ChatGroupMapper;
@@ -52,5 +53,17 @@ public class ChatGroupService {
         qw.eq("uid",uid);
         qw.eq("GID",gid);
         return groupItemMapper.selectCount(qw) > 0;
+    }
+
+    public ChatGroup search(Integer gid){
+        return chatGroupMapper.selectById(gid);
+    }
+
+    public List<ChatGroup> search(String str,Integer pageindex,Integer pagesize){
+        QueryWrapper<ChatGroup> qw=new QueryWrapper<>();
+        qw.like("Introduce",str).or().like("Groupname",str);
+        Page<ChatGroup> page=new Page<>(pageindex,pagesize);
+        chatGroupMapper.selectPage(page,qw);
+        return page.getRecords();
     }
 }

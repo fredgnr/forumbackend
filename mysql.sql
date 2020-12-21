@@ -4,6 +4,7 @@
 /*==============================================================*/
 use forum;
 
+drop table if exists ChatItem;
 drop table if exists Chat;
 drop table if exists GroupItem;
 drop table if exists chatgroup;
@@ -17,6 +18,21 @@ drop table if exists resources;
 drop table if exists section;
 drop table if exists user_info;
 drop table if exists Users;
+
+
+/*==============================================================*/
+/* Table: ChatItem                                              */
+/*==============================================================*/
+create table ChatItem
+(
+   ID                   int not null,
+   GID                  int,
+   UID1                 int,
+   UID2                 int,
+   mtype                int,
+   happentime           datetime,
+   primary key (ID)
+);
 
 
 /*==============================================================*/
@@ -234,4 +250,14 @@ alter table GroupItem add constraint FK_Reference_d foreign key (uid)
 
 alter table GroupItem add constraint FK_Reference_e foreign key (GID)
       references chatgroup (GID) on delete restrict on update restrict;
+
+alter table ChatItem add constraint FK_Reference_16 foreign key (GID)
+      references chatgroup (GID) on delete restrict on update restrict;
+
+alter table ChatItem add constraint FK_Reference_17 foreign key (UID1)
+      references Users (uid) on delete restrict on update restrict;
+
+alter table ChatItem add constraint FK_Reference_18 foreign key (UID2)
+      references Users (uid) on delete restrict on update restrict;
+
 insert into section(section_name,section_count) value("JAVA",0);

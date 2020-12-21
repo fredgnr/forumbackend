@@ -26,6 +26,8 @@ public enum ResultCode {
     ARTICAL_CANNOT_PURCHASE(125),
     GROUP_NOT_EXIST(126),//群不存在
     NOT_JOIN_GROUP(127),//未加群
+    TOKEN_OUT_TIME(128),//token过期
+    CANNOT_SEND_TO_YOURSELF(129),
     INTERNAL_SERVER_ERROR(500);
 
     public final int code;
