@@ -19,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/zan")
+@CrossOrigin
 @Api(tags = "点赞相关api(测试完成)")
 public class ZanController {
     @Autowired

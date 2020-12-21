@@ -25,6 +25,7 @@ import java.util.*;
 @RestController
 @RequestMapping("/user")
 @Api(tags = "用户信息(测试完成)")
+@CrossOrigin
 public class UserController {
     @Autowired
     private UserService userService;

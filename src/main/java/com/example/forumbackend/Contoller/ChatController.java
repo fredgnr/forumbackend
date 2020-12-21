@@ -24,6 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/chat")
+@CrossOrigin
 public class ChatController {
 
     @Autowired

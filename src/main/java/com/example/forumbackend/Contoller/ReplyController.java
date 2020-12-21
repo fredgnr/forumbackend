@@ -23,6 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/reply")
 @Api(tags = "回复API(测试完成)")
+@CrossOrigin
 public class ReplyController {
     @Autowired
     private ResourceService resourceService;

@@ -28,6 +28,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/upfile")
 @Api(tags = "文件API(完成测试)")
+@CrossOrigin
 public class UpfileController {
 
     @Value("${web.upload-path}")
