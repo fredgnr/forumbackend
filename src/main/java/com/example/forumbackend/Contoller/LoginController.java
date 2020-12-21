@@ -52,6 +52,7 @@ public class LoginController {
             @ApiParam(value = "账号",example = "513317651") @RequestParam String account,
             @ApiParam(value = "密码",example = "zz123456") @RequestParam String password){
         Role role=new Role();
+        response.addHeader("Access-Control-Allow-Origin", "");
         String token=loginService.login(account,password,role);
         System.out.println("token:\t"+token);
         System.out.println("test account"+AccountNotExist);
