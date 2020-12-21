@@ -61,6 +61,7 @@ public class ArticalController {
                                          @ApiParam(value = "文件列表") @RequestParam MultipartFile[] files){
         Integer uid=cookieUtil.getuid(request);
         List<String> pictures=new ArrayList<>();
+        response.addHeader("Access-Control-Allow-Credentials","true");
         response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         try {
                 for(MultipartFile multipartFile:files) {
@@ -94,6 +95,7 @@ public class ArticalController {
     public ResponseResult<ForumResource> uploadartical(HttpServletRequest request,HttpServletResponse response,
                               @ApiParam("文章类，view和ID和RID置为null")@RequestBody Artical artical){
         response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.addHeader("Access-Control-Allow-Credentials","true");
         Integer uid=cookieUtil.getuid(request);
         ForumResource resource=new ForumResource();
         resource.setUID(uid);
@@ -124,6 +126,7 @@ public class ArticalController {
                                                  @RequestBody Artical artical){
         artical.setView(null);
         response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.addHeader("Access-Control-Allow-Credentials","true");
         Integer uid=cookieUtil.getuid(request);
         ForumResource resource=resourceService.findresourceByrid(artical.getResourceID());
         if(resource==null||!resource.getRID().equals(artical.getResourceID())){
@@ -139,6 +142,7 @@ public class ArticalController {
     @ApiOperation("查询文章总数量")
     public ResponseResult<Integer> getarticalcount(HttpServletResponse response,HttpServletRequest request){
         response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.addHeader("Access-Control-Allow-Credentials","true");
         return Response.makeOKRsp(articalService.getcount());
     }
 
@@ -149,7 +153,8 @@ public class ArticalController {
             @RequestParam @ApiParam(value = "页码号") Integer pageindex,
             @RequestParam @ApiParam(value = "页大小")Integer pagesize,
             HttpServletRequest request,HttpServletResponse response){
-        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+
+        response.addHeader("Access-Control-Allow-Credentials","true");response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         return Response.makeOKRsp(resourceService.getarticals(pageindex,pagesize));
     }
 
@@ -168,7 +173,7 @@ public class ArticalController {
             Integer uid,HttpServletRequest request,HttpServletResponse response,
             @RequestParam @ApiParam(value = "页码号") Integer pageindex,
             @RequestParam @ApiParam(value = "页大小")Integer pagesize){
-        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.addHeader("Access-Control-Allow-Credentials","true");response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         return Response.makeOKRsp(resourceService.getarticalsbyuid(uid,pageindex,pagesize));
     }
 
@@ -176,7 +181,7 @@ public class ArticalController {
     @Transactional
     public ResponseResult<Artical> getarticalbyrid(Integer rid,
                                                    HttpServletResponse response,HttpServletRequest request){
-        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.addHeader("Access-Control-Allow-Credentials","true");response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         Artical artical=articalService.findBYRID(rid);
         articalService.updateview(artical.getID());
         userInfoService.addpointbyrid(pointsviewartical,rid);
@@ -186,7 +191,7 @@ public class ArticalController {
     @GetMapping("/articalsbyrids")
     @Transactional
     public ResponseResult<List<Artical>> getarticalsbyrids(@RequestBody List<Integer> rids,HttpServletRequest request,HttpServletResponse response){
-        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.addHeader("Access-Control-Allow-Credentials","true");response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         List<Artical> articals=articalService.findByRIDlist(rids);
         List<Integer> aids=new ArrayList<>();
         for(Artical artical:articals) {
@@ -207,7 +212,7 @@ public class ArticalController {
             @RequestParam(required = false) @ApiParam(value = "是否为最火文章") Boolean hottest,
             @RequestParam(required = false) @ApiParam(value = "是否为最近被回复的文章") Boolean latestreplied,
             @RequestBody(required = false) @ApiParam(value = "搜索关键词")List<String> strings){
-        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.addHeader("Access-Control-Allow-Credentials","true");response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         List<Artical> articals=articalService.search(pageindex,pagesize,latest,hottest,latestreplied,strings);
         List<Integer> rids=new ArrayList<>();
         for (Artical artical:articals){
@@ -227,7 +232,7 @@ public class ArticalController {
             @RequestParam(required = false) @ApiParam(value = "是否为最火文章") Boolean hottest,
             @RequestParam(required = false) @ApiParam(value = "是否为最近被回复的文章") Boolean latestreplied,
             @RequestBody(required = false) @ApiParam(value = "搜索关键词")List<String> strings){
-        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.addHeader("Access-Control-Allow-Credentials","true"); response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         return Response.makeOKRsp(articalService.searchcount(latest,hottest,latestreplied,strings));
     }
 

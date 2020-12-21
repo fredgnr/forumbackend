@@ -79,7 +79,7 @@ public class UpfileController {
             @ApiParam(value = "介绍")@RequestParam() String introduction,
             @ApiParam(value = "关键词")@RequestParam String keywords,
             @ApiParam(value = "标题")@RequestParam String title){
-        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.addHeader("Access-Control-Allow-Credentials","true"); response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         if(file.isEmpty()){
             return Response.makeRsp(ResultCode.FILE_EMPTY.code, "上传文件为空");
         }
@@ -141,7 +141,7 @@ public class UpfileController {
             @RequestParam(required = false) String keywords,
             @RequestParam(required = false) String title
     ){
-        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.addHeader("Access-Control-Allow-Credentials","true"); response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         Upfile upfile=upFileService.findByID(fid);
         if(upfile==null){
             return Response.makeRsp(ResultCode.FILE_NOT_EXIST.code, "此文件不存在");
@@ -158,7 +158,8 @@ public class UpfileController {
     @Transactional
     @ApiOperation(value = "获得论坛所有文件数量")
     public ResponseResult<Integer> getallcount(HttpServletResponse response,HttpServletRequest request){
-        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));        return Response.makeOKRsp(upFileService.getcount());
+        response.addHeader("Access-Control-Allow-Credentials","true"); response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        return Response.makeOKRsp(upFileService.getcount());
     }
 
     @GetMapping("/files")
@@ -166,7 +167,7 @@ public class UpfileController {
     @ApiOperation(value = "分页查询文件的资源信息（Resource）")
     public ResponseResult<List<ForumResource>> getfiles(@RequestParam @ApiParam(value = "页码号") Integer pageindex,@RequestParam @ApiParam(value = "页大小")Integer pagesize,
                                                         HttpServletRequest request,HttpServletResponse response){
-        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.addHeader("Access-Control-Allow-Credentials","true");response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         return Response.makeOKRsp(resourceService.getfiles(pageindex,pagesize));
     }
 
@@ -181,7 +182,7 @@ public class UpfileController {
     public ResponseResult<Upfile> download(HttpServletRequest request, HttpServletResponse response,
                                            @RequestParam @ApiParam(value = "要下载文件的FID") Integer fid){
         Integer uid=cookieUtil.getuid(request);
-        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.addHeader("Access-Control-Allow-Credentials","true");response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         ResponseResult<Upfile> result=upFileService.download(fid,uid);
         if(result.getData()==null)
             return  result;
@@ -203,7 +204,7 @@ public class UpfileController {
     @ApiOperation(value = "获取某一用户上传的文件数量")
     @Transactional
     public ResponseResult<Integer> getfilecountbyuid(Integer uid,HttpServletResponse response,HttpServletRequest request){
-        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.addHeader("Access-Control-Allow-Credentials","true"); response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         return Response.makeOKRsp(resourceService.getfilecountbyuid(uid));
     }
 
@@ -214,7 +215,7 @@ public class UpfileController {
                                                              @RequestParam @ApiParam(value = "页码号") Integer pageindex,
                                                              @RequestParam @ApiParam(value = "页大小")Integer pagesize,
                                                              HttpServletRequest request,HttpServletResponse response){
-        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.addHeader("Access-Control-Allow-Credentials","true");response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         return Response.makeOKRsp(resourceService.getfilesbyuid(uid,pageindex,pagesize));
     }
 
@@ -224,7 +225,7 @@ public class UpfileController {
     @Transactional
     public ResponseResult<Upfile> getbyrid(@RequestParam @ApiParam(value = "所查询文件的RID") Integer rid,
                                            HttpServletResponse response,HttpServletRequest request){
-        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.addHeader("Access-Control-Allow-Credentials","true");response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         return Response.makeOKRsp(upFileService.findByRID(rid));
     }
 
@@ -237,7 +238,7 @@ public class UpfileController {
             @RequestParam(required = false) @ApiParam(value = "是否为最火文件") Boolean hottest,
             @RequestBody(required = false) @ApiParam(value = "搜索关键词")List<String> strings,
             HttpServletRequest request,HttpServletResponse response){
-        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.addHeader("Access-Control-Allow-Credentials","true");response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         List<Upfile> upfiles=upFileService.search(pageindex,pagesize,latest,hottest,strings);
         List<Integer> rids=new ArrayList<>();
         for(Upfile upfile:upfiles)
@@ -252,7 +253,7 @@ public class UpfileController {
             @RequestParam(required = false) @ApiParam(value = "是否为最火文件") Boolean hottest,
             @RequestBody(required = false) @ApiParam(value = "搜索关键词")List<String> strings,
             HttpServletResponse response,HttpServletRequest request){
-        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.addHeader("Access-Control-Allow-Credentials","true"); response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         Integer integer=upFileService.searchcount(latest,hottest,strings);
         return Response.makeOKRsp(integer);
     }
