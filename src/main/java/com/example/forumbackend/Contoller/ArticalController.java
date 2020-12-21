@@ -24,7 +24,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/artical")
-@CrossOrigin
 @Api(tags = "文章相关API")
 public class ArticalController {
     @Value("${web.picture-path}")

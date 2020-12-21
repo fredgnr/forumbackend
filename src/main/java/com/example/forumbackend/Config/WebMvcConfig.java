@@ -2,6 +2,7 @@ package com.example.forumbackend.Config;
 
 
 import com.example.forumbackend.Utils.MyInterceptor1;
+import com.example.forumbackend.Utils.MyInterceptorfirst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -11,6 +12,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer {
     @Autowired
     private MyInterceptor1 myInterceptor1;
+
+    @Autowired
+    private MyInterceptorfirst myInterceptorfirst;
 
     /**
      * 注册拦截器
@@ -22,6 +26,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
          * addInterceptor 注册拦截器
          * addPathPatterns 配置拦截规则
          */
+        registry.addInterceptor(myInterceptorfirst);
         registry.addInterceptor(myInterceptor1)
             .addPathPatterns("/login/**").excludePathPatterns("/login/in")
             .addPathPatterns("/user/**").excludePathPatterns("/user/singup")

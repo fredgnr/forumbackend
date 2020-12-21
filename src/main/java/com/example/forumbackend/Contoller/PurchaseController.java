@@ -23,7 +23,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/purchase")
-@CrossOrigin
 @Api(tags = "购买资源")
 public class PurchaseController {
     @Autowired
