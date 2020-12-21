@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 @RestController
@@ -41,7 +42,9 @@ public class UserController {
     @GetMapping("/getuser")
     @ApiOperation(value = "获取自己的账户类(测试完成)")
     public ResponseResult<User> getuser(
-             HttpServletRequest request) {
+            HttpServletRequest request,
+            HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         //logger.info("nums of cookies:\t"+request.getCookies().length);
         Integer uidincookie= cookieUtil.getuid(request);
         User user=userService.findByUID(uidincookie);
@@ -51,7 +54,9 @@ public class UserController {
     @Transactional
     @GetMapping("/getinfo")
     @ApiOperation(value = "获取User_Info信息(测试完成)")
-    public  ResponseResult<User_Info> getuserinfo(HttpServletRequest request){
+    public  ResponseResult<User_Info> getuserinfo(HttpServletRequest request,HttpServletResponse response){
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+
         Integer uid=cookieUtil.getuid(request);
         User_Info userInfo=userInfoService.findByUID(uid);
         return Response.makeOKRsp(userInfo);
@@ -61,7 +66,9 @@ public class UserController {
     @GetMapping("/getuserbyuid")
     @ApiOperation(value = "根据UID获取User,隐藏密码邮箱(测试完成)")
     public ResponseResult<User> getuserbyuid(
-            Integer uid) {
+            Integer uid,HttpServletRequest request,HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+
         User user=userService.findByUID(uid);
         user.setPassword(null);
         user.setEmail(null);
@@ -71,7 +78,7 @@ public class UserController {
     @Transactional
     @GetMapping("/getinfobyuid")
     @ApiOperation(value = "根据uid获取User_Info信息，隐藏余额和infoID(测试完成)")
-    public  ResponseResult<User_Info> getuserinfobyuid(Integer uid){
+    public  ResponseResult<User_Info> getuserinfobyuid(Integer uid,HttpServletRequest request,HttpServletResponse response){
         User_Info userInfo=userInfoService.findByUID(uid);
         userInfo.setUserBalance(null);
         userInfo.setInfoID(null);
@@ -87,7 +94,7 @@ public class UserController {
             @ApiResponse(code=109,message = "邮箱已被注册"),
             @ApiResponse(code=102,message = "成功注册")
     })
-    public ResponseResult<User> singup(@RequestBody User user){
+    public ResponseResult<User> singup(@RequestBody User user,HttpServletRequest request,HttpServletResponse response){
         if(userService.findByAccount(user.getAccount())!=null){
             return Response.makeRsp(
                     ResultCode.ACCOUNT_DUPLICATED.code, user.getAccount()+"账号已被注册");
@@ -111,7 +118,7 @@ public class UserController {
     @Transactional
     @PutMapping("/changename")
     @ApiOperation(value = "修改姓名，具体账号从cookie中获取")
-    public ResponseResult<User> changename(HttpServletRequest request,String name){
+    public ResponseResult<User> changename(HttpServletResponse response,HttpServletRequest request,String name){
         Integer uidincookie= cookieUtil.getuid(request);;
         userService.changeName(uidincookie,name);
         return Response.makeOKRsp();
@@ -120,7 +127,7 @@ public class UserController {
     @Transactional
     @PutMapping("/changepassword")
     @ApiOperation(value = "修改密码，账号从cookie中获取")
-    public ResponseResult<User> changepassword(HttpServletRequest request,String password){
+    public ResponseResult<User> changepassword(HttpServletResponse response,HttpServletRequest request,String password){
         Integer uidincookie= cookieUtil.getuid(request);;
         userService.changePassword(uidincookie,password);
         return Response.makeOKRsp();
@@ -129,7 +136,7 @@ public class UserController {
     @Transactional
     @PutMapping("/changeintro")
     @ApiOperation(value = "修改个人简介，账号从cookie中获取")
-    public ResponseResult<User_Info> changeintro(HttpServletRequest request,String intro){
+    public ResponseResult<User_Info> changeintro(HttpServletResponse response,HttpServletRequest request,String intro){
         Integer uidincookie= cookieUtil.getuid(request);
         System.out.println("uid:"+ uidincookie.toString()+"\tintro:"+intro);
         userInfoService.addintro(uidincookie,intro);
