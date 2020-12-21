@@ -13,8 +13,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +31,6 @@ public class UserController {
     @Autowired
     private UserInfoService userInfoService;
 
-   // private final Logger logger= LoggerFactory.getLogger(UserController.class);
-
     @Autowired
     private CookieUtil cookieUtil;
 
@@ -45,7 +41,6 @@ public class UserController {
             HttpServletRequest request,
             HttpServletResponse response) {
         response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
-        //logger.info("nums of cookies:\t"+request.getCookies().length);
         Integer uidincookie= cookieUtil.getuid(request);
         User user=userService.findByUID(uidincookie);
         return Response.makeOKRsp(user);
@@ -56,7 +51,6 @@ public class UserController {
     @ApiOperation(value = "获取User_Info信息(测试完成)")
     public  ResponseResult<User_Info> getuserinfo(HttpServletRequest request,HttpServletResponse response){
         response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
-
         Integer uid=cookieUtil.getuid(request);
         User_Info userInfo=userInfoService.findByUID(uid);
         return Response.makeOKRsp(userInfo);
@@ -68,7 +62,6 @@ public class UserController {
     public ResponseResult<User> getuserbyuid(
             Integer uid,HttpServletRequest request,HttpServletResponse response) {
         response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
-
         User user=userService.findByUID(uid);
         user.setPassword(null);
         user.setEmail(null);
@@ -79,6 +72,7 @@ public class UserController {
     @GetMapping("/getinfobyuid")
     @ApiOperation(value = "根据uid获取User_Info信息，隐藏余额和infoID(测试完成)")
     public  ResponseResult<User_Info> getuserinfobyuid(Integer uid,HttpServletRequest request,HttpServletResponse response){
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         User_Info userInfo=userInfoService.findByUID(uid);
         userInfo.setUserBalance(null);
         userInfo.setInfoID(null);
@@ -95,6 +89,8 @@ public class UserController {
             @ApiResponse(code=102,message = "成功注册")
     })
     public ResponseResult<User> singup(@RequestBody User user,HttpServletRequest request,HttpServletResponse response){
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+
         if(userService.findByAccount(user.getAccount())!=null){
             return Response.makeRsp(
                     ResultCode.ACCOUNT_DUPLICATED.code, user.getAccount()+"账号已被注册");
@@ -119,6 +115,8 @@ public class UserController {
     @PutMapping("/changename")
     @ApiOperation(value = "修改姓名，具体账号从cookie中获取")
     public ResponseResult<User> changename(HttpServletResponse response,HttpServletRequest request,String name){
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+
         Integer uidincookie= cookieUtil.getuid(request);;
         userService.changeName(uidincookie,name);
         return Response.makeOKRsp();
@@ -128,6 +126,8 @@ public class UserController {
     @PutMapping("/changepassword")
     @ApiOperation(value = "修改密码，账号从cookie中获取")
     public ResponseResult<User> changepassword(HttpServletResponse response,HttpServletRequest request,String password){
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+
         Integer uidincookie= cookieUtil.getuid(request);;
         userService.changePassword(uidincookie,password);
         return Response.makeOKRsp();
@@ -137,6 +137,8 @@ public class UserController {
     @PutMapping("/changeintro")
     @ApiOperation(value = "修改个人简介，账号从cookie中获取")
     public ResponseResult<User_Info> changeintro(HttpServletResponse response,HttpServletRequest request,String intro){
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+
         Integer uidincookie= cookieUtil.getuid(request);
         System.out.println("uid:"+ uidincookie.toString()+"\tintro:"+intro);
         userInfoService.addintro(uidincookie,intro);
@@ -146,7 +148,9 @@ public class UserController {
     @Transactional
     @GetMapping("/getrankbyuid")
     @ApiOperation(value = "获取某用户的排名")
-    public ResponseResult<Integer> getrankbyuid(Integer uid){
+    public ResponseResult<Integer> getrankbyuid(Integer uid,HttpServletResponse response,HttpServletRequest request){
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+
         User_Info tmp=userInfoService.findByUID(uid);
         if(tmp==null)
             return Response.makeRsp(ResultCode.USER_NOT_EXIST.code, "查询用户不存在");
@@ -172,7 +176,9 @@ public class UserController {
     @Transactional
     @GetMapping("/getranks")
     @ApiOperation(value = "获取排行榜某页所有人的UID")
-    public ResponseResult<List<Integer>> getranks(Integer pageindex,Integer pagesize){
+    public ResponseResult<List<Integer>> getranks(Integer pageindex,Integer pagesize,HttpServletRequest request,HttpServletResponse response){
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+
         List<User_Info> userInfos=userInfoService.finddescbypage(pageindex,pagesize);
         List<Integer> integerList = new ArrayList<>();
         for(User_Info userInfo:userInfos){

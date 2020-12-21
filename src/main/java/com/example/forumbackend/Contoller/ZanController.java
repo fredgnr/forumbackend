@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -33,7 +34,8 @@ public class ZanController {
     @PostMapping("/addzan")
     @ApiOperation(value = "点赞某资源")
     @Transactional
-    public ResponseResult<Zan> Zan_Resource(HttpServletRequest request,Integer rid){
+    public ResponseResult<Zan> Zan_Resource(HttpServletRequest request, HttpServletResponse response, Integer rid){
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         Integer uid=cookieUtil.getuid(request);
         ForumResource resource=resourceService.findresourceByrid(rid);
         if(resource==null)
@@ -48,8 +50,9 @@ public class ZanController {
     @DeleteMapping("/deletezan")
     @ApiOperation(value = "取消点赞")
     @Transactional
-    public  ResponseResult<Zan> deletezan(HttpServletRequest request,Integer rid){
+    public  ResponseResult<Zan> deletezan(HttpServletRequest request,HttpServletResponse response,Integer rid){
         Integer uid=cookieUtil.getuid(request);
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         ForumResource resource=resourceService.findresourceByrid(rid);
         if(resource==null)
             return Response.makeRsp(ResultCode.RESOURCE_NOT_EXIST.code, "点赞资源不存在");
@@ -62,21 +65,24 @@ public class ZanController {
 
     @GetMapping("/ifzan")
     @ApiOperation(value = "查询用户是否点赞了某资源")
-    public ResponseResult<Boolean> if_zann(HttpServletRequest request,Integer rid){
+    public ResponseResult<Boolean> if_zann(HttpServletRequest request,HttpServletResponse response,Integer rid){
         Integer uid=cookieUtil.getuid(request);
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         Zan zan=zanService.findByRID_UID(rid,uid);
         return Response.makeOKRsp(zan != null);
     }
 
     @GetMapping("/getzancount")
     @ApiOperation(value = "获得资源的赞数量")
-    public ResponseResult<Integer> getrzan(Integer rid){
+    public ResponseResult<Integer> getrzan(Integer rid,HttpServletResponse response,HttpServletRequest request){
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         ForumResource forumResource=resourceService.findresourceByrid(rid);
         return Response.makeOKRsp(forumResource==null?0:forumResource.getZan());
     }
     @GetMapping("/getzans")
     @ApiOperation(value = "获得具体点赞信息")
-    public ResponseResult<List<Zan>> getrzans(Integer rid,Integer pageindex,Integer pagesize){
+    public ResponseResult<List<Zan>> getrzans(Integer rid,Integer pageindex,Integer pagesize,HttpServletRequest request,HttpServletResponse response){
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         return Response.makeOKRsp(zanService.getzansbyRID(rid,pageindex,pagesize));
     }
 }
