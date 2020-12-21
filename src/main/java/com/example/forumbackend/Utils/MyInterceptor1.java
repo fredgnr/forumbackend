@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 public class MyInterceptor1 implements HandlerInterceptor {
-    Logger logger = LoggerFactory.getLogger(MyInterceptor1.class);
+    //Logger logger = LoggerFactory.getLogger(MyInterceptor1.class);
 
     @Value("${cookie.timeout}")
     private Integer cookie_timeout;
@@ -43,7 +43,6 @@ public class MyInterceptor1 implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        logger.info("拦截器1 在控制器执行之前执行");
         Cookie[] cookies=request.getCookies();
         Cookie usercookie=null,tokencookie=null;
         if(cookies!=null&&cookies.length>0)

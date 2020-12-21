@@ -20,10 +20,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 @Component
 public class MybatisRedisCache implements Cache {
-
-    @Resource
-    private RedisUtil redisUtil;
-
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
 
@@ -37,7 +33,6 @@ public class MybatisRedisCache implements Cache {
     private String id;
 
     public MybatisRedisCache() {}
-    public void hello_world(){}
 
     public MybatisRedisCache(final String id) {
         if (id == null) {

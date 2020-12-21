@@ -32,7 +32,7 @@ public class UserController {
     @Autowired
     private UserInfoService userInfoService;
 
-    private final Logger logger= LoggerFactory.getLogger(UserController.class);
+   // private final Logger logger= LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private CookieUtil cookieUtil;
@@ -42,7 +42,7 @@ public class UserController {
     @ApiOperation(value = "获取自己的账户类(测试完成)")
     public ResponseResult<User> getuser(
              HttpServletRequest request) {
-        logger.info("nums of cookies:\t"+request.getCookies().length);
+        //logger.info("nums of cookies:\t"+request.getCookies().length);
         Integer uidincookie= cookieUtil.getuid(request);
         User user=userService.findByUID(uidincookie);
         return Response.makeOKRsp(user);

@@ -23,10 +23,6 @@ public class RedisUtil {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
-
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
-
     /**
      * 指定缓存失效时间
      *

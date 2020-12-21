@@ -90,14 +90,4 @@ public class RedisConfig {
         return cacheManager;
     }
 
-  /* @Bean
-    public RedisUtil redisUtil(){
-        return new RedisUtil();
-    }
-
-    @Bean
-    public MybatisRedisCache mybatisRedisCache(){
-        return new MybatisRedisCache();
-    }
-*/
 }
