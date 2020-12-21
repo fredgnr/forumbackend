@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -53,9 +54,10 @@ public class PurchaseController {
             @ApiResponse(code = 125,message = "文章不需要购买"),
             @ApiResponse(code=102,message = "成功购买")
     })
-    public ResponseResult<Purchase> pur(HttpServletRequest request,
+    public ResponseResult<Purchase> pur(HttpServletRequest request, HttpServletResponse response,
                                         @RequestParam @ApiParam(value = "购买资源的RID") Integer rid){
         Integer uid=cookieUtil.getuid(request);
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         ForumResource resource=resourceService.findresourceByrid(rid);
         if(resource==null)
             return Response.makeRsp(ResultCode.RESOURCE_NOT_EXIST.code, "请求资源不存在");
@@ -83,7 +85,8 @@ public class PurchaseController {
     @GetMapping("/countbyuid")
     @Transactional
     @ApiOperation("获取请求用户购买过的资源数量")
-    public ResponseResult<Integer> getcountbyuid(HttpServletRequest request){
+    public ResponseResult<Integer> getcountbyuid(HttpServletRequest request,HttpServletResponse response){
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         Integer uid=cookieUtil.getuid(request);
         return Response.makeOKRsp(purchaseService.getcountbyuid(uid));
     }
@@ -92,10 +95,11 @@ public class PurchaseController {
     @Transactional
     @ApiOperation(value = "获取用户的购买记录")
     public ResponseResult<List<Purchase>> getpurchasesbyuid(
-            HttpServletRequest request,
+            HttpServletRequest request,HttpServletResponse response,
             @RequestParam @ApiParam(value = "页索引") Integer pageindex,
             @RequestParam @ApiParam(value = "页号码")Integer pagesize){
         Integer uid=cookieUtil.getuid(request);
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         return Response.makeOKRsp(purchaseService.getpurchasesbyuid(uid,pageindex,pagesize));
     }
 
@@ -108,11 +112,12 @@ public class PurchaseController {
     })
     @ApiOperation(value = "获取用户发布的某资源的购买记录")
     public ResponseResult<List<Purchase>> getpurchasesbyrid(
-            HttpServletRequest request,
+            HttpServletRequest request,HttpServletResponse response,
             @RequestParam @ApiParam(value = "资源RID")Integer rid,
             @RequestParam @ApiParam(value = "页索引") Integer pageindex,
             @RequestParam @ApiParam(value = "页号码")Integer pagesize){
         Integer uid=cookieUtil.getuid(request);
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         ForumResource resource=resourceService.findresourceByrid(rid);
         if(resource==null)
             return  Response.makeRsp(ResultCode.RESOURCE_NOT_EXIST.code, "请求资源不存在");

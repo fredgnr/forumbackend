@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -52,10 +53,11 @@ public class ReplyController {
             @ApiResponse(code = 112,message = "资源不存在"),
             @ApiResponse(code = 102,message = "成功获取")
     })
-    public ResponseResult<Reply> replyresource(HttpServletRequest request,
+    public ResponseResult<Reply> replyresource(HttpServletRequest request, HttpServletResponse response,
                                                @ApiParam(value = "资源RID") @RequestParam Integer rid,
                                                @ApiParam(value = "评论内容") @RequestParam String content){
         ForumResource resource=resourceService.findresourceByrid(rid);
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         System.out.println(resource);
         if(resource==null){
             return Response.makeRsp(ResultCode.RESOURCE_NOT_EXIST.code,"resource_id为"+rid+"的资源不存在");
@@ -74,14 +76,18 @@ public class ReplyController {
     public ResponseResult<List<Reply>> getrepliesbyrid(
             @RequestParam @ApiParam(value = "资源RID") Integer rid,
             Integer pageindex,
-            Integer pagesize){
+            Integer pagesize,
+            HttpServletResponse response,HttpServletRequest request){
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         return  Response.makeOKRsp(replyService.getrepliesbyrid(rid,pageindex,pagesize));
     }
 
     @GetMapping("/replycountbyrid")
     @Transactional
     @ApiOperation(value = "获取某资源评论数量")
-    public  ResponseResult<Integer> replycountbyrid( @RequestParam @ApiParam(value = "资源RID") Integer rid){
+    public  ResponseResult<Integer> replycountbyrid( @RequestParam @ApiParam(value = "资源RID") Integer rid,
+                                                     HttpServletRequest request,HttpServletResponse response){
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         return Response.makeOKRsp(replyService.getcountbyrid(rid));
     }
 }
