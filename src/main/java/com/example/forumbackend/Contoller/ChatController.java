@@ -189,7 +189,7 @@ public class ChatController {
         return Response.makeOKRsp(chatService.getprivatechat2(uid, senduid, CID,size));
     }
 
-    @GetMapping("/getprivatechat")
+    @GetMapping("/getgroupchat")
     @Transactional
     @ApiOperation("获取某群中最近的特定数量的聊天记录")
     @ApiResponses({
@@ -202,7 +202,7 @@ public class ChatController {
         return Response.makeOKRsp(chatService.getgroupchat(gid,  pagesize));
     }
 
-    @GetMapping("/getprivatechatbefore")
+    @GetMapping("/getgroupchatbefore")
     @Transactional
     @ApiResponses({
             @ApiResponse(code = 127,message = "未加群"),
@@ -222,7 +222,7 @@ public class ChatController {
         return Response.makeOKRsp(chatGroupService.search(gid));
     }
 
-    @GetMapping("/searchbystring")
+    @GetMapping("/searchgroupbystring")
     @Transactional
     @ApiOperation("模糊搜索群")
     public ResponseResult<List<ChatGroup>> search(String str,Integer pageindex,Integer pagesize){
