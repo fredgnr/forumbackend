@@ -1,4 +1,4 @@
-package com.example.forumbackend.Utils;
+package com.example.forumbackend.Utils.Interceptor;
 
 import com.example.forumbackend.Domain.Utils.Role;
 import com.example.forumbackend.Domain.Normal.User;

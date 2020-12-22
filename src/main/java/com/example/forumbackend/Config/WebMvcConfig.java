@@ -1,7 +1,7 @@
 package com.example.forumbackend.Config;
 
 
-import com.example.forumbackend.Utils.MyInterceptor1;
+import com.example.forumbackend.Utils.Interceptor.MyInterceptor1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
