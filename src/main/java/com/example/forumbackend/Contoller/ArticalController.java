@@ -10,14 +10,15 @@ import com.example.forumbackend.Utils.ResponseUitls.Response;
 import com.example.forumbackend.Utils.ResponseUitls.ResponseResult;
 import com.example.forumbackend.Utils.ResponseUitls.ResultCode;
 import io.swagger.annotations.*;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,22 @@ public class ArticalController {
     @Value("${points.uploadartical}")
     private Integer pointsuploadartical;
 
+
+    @GetMapping("/pciture")
+    @ApiOperation("获得照片")
+    public ResponseResult<String> getpic(@RequestParam@ApiParam(value = "请求文章的作者uid") Integer uid, String picname
+                                        , HttpServletResponse response){
+        try (InputStream inputStream=new FileInputStream(new File(picturebase+File.separator+uid,picname));
+             OutputStream outputStream=response.getOutputStream();){
+            response.setContentType("application/x-download");
+            response.addHeader("Content-Disposition","attachment;filename="+picname);
+            IOUtils.copy(inputStream,outputStream);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Response.makeOKRsp();
+    }
     @PostMapping("/picture")
     @ApiOperation("上传图片")
     @ApiResponses({
