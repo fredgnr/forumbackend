@@ -62,7 +62,7 @@ public class UpfileController {
     private Integer pointsuploadfile;
 
 
-    @GetMapping("/upload")
+    @PostMapping("/upload")
     @Transactional
     @ApiOperation(value = "上传文件(测试完成)")
     @ApiResponses({
