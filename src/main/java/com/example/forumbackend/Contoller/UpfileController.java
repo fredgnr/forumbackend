@@ -107,7 +107,6 @@ public class UpfileController {
         String newfilename= UUID.randomUUID().toString()+oldname.substring(oldname.lastIndexOf("."), oldname.length());
         File newfile=new  File(folder,newfilename);
 
-        Upfile upfile=new Upfile();
 
         upfile.setResourceid(resource.getRID());
         upfile.setFilename(file.getOriginalFilename());
