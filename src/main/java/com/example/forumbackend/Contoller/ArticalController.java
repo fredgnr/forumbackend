@@ -207,8 +207,6 @@ public class ArticalController {
     @GetMapping("/searchcount")
     @Transactional
     public ResponseResult<Integer> searchcount(
-            @RequestParam @ApiParam(value = "页码号") Integer pageindex,
-            @RequestParam @ApiParam(value = "页大小")Integer pagesize,
             @RequestParam(required = false) @ApiParam(value = "是否为最新文章" ) Boolean latest,
             @RequestParam(required = false) @ApiParam(value = "是否为最火文章") Boolean hottest,
             @RequestParam(required = false) @ApiParam(value = "是否为最近被回复的文章") Boolean latestreplied,
