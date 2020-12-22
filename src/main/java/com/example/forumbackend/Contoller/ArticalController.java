@@ -185,7 +185,7 @@ public class ArticalController {
     @Transactional
     public ResponseResult<Artical> getarticalbyrid(Integer rid){
         Artical artical=articalService.findBYRID(rid);
-        articalService.updateview(artical.getID());
+        //articalService.updateview(artical.getID());
         userInfoService.addpointbyrid(pointsviewartical,rid);
         return Response.makeOKRsp(artical);
     }

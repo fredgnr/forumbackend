@@ -54,12 +54,12 @@ public class Artical {
     private Integer View;
 
     @JsonFormat(locale = "zh",timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "资源上传时间",example = "2020-11-22 12:23:11",hidden = true)
+    @ApiModelProperty(value = "资源上传时间",example = "2020-11-22 12:23:11")
     @TableField("created_time")
     private LocalDateTime Createdtime;
 
     @JsonFormat(locale = "zh",timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "最后评论时间",example = "2020-11-22 12:23:11",hidden = true)
+    @ApiModelProperty(value = "最后评论时间",example = "2020-11-22 12:23:11")
     @TableField("last_reply_time")
     private LocalDateTime Lastreplytime;
 
