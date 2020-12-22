@@ -54,10 +54,11 @@ public class ArticalService {
         articalMapper.update(null,uw);
     }
 
-    public void updateview(Integer aids){
+    public void updateview(Artical artical){
         UpdateWrapper<Artical> uw=new UpdateWrapper<>();
-        uw.eq("artical_id",aids).setSql(" article_view=article_view+1 ");
-        articalMapper.update(null,uw);
+        uw.eq("artical_id",artical.getID());
+        artical.setView(artical.getView()+1);
+        articalMapper.update(artical,uw);
     }
 
     public void setlastrepliedtime(Integer rid, LocalDateTime time){

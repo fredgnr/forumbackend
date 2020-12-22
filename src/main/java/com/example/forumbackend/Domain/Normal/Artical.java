@@ -28,7 +28,6 @@ public class Artical {
      */
     @TableId(value = "artical_id",type = IdType.AUTO)
     @ApiModelProperty(example = "0")
-
     private Integer ID;
 
     @ApiModelProperty(example = "0")

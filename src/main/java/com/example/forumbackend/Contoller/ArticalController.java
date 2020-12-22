@@ -187,7 +187,7 @@ public class ArticalController {
     @Transactional
     public ResponseResult<Artical> getarticalbyrid(Integer rid){
         Artical artical=articalService.findBYRID(rid);
-        //articalService.updateview(artical.getID());
+        articalService.updateview(artical);
         userInfoService.addpointbyrid(pointsviewartical,rid);
         return Response.makeOKRsp(artical);
     }
@@ -199,9 +199,9 @@ public class ArticalController {
         List<Integer> aids=new ArrayList<>();
         for(Artical artical:articals) {
             aids.add(artical.getID());
+            articalService.updateview(artical);
             userInfoService.addpointbyrid(pointsviewartical,artical.getResourceID());
         }
-        articalService.updateview(aids);
         return Response.makeOKRsp(articals);
     }
 
