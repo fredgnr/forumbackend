@@ -76,9 +76,11 @@ public class UpfileController {
             @ApiParam(value = "文件本身")@RequestParam MultipartFile file,
             @ApiParam(value = "价格，缺省时为0")@RequestParam(required = false) Integer price,
             @ApiParam(value = "资源所属板块")@RequestParam Integer sectionid,
-            @ApiParam(value = "介绍")@RequestParam() String introduction,
-            @ApiParam(value = "关键词")@RequestParam String keywords,
-            @ApiParam(value = "标题")@RequestParam String title){
+            @RequestBody Upfile upfile){
+
+        String introduction=upfile.getIntro();
+        String keywords=upfile.getKeywords();
+        String title=upfile.getTitle();
         if(file.isEmpty()){
             return Response.makeRsp(ResultCode.FILE_EMPTY.code, "上传文件为空");
         }
