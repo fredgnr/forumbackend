@@ -62,7 +62,7 @@ public class UpfileController {
     private Integer pointsuploadfile;
 
 
-    @PostMapping("/upload")
+    @GetMapping("/upload")
     @Transactional
     @ApiOperation(value = "上传文件(测试完成)")
     @ApiResponses({
@@ -76,11 +76,9 @@ public class UpfileController {
             @ApiParam(value = "文件本身")@RequestParam MultipartFile file,
             @ApiParam(value = "价格，缺省时为0")@RequestParam(required = false) Integer price,
             @ApiParam(value = "资源所属板块")@RequestParam Integer sectionid,
-            @RequestBody Upfile upfile){
-
-        String introduction=upfile.getIntro();
-        String keywords=upfile.getKeywords();
-        String title=upfile.getTitle();
+            @ApiParam(value = "介绍")@RequestParam() String introduction,
+            @ApiParam(value = "关键词")@RequestParam String keywords,
+            @ApiParam(value = "标题")@RequestParam String title){
         if(file.isEmpty()){
             return Response.makeRsp(ResultCode.FILE_EMPTY.code, "上传文件为空");
         }
@@ -107,6 +105,7 @@ public class UpfileController {
         String newfilename= UUID.randomUUID().toString()+oldname.substring(oldname.lastIndexOf("."), oldname.length());
         File newfile=new  File(folder,newfilename);
 
+        Upfile upfile=new Upfile();
 
         upfile.setResourceid(resource.getRID());
         upfile.setFilename(file.getOriginalFilename());
