@@ -1,5 +1,6 @@
 package com.example.forumbackend.Domain.Normal;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -25,8 +26,9 @@ public class Artical {
    article_content      longtext not null,
    article_view         int not null,
      */
+    @TableId(value = "artical_id",type = IdType.AUTO)
     @ApiModelProperty(example = "0")
-    @TableId("artical_id")
+
     private Integer ID;
 
     @ApiModelProperty(example = "0")

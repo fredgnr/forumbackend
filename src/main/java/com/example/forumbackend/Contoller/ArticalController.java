@@ -107,7 +107,7 @@ public class ArticalController {
     @PostMapping("/artical")
     @Transactional
     @ApiOperation("上传文章")
-    public ResponseResult<ForumResource> uploadartical(HttpServletRequest request,
+    public ResponseResult<ForumResource> uploadartical(HttpServletRequest request,Integer sectionid,
                               @ApiParam("文章类，view和ID和RID置为null")@RequestBody Artical artical){
         Integer uid=cookieUtil.getuid(request);
         ForumResource resource=new ForumResource();
@@ -116,8 +116,10 @@ public class ArticalController {
         resource.setLastReplyUID(null);
         resource.setType(articaltype);
         resource.setPrice(0);
+       // resource.setSectionID(sectionid);
         resource.setCreatedtime(LocalDateTime.now());
         resource.setLastreplytime(null);
+        System.out.println(resource);
         resourceService.addresource(resource);
         artical.setResourceID(resource.getRID());
         artical.setView(0);
@@ -211,7 +213,7 @@ public class ArticalController {
             @RequestParam(required = false) @ApiParam(value = "是否为最新文章" ) Boolean latest,
             @RequestParam(required = false) @ApiParam(value = "是否为最火文章") Boolean hottest,
             @RequestParam(required = false) @ApiParam(value = "是否为最近被回复的文章") Boolean latestreplied,
-            @RequestBody(required = false) @ApiParam(value = "搜索关键词")List<String> strings){
+            @RequestParam(required = false) @ApiParam(value = "搜索关键词")List<String> strings){
         List<Artical> articals=articalService.search(pageindex,pagesize,latest,hottest,latestreplied,strings);
         List<Integer> rids=new ArrayList<>();
         for (Artical artical:articals){
@@ -227,7 +229,7 @@ public class ArticalController {
             @RequestParam(required = false) @ApiParam(value = "是否为最新文章" ) Boolean latest,
             @RequestParam(required = false) @ApiParam(value = "是否为最火文章") Boolean hottest,
             @RequestParam(required = false) @ApiParam(value = "是否为最近被回复的文章") Boolean latestreplied,
-            @RequestBody(required = false) @ApiParam(value = "搜索关键词")List<String> strings){
+            @RequestParam(required = false) @ApiParam(value = "搜索关键词")List<String> strings){
         return Response.makeOKRsp(articalService.searchcount(latest,hottest,latestreplied,strings));
     }
 
