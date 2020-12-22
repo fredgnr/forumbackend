@@ -1,5 +1,6 @@
 package com.example.forumbackend.Domain.Normal;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -25,8 +26,9 @@ public class Artical {
    article_content      longtext not null,
    article_view         int not null,
      */
+    @TableId(value = "artical_id",type = IdType.AUTO)
     @ApiModelProperty(example = "0")
-    @TableId("artical_id")
+
     private Integer ID;
 
     @ApiModelProperty(example = "0")
@@ -54,12 +56,12 @@ public class Artical {
     private Integer View;
 
     @JsonFormat(locale = "zh",timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "资源上传时间",example = "2020-11-22 12:23:11",hidden = true)
+    @ApiModelProperty(value = "资源上传时间",example = "2020-11-22 12:23:11")
     @TableField("created_time")
     private LocalDateTime Createdtime;
 
     @JsonFormat(locale = "zh",timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "最后评论时间",example = "2020-11-22 12:23:11",hidden = true)
+    @ApiModelProperty(value = "最后评论时间",example = "2020-11-22 12:23:11")
     @TableField("last_reply_time")
     private LocalDateTime Lastreplytime;
 
