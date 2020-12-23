@@ -43,14 +43,23 @@ public class Chat implements Serializable {
     private Integer GroupID;
 
     @TableField("message")
+    @ApiModelProperty(value = "消息内容",example = "message test")
     private String  message;
 
     @TableField("mtype")
     @ApiModelProperty(value = "消息记录种类(群聊or私聊)",example = "0")
     private Integer mtype;
 
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+
     @JsonFormat(locale = "zh",timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
-    @TableField("CreateTime")
+    @TableField("createTime")
     @ApiModelProperty(value = "发送时间",example = "2020-12-22 01:35:00")
-    private LocalDateTime CreateTime;
+    private LocalDateTime createTime;
 }

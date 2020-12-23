@@ -1,0 +1,3451 @@
+
+h2. 资源 {anchor:paths}
+
+h3. Chat-controller {anchor:chat-controller_resource}
+Chat Controller
+
+
+h4. 创建群聊 {anchor:creategroupusingpost}
+{noformat}
+POST /chat/CreateGroup
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*introduce*\\ \\ _可选_||群介绍||string|
+|*Query*|*name*\\ \\ _可选_||群名称||string|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«ChatGroup»|#e30ca2e1fbb092c982560abcffcf3bd6]|
+|*201*||Created||无内容|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 消耗
+
+* {noformat}application/json{noformat}
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/chat/CreateGroup
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "createtime" : "2020-12-22 01:35:00",
+    "gid" : 0,
+    "introduce" : "string",
+    "name" : "string"
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h4. 加群 {anchor:addgroupusingpost}
+{noformat}
+POST /chat/addgroup
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*GID*\\ \\ _可选_||群id||integer (int32)|
+|*Body*|*uid*\\ \\ _可选_||uid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*102*||成功||无内容|
+|*126*||群不存在||无内容|
+|*200*||OK||[ResponseResult«boolean»|#0a2261a69c68d1053ed2559c393cc527]|
+|*201*||Created||无内容|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 消耗
+
+* {noformat}application/json{noformat}
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/chat/addgroup
+{code}
+
+
+h6. 请求 body
+{code:language=json}
+{ }
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : true,
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获取某群中最近的特定数量的聊天记录 {anchor:getgroupchatusingget}
+{noformat}
+GET /chat/getgroupchat
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*gid*\\ \\ _可选_||gid||integer (int32)|
+|*Query*|*pagesize*\\ \\ _可选_||pagesize||integer (int32)|
+|*Body*|*uid*\\ \\ _可选_||uid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*102*||成功||无内容|
+|*127*||未加群||无内容|
+|*200*||OK||[ResponseResult«List«Chat»»|#d4fd7cedcb8c5dc04f176888e43cbb73]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/chat/getgroupchat
+{code}
+
+
+h6. 请求 body
+{code:language=json}
+{ }
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ {
+    "createTime" : "2020-12-22 01:35:00",
+    "groupID" : 0,
+    "id" : 0,
+    "message" : "message test",
+    "mtype" : 0,
+    "receiveUID" : 0,
+    "sendUID" : 0
+  } ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. 分页获取某群的聊天记录中早于某条特定记录的记录 {anchor:getgroupchat2usingget}
+{noformat}
+GET /chat/getgroupchatbefore
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*cid*\\ \\ _可选_||cid||integer (int32)|
+|*Query*|*gid*\\ \\ _可选_||gid||integer (int32)|
+|*Query*|*size*\\ \\ _可选_||size||integer (int32)|
+|*Body*|*uid*\\ \\ _可选_||uid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*102*||成功||无内容|
+|*127*||未加群||无内容|
+|*200*||OK||[ResponseResult«List«Chat»»|#d4fd7cedcb8c5dc04f176888e43cbb73]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/chat/getgroupchatbefore
+{code}
+
+
+h6. 请求 body
+{code:language=json}
+{ }
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ {
+    "createTime" : "2020-12-22 01:35:00",
+    "groupID" : 0,
+    "id" : 0,
+    "message" : "message test",
+    "mtype" : 0,
+    "receiveUID" : 0,
+    "sendUID" : 0
+  } ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获取与某用户存在聊天记录的群的列表，按照最后发送时间来确定 {anchor:getgroupchatbytimeusingget}
+{noformat}
+GET /chat/getgroupchatbytime
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*pageindex*\\ \\ _可选_||pageindex||integer (int32)|
+|*Query*|*pagesize*\\ \\ _可选_||pagesize||integer (int32)|
+|*Body*|*uid*\\ \\ _可选_||uid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«List«int»»|#6f832e606553701536847de28df30e6d]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/chat/getgroupchatbytime
+{code}
+
+
+h6. 请求 body
+{code:language=json}
+{ }
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ 0 ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获取论坛群总数量 {anchor:getlistusingget}
+{noformat}
+GET /chat/getgroupitemlist
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*GID*\\ \\ _可选_||GID||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«List«GroupItem»»|#010091f7244d323dc6c6282d31d5c2db]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/chat/getgroupitemlist
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ {
+    "gid" : 0,
+    "id" : 0,
+    "uid" : 0
+  } ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获取与某用户最近的特定条数的聊天记录 {anchor:getprivatechatusingget}
+{noformat}
+GET /chat/getprivatechat
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*pagesize*\\ \\ _可选_||pagesize||integer (int32)|
+|*Query*|*senduid*\\ \\ _可选_||senduid||integer (int32)|
+|*Body*|*uid*\\ \\ _可选_||uid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«List«Chat»»|#d4fd7cedcb8c5dc04f176888e43cbb73]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/chat/getprivatechat
+{code}
+
+
+h6. 请求 body
+{code:language=json}
+{ }
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ {
+    "createTime" : "2020-12-22 01:35:00",
+    "groupID" : 0,
+    "id" : 0,
+    "message" : "message test",
+    "mtype" : 0,
+    "receiveUID" : 0,
+    "sendUID" : 0
+  } ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. 分页获取与某用户的聊天记录中早于某条特定记录的记录 {anchor:getprivatechat2usingget}
+{noformat}
+GET /chat/getprivatechatbefore
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*CID*\\ \\ _可选_||CID||integer (int32)|
+|*Query*|*senduid*\\ \\ _可选_||senduid||integer (int32)|
+|*Query*|*size*\\ \\ _可选_||size||integer (int32)|
+|*Body*|*uid*\\ \\ _可选_||uid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«List«Chat»»|#d4fd7cedcb8c5dc04f176888e43cbb73]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/chat/getprivatechatbefore
+{code}
+
+
+h6. 请求 body
+{code:language=json}
+{ }
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ {
+    "createTime" : "2020-12-22 01:35:00",
+    "groupID" : 0,
+    "id" : 0,
+    "message" : "message test",
+    "mtype" : 0,
+    "receiveUID" : 0,
+    "sendUID" : 0
+  } ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获取与某用户存在的私聊的人的列表，按照最后发送时间来确定 {anchor:getprivatechatbytimeusingget}
+{noformat}
+GET /chat/getprivatechatbytime
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*pageindex*\\ \\ _可选_||pageindex||integer (int32)|
+|*Query*|*pagesize*\\ \\ _可选_||pagesize||integer (int32)|
+|*Body*|*uid*\\ \\ _可选_||uid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«List«int»»|#6f832e606553701536847de28df30e6d]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/chat/getprivatechatbytime
+{code}
+
+
+h6. 请求 body
+{code:language=json}
+{ }
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ 0 ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获取某用户的存在的私聊的人的数量 {anchor:getprivatecountusingget}
+{noformat}
+GET /chat/getprivatecount
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Body*|*uid*\\ \\ _可选_||uid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«int»|#3fe2e2379dbf233eedc7933fe7cf413b]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/chat/getprivatecount
+{code}
+
+
+h6. 请求 body
+{code:language=json}
+{ }
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : 0,
+  "msg" : "string"
+}
+{code}
+
+
+h4. 通过GID搜索群 {anchor:searchusingget_1}
+{noformat}
+GET /chat/searchgroupbyid
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*gid*\\ \\ _可选_||gid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«ChatGroup»|#e30ca2e1fbb092c982560abcffcf3bd6]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/chat/searchgroupbyid
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "createtime" : "2020-12-22 01:35:00",
+    "gid" : 0,
+    "introduce" : "string",
+    "name" : "string"
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h4. 模糊搜索群 {anchor:searchusingget_2}
+{noformat}
+GET /chat/searchgroupbystring
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*pageindex*\\ \\ _可选_||pageindex||integer (int32)|
+|*Query*|*pagesize*\\ \\ _可选_||pagesize||integer (int32)|
+|*Query*|*str*\\ \\ _可选_||str||string|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«List«ChatGroup»»|#99f690e40505fb2bd447c2d40ce02ad9]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/chat/searchgroupbystring
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ {
+    "createtime" : "2020-12-22 01:35:00",
+    "gid" : 0,
+    "introduce" : "string",
+    "name" : "string"
+  } ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. 发送群聊 {anchor:sendgroupusingpost}
+{noformat}
+POST /chat/sendgroup
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*GID*\\ \\ _可选_||群id||integer (int32)|
+|*Query*|*message*\\ \\ _可选_||发送内容||string|
+|*Body*|*uid*\\ \\ _可选_||uid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*102*||成功发送||无内容|
+|*127*||未加群||无内容|
+|*200*||OK||[ResponseResult«Chat»|#4b20c52ffaf425ee794978c9584e73a9]|
+|*201*||Created||无内容|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 消耗
+
+* {noformat}application/json{noformat}
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/chat/sendgroup
+{code}
+
+
+h6. 请求 body
+{code:language=json}
+{ }
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "createTime" : "2020-12-22 01:35:00",
+    "groupID" : 0,
+    "id" : 0,
+    "message" : "message test",
+    "mtype" : 0,
+    "receiveUID" : 0,
+    "sendUID" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h4. 发送私聊信息 {anchor:sendprivateusingpost}
+{noformat}
+POST /chat/sendprivate
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*message*\\ \\ _可选_||发送内容||string|
+|*Query*|*receivedid*\\ \\ _可选_||发送对象uid||integer (int32)|
+|*Body*|*uid*\\ \\ _可选_||uid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*102*||成功发送||无内容|
+|*124*||发送对象不存在||无内容|
+|*129*||不能自己给自己发||无内容|
+|*200*||OK||[ResponseResult«Chat»|#4b20c52ffaf425ee794978c9584e73a9]|
+|*201*||Created||无内容|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 消耗
+
+* {noformat}application/json{noformat}
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/chat/sendprivate
+{code}
+
+
+h6. 请求 body
+{code:language=json}
+{ }
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "createTime" : "2020-12-22 01:35:00",
+    "groupID" : 0,
+    "id" : 0,
+    "message" : "message test",
+    "mtype" : 0,
+    "receiveUID" : 0,
+    "sendUID" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h3. Resource-controller {anchor:resource-controller_resource}
+Resource Controller
+
+
+h4. getbyrid {anchor:getbyridusingget}
+{noformat}
+GET /resource/getbyrid
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*rid*\\ \\ _可选_||rid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«ForumResource»|#2306c090eda0ace4811155e2b2961fd9]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/resource/getbyrid
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "createdtime" : "2020-11-22 12:23:11",
+    "lastReplyUID" : 0,
+    "lastreplytime" : "string",
+    "price" : 0,
+    "rid" : 0,
+    "sectionID" : 0,
+    "type" : 0,
+    "uid" : 0,
+    "zan" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h3. 回复API(测试完成) {anchor:26ee9c453b5adaf93695fa017f4df60f}
+Reply Controller
+
+
+h4. 获取某资源的评论 {anchor:getrepliesbyridusingget}
+{noformat}
+GET /reply/repliesbyrid
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*pageindex*\\ \\ _可选_||pageindex||integer (int32)|
+|*Query*|*pagesize*\\ \\ _可选_||pagesize||integer (int32)|
+|*Query*|*rid*\\ \\ _可选_||资源RID||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«List«Reply»»|#718a368ab83d8e8ae937319dbdec1ae5]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/reply/repliesbyrid
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ {
+    "content" : "string",
+    "id" : 0,
+    "rid" : 0,
+    "time" : "2020-11-22 12:23:11",
+    "uid" : 0
+  } ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获取某资源评论数量 {anchor:replycountbyridusingget}
+{noformat}
+GET /reply/replycountbyrid
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*rid*\\ \\ _可选_||资源RID||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«int»|#3fe2e2379dbf233eedc7933fe7cf413b]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/reply/replycountbyrid
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : 0,
+  "msg" : "string"
+}
+{code}
+
+
+h4. 评论资源 {anchor:replyresourceusingpost}
+{noformat}
+POST /reply/replyresource
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*content*\\ \\ _可选_||评论内容||string|
+|*Query*|*rid*\\ \\ _可选_||资源RID||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*102*||成功获取||无内容|
+|*112*||资源不存在||无内容|
+|*200*||OK||[ResponseResult«Reply»|#c01fdf3f9b88d406145d821dd854bd06]|
+|*201*||Created||无内容|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 消耗
+
+* {noformat}application/json{noformat}
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/reply/replyresource
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "content" : "string",
+    "id" : 0,
+    "rid" : 0,
+    "time" : "2020-11-22 12:23:11",
+    "uid" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h3. 文件API(完成测试) {anchor:2430f4f07280abe5efcad3bba3e27270}
+Upfile Controller
+
+
+h4. 获得论坛所有文件数量 {anchor:getallcountusingget}
+{noformat}
+GET /upfile/allcount
+{noformat}
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«int»|#3fe2e2379dbf233eedc7933fe7cf413b]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/upfile/allcount
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : 0,
+  "msg" : "string"
+}
+{code}
+
+
+h4. 修改文件信息 {anchor:changeinfousingput}
+{noformat}
+PUT /upfile/changeinfo
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*fid*\\ \\ _可选_||文件fid||integer (int32)|
+|*Query*|*introduction*\\ \\ _可选_||introduction||string|
+|*Query*|*keywords*\\ \\ _可选_||keywords||string|
+|*Query*|*title*\\ \\ _可选_||title||string|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«Upfile»|#65a4589c7cc60c7cdc4dc8c0ce8a6f4a]|
+|*201*||Created||无内容|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 消耗
+
+* {noformat}application/json{noformat}
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/upfile/changeinfo
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "fileid" : 0,
+    "filename" : "test.zip",
+    "intro" : "test intro",
+    "keywords" : "java",
+    "purchasetime" : 0,
+    "resourceid" : 0,
+    "title" : "test title"
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h4. 下载文件(完成测试) {anchor:downloadusingget}
+{noformat}
+GET /upfile/download
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*fid*\\ \\ _可选_||要下载文件的FID||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*102*||成功下载||无内容|
+|*112*||下载文件不存在||无内容|
+|*118*||还未购买资源||无内容|
+|*200*||OK||[ResponseResult«Upfile»|#65a4589c7cc60c7cdc4dc8c0ce8a6f4a]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/upfile/download
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "fileid" : 0,
+    "filename" : "test.zip",
+    "intro" : "test intro",
+    "keywords" : "java",
+    "purchasetime" : 0,
+    "resourceid" : 0,
+    "title" : "test title"
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h4. 分页查询文件的资源信息（Resource） {anchor:getfilesusingget}
+{noformat}
+GET /upfile/files
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*pageindex*\\ \\ _可选_||页码号||integer (int32)|
+|*Query*|*pagesize*\\ \\ _可选_||页大小||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«List«ForumResource»»|#40c17371c2d3c0df11edd8708ee94302]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/upfile/files
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ {
+    "createdtime" : "2020-11-22 12:23:11",
+    "lastReplyUID" : 0,
+    "lastreplytime" : "string",
+    "price" : 0,
+    "rid" : 0,
+    "sectionID" : 0,
+    "type" : 0,
+    "uid" : 0,
+    "zan" : 0
+  } ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获取文件信息 {anchor:getbyridusingget_1}
+{noformat}
+GET /upfile/getbyrid
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*rid*\\ \\ _可选_||所查询文件的RID||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«Upfile»|#65a4589c7cc60c7cdc4dc8c0ce8a6f4a]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/upfile/getbyrid
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "fileid" : 0,
+    "filename" : "test.zip",
+    "intro" : "test intro",
+    "keywords" : "java",
+    "purchasetime" : 0,
+    "resourceid" : 0,
+    "title" : "test title"
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获取某一用户上传的文件数量 {anchor:getfilecountbyuidusingget}
+{noformat}
+GET /upfile/getfilecountbyuid
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*uid*\\ \\ _可选_||uid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«int»|#3fe2e2379dbf233eedc7933fe7cf413b]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/upfile/getfilecountbyuid
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : 0,
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获取某一用户上传的文件 {anchor:getfilesbyuidusingget}
+{noformat}
+GET /upfile/getfilesbyuid
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*pageindex*\\ \\ _可选_||页码号||integer (int32)|
+|*Query*|*pagesize*\\ \\ _可选_||页大小||integer (int32)|
+|*Query*|*uid*\\ \\ _可选_||所查询用户的UID||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«List«ForumResource»»|#40c17371c2d3c0df11edd8708ee94302]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/upfile/getfilesbyuid
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ {
+    "createdtime" : "2020-11-22 12:23:11",
+    "lastReplyUID" : 0,
+    "lastreplytime" : "string",
+    "price" : 0,
+    "rid" : 0,
+    "sectionID" : 0,
+    "type" : 0,
+    "uid" : 0,
+    "zan" : 0
+  } ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. search {anchor:searchusingget_3}
+{noformat}
+GET /upfile/search
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*hottest*\\ \\ _可选_||是否为最火文件||boolean|
+|*Query*|*latest*\\ \\ _可选_||是否为最新文件||boolean|
+|*Query*|*pageindex*\\ \\ _可选_||页码号||integer (int32)|
+|*Query*|*pagesize*\\ \\ _可选_||页大小||integer (int32)|
+|*Body*|*strings*\\ \\ _可选_||搜索关键词||< string > array|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«List«ForumResource»»|#40c17371c2d3c0df11edd8708ee94302]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/upfile/search
+{code}
+
+
+h6. 请求 body
+{code:language=json}
+[ "string" ]
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ {
+    "createdtime" : "2020-11-22 12:23:11",
+    "lastReplyUID" : 0,
+    "lastreplytime" : "string",
+    "price" : 0,
+    "rid" : 0,
+    "sectionID" : 0,
+    "type" : 0,
+    "uid" : 0,
+    "zan" : 0
+  } ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. searchcount {anchor:searchcountusingget_1}
+{noformat}
+GET /upfile/searchcount
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*hottest*\\ \\ _可选_||是否为最火文件||boolean|
+|*Query*|*latest*\\ \\ _可选_||是否为最新文件||boolean|
+|*Body*|*strings*\\ \\ _可选_||搜索关键词||< string > array|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«int»|#3fe2e2379dbf233eedc7933fe7cf413b]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/upfile/searchcount
+{code}
+
+
+h6. 请求 body
+{code:language=json}
+[ "string" ]
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : 0,
+  "msg" : "string"
+}
+{code}
+
+
+h4. 上传文件(测试完成) {anchor:uploadusingpost_1}
+{noformat}
+POST /upfile/upload
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*introduction*\\ \\ _可选_||introduction||string|
+|*Query*|*keywords*\\ \\ _可选_||keywords||string|
+|*Query*|*price*\\ \\ _可选_||price||integer (int32)|
+|*Query*|*sectionid*\\ \\ _可选_||sectionid||integer (int32)|
+|*Query*|*title*\\ \\ _可选_||title||string|
+|*FormData*|*file*\\ \\ _可选_||文件本身||file|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*102*||上传成功||无内容|
+|*110*||上传失败，请重传||无内容|
+|*111*||板块不存在||无内容|
+|*121*||上传文件为空||无内容|
+|*200*||OK||[ResponseResult«Upfile»|#65a4589c7cc60c7cdc4dc8c0ce8a6f4a]|
+|*201*||Created||无内容|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 消耗
+
+* {noformat}multipart/form-data{noformat}
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/upfile/upload
+{code}
+
+
+h6. 请求 formData
+{code:language=json}
+"file"
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "fileid" : 0,
+    "filename" : "test.zip",
+    "intro" : "test intro",
+    "keywords" : "java",
+    "purchasetime" : 0,
+    "resourceid" : 0,
+    "title" : "test title"
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h3. 文章相关API {anchor:225d7fa15fee4c1bbddd9354912a03c8}
+Artical Controller
+
+
+h4. 上传文章 {anchor:uploadarticalusingpost}
+{noformat}
+POST /artical/artical
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*sectionid*\\ \\ _可选_||sectionid||integer (int32)|
+|*Body*|*artical*\\ \\ _可选_||文章类，view和ID和RID置为null||[Artical|#artical]|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«ForumResource»|#2306c090eda0ace4811155e2b2961fd9]|
+|*201*||Created||无内容|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 消耗
+
+* {noformat}application/json{noformat}
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/artical/artical
+{code}
+
+
+h6. 请求 body
+{code:language=json}
+{
+  "content" : "string",
+  "createdtime" : "2020-11-22 12:23:11",
+  "id" : 0,
+  "introduction" : "string",
+  "keywords" : "string",
+  "lastreplytime" : "2020-11-22 12:23:11",
+  "resourceID" : 0,
+  "title" : "string",
+  "view" : 0
+}
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "createdtime" : "2020-11-22 12:23:11",
+    "lastReplyUID" : 0,
+    "lastreplytime" : "string",
+    "price" : 0,
+    "rid" : 0,
+    "sectionID" : 0,
+    "type" : 0,
+    "uid" : 0,
+    "zan" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h4. 修改文章（只上传需要修改的字段，不需要的修改的字段留成null） {anchor:refinearticalusingput}
+{noformat}
+PUT /artical/artical
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Body*|*artical*\\ \\ _必填_||artical||[Artical|#artical]|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*102*||修改成功||无内容|
+|*123*||文章修改失败||无内容|
+|*200*||OK||[ResponseResult«boolean»|#0a2261a69c68d1053ed2559c393cc527]|
+|*201*||Created||无内容|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 消耗
+
+* {noformat}application/json{noformat}
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/artical/artical
+{code}
+
+
+h6. 请求 body
+{code:language=json}
+{
+  "content" : "string",
+  "createdtime" : "2020-11-22 12:23:11",
+  "id" : 0,
+  "introduction" : "string",
+  "keywords" : "string",
+  "lastreplytime" : "2020-11-22 12:23:11",
+  "resourceID" : 0,
+  "title" : "string",
+  "view" : 0
+}
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : true,
+  "msg" : "string"
+}
+{code}
+
+
+h4. getarticalbyrid {anchor:getarticalbyridusingget}
+{noformat}
+GET /artical/articalbyrid
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*rid*\\ \\ _可选_||rid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«Artical»|#61e3f0cb484fc54999013e7b63698085]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/artical/articalbyrid
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "content" : "string",
+    "createdtime" : "2020-11-22 12:23:11",
+    "id" : 0,
+    "introduction" : "string",
+    "keywords" : "string",
+    "lastreplytime" : "2020-11-22 12:23:11",
+    "resourceID" : 0,
+    "title" : "string",
+    "view" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h4. getarticalsbyrids {anchor:getarticalsbyridsusingget}
+{noformat}
+GET /artical/articalsbyrids
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Body*|*rids*\\ \\ _必填_||rids||< integer (int32) > array|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«List«Artical»»|#af4d76c2fd02cbff89dd897ee8435152]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/artical/articalsbyrids
+{code}
+
+
+h6. 请求 body
+{code:language=json}
+[ 0 ]
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ {
+    "content" : "string",
+    "createdtime" : "2020-11-22 12:23:11",
+    "id" : 0,
+    "introduction" : "string",
+    "keywords" : "string",
+    "lastreplytime" : "2020-11-22 12:23:11",
+    "resourceID" : 0,
+    "title" : "string",
+    "view" : 0
+  } ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. 查询文章总数量 {anchor:getarticalcountusingget}
+{noformat}
+GET /artical/getarticalcount
+{noformat}
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«int»|#3fe2e2379dbf233eedc7933fe7cf413b]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/artical/getarticalcount
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : 0,
+  "msg" : "string"
+}
+{code}
+
+
+h4. 查询某用户文章总数量 {anchor:getarticalcountbyuidusingget}
+{noformat}
+GET /artical/getarticalcountbyuid
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*uid*\\ \\ _可选_||uid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«int»|#3fe2e2379dbf233eedc7933fe7cf413b]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/artical/getarticalcountbyuid
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : 0,
+  "msg" : "string"
+}
+{code}
+
+
+h4. 查询文章ForumResource {anchor:getarticalresourcesusingget}
+{noformat}
+GET /artical/getarticalresources
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*pageindex*\\ \\ _可选_||页码号||integer (int32)|
+|*Query*|*pagesize*\\ \\ _可选_||页大小||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«List«ForumResource»»|#40c17371c2d3c0df11edd8708ee94302]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/artical/getarticalresources
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ {
+    "createdtime" : "2020-11-22 12:23:11",
+    "lastReplyUID" : 0,
+    "lastreplytime" : "string",
+    "price" : 0,
+    "rid" : 0,
+    "sectionID" : 0,
+    "type" : 0,
+    "uid" : 0,
+    "zan" : 0
+  } ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. 查询某用户的文章ForumResource {anchor:getarticalresourcesbyuidusingget}
+{noformat}
+GET /artical/getarticalresourcesbyuid
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*pageindex*\\ \\ _可选_||页码号||integer (int32)|
+|*Query*|*pagesize*\\ \\ _可选_||页大小||integer (int32)|
+|*Query*|*uid*\\ \\ _可选_||uid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«List«ForumResource»»|#40c17371c2d3c0df11edd8708ee94302]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/artical/getarticalresourcesbyuid
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ {
+    "createdtime" : "2020-11-22 12:23:11",
+    "lastReplyUID" : 0,
+    "lastreplytime" : "string",
+    "price" : 0,
+    "rid" : 0,
+    "sectionID" : 0,
+    "type" : 0,
+    "uid" : 0,
+    "zan" : 0
+  } ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获得照片 {anchor:getpicusingget}
+{noformat}
+GET /artical/pciture
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*picname*\\ \\ _可选_||picname||string|
+|*Query*|*uid*\\ \\ _可选_||请求文章的作者uid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«string»|#2fcc07109ac56c98de62a28511fb6955]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/artical/pciture
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : "string",
+  "msg" : "string"
+}
+{code}
+
+
+h4. 上传图片 {anchor:uploadusingpost}
+{noformat}
+POST /artical/picture
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*FormData*|*files*\\ \\ _可选_||文件列表||< file > array(multi)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*102*||上传成功||无内容|
+|*200*||OK||[ResponseResult«string»|#2fcc07109ac56c98de62a28511fb6955]|
+|*201*||Created||无内容|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+|*500*||上传失败||无内容|
+
+
+h5. 消耗
+
+* {noformat}application/json{noformat}
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/artical/picture
+{code}
+
+
+h6. 请求 formData
+{code:language=json}
+"file"
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : "string",
+  "msg" : "string"
+}
+{code}
+
+
+h4. search {anchor:searchusingget}
+{noformat}
+GET /artical/search
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*hottest*\\ \\ _可选_||是否为最火文章||boolean|
+|*Query*|*latest*\\ \\ _可选_||是否为最新文章||boolean|
+|*Query*|*latestreplied*\\ \\ _可选_||是否为最近被回复的文章||boolean|
+|*Query*|*pageindex*\\ \\ _可选_||页码号||integer (int32)|
+|*Query*|*pagesize*\\ \\ _可选_||页大小||integer (int32)|
+|*Query*|*strings*\\ \\ _可选_||搜索关键词||< string > array(multi)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«List«ForumResource»»|#40c17371c2d3c0df11edd8708ee94302]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/artical/search
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ {
+    "createdtime" : "2020-11-22 12:23:11",
+    "lastReplyUID" : 0,
+    "lastreplytime" : "string",
+    "price" : 0,
+    "rid" : 0,
+    "sectionID" : 0,
+    "type" : 0,
+    "uid" : 0,
+    "zan" : 0
+  } ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. searchcount {anchor:searchcountusingget}
+{noformat}
+GET /artical/searchcount
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*hottest*\\ \\ _可选_||是否为最火文章||boolean|
+|*Query*|*latest*\\ \\ _可选_||是否为最新文章||boolean|
+|*Query*|*latestreplied*\\ \\ _可选_||是否为最近被回复的文章||boolean|
+|*Query*|*strings*\\ \\ _可选_||搜索关键词||< string > array(multi)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«int»|#3fe2e2379dbf233eedc7933fe7cf413b]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/artical/searchcount
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : 0,
+  "msg" : "string"
+}
+{code}
+
+
+h3. 点赞相关api(测试完成) {anchor:cceaf5878a6a03ec21031140b2ab3582}
+Zan Controller
+
+
+h4. 点赞某资源 {anchor:zan_resourceusingpost}
+{noformat}
+POST /zan/addzan
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*rid*\\ \\ _可选_||rid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«Zan»|#4007e9bcd76c9e8104d0d22a80839973]|
+|*201*||Created||无内容|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 消耗
+
+* {noformat}application/json{noformat}
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/zan/addzan
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "id" : 0,
+    "rid" : 0,
+    "status" : 0,
+    "uid" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h4. 取消点赞 {anchor:deletezanusingdelete}
+{noformat}
+DELETE /zan/deletezan
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*rid*\\ \\ _可选_||rid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«Zan»|#4007e9bcd76c9e8104d0d22a80839973]|
+|*204*||No Content||无内容|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/zan/deletezan
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "id" : 0,
+    "rid" : 0,
+    "status" : 0,
+    "uid" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获得资源的赞数量 {anchor:getrzanusingget}
+{noformat}
+GET /zan/getzancount
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*rid*\\ \\ _可选_||rid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«int»|#3fe2e2379dbf233eedc7933fe7cf413b]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/zan/getzancount
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : 0,
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获得具体点赞信息 {anchor:getrzansusingget}
+{noformat}
+GET /zan/getzans
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*pageindex*\\ \\ _可选_||pageindex||integer (int32)|
+|*Query*|*pagesize*\\ \\ _可选_||pagesize||integer (int32)|
+|*Query*|*rid*\\ \\ _可选_||rid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«List«Zan»»|#ce985ad7d1f2ec7f4354e716a6c2b825]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/zan/getzans
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ {
+    "id" : 0,
+    "rid" : 0,
+    "status" : 0,
+    "uid" : 0
+  } ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. 查询用户是否点赞了某资源 {anchor:if_zannusingget}
+{noformat}
+GET /zan/ifzan
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*rid*\\ \\ _可选_||rid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«boolean»|#0a2261a69c68d1053ed2559c393cc527]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/zan/ifzan
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : true,
+  "msg" : "string"
+}
+{code}
+
+
+h3. 用户信息(测试完成) {anchor:7af0995c16860d61f3e4218c3ea7188e}
+User Controller
+
+
+h4. 修改个人简介，账号从cookie中获取 {anchor:changeintrousingput}
+{noformat}
+PUT /user/changeintro
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*intro*\\ \\ _可选_||intro||string|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«User_Info»|#2fa1ffabb8c07cafb7a3ce222ff36c08]|
+|*201*||Created||无内容|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 消耗
+
+* {noformat}application/json{noformat}
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/user/changeintro
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "infoID" : 0,
+    "userBalance" : 0,
+    "userID" : 0,
+    "userIntro" : "string",
+    "userPoint" : 0,
+    "userZan" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h4. 修改姓名，具体账号从cookie中获取 {anchor:changenameusingput}
+{noformat}
+PUT /user/changename
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*name*\\ \\ _可选_||name||string|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«User»|#1a0d4ca65a630c3c812d7e1c11e0cdd8]|
+|*201*||Created||无内容|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 消耗
+
+* {noformat}application/json{noformat}
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/user/changename
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "account" : "string",
+    "email" : "513317651@qq.com",
+    "name" : "string",
+    "password" : "string",
+    "uid" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h4. 修改密码，账号从cookie中获取 {anchor:changepasswordusingput}
+{noformat}
+PUT /user/changepassword
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*password*\\ \\ _可选_||password||string|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«User»|#1a0d4ca65a630c3c812d7e1c11e0cdd8]|
+|*201*||Created||无内容|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 消耗
+
+* {noformat}application/json{noformat}
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/user/changepassword
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "account" : "string",
+    "email" : "513317651@qq.com",
+    "name" : "string",
+    "password" : "string",
+    "uid" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获取User_Info信息(测试完成) {anchor:getuserinfousingget}
+{noformat}
+GET /user/getinfo
+{noformat}
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«User_Info»|#2fa1ffabb8c07cafb7a3ce222ff36c08]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/user/getinfo
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "infoID" : 0,
+    "userBalance" : 0,
+    "userID" : 0,
+    "userIntro" : "string",
+    "userPoint" : 0,
+    "userZan" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h4. 根据uid获取User_Info信息，隐藏余额和infoID(测试完成) {anchor:getuserinfobyuidusingget}
+{noformat}
+GET /user/getinfobyuid
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*uid*\\ \\ _可选_||uid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«User_Info»|#2fa1ffabb8c07cafb7a3ce222ff36c08]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/user/getinfobyuid
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "infoID" : 0,
+    "userBalance" : 0,
+    "userID" : 0,
+    "userIntro" : "string",
+    "userPoint" : 0,
+    "userZan" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获取某用户的排名 {anchor:getrankbyuidusingget}
+{noformat}
+GET /user/getrankbyuid
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*uid*\\ \\ _可选_||uid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«int»|#3fe2e2379dbf233eedc7933fe7cf413b]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/user/getrankbyuid
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : 0,
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获取排行榜某页所有人的UID {anchor:getranksusingget}
+{noformat}
+GET /user/getranks
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*pageindex*\\ \\ _可选_||pageindex||integer (int32)|
+|*Query*|*pagesize*\\ \\ _可选_||pagesize||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«List«int»»|#6f832e606553701536847de28df30e6d]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/user/getranks
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ 0 ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获取自己的账户类(测试完成) {anchor:getuserusingget}
+{noformat}
+GET /user/getuser
+{noformat}
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«User»|#1a0d4ca65a630c3c812d7e1c11e0cdd8]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/user/getuser
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "account" : "string",
+    "email" : "513317651@qq.com",
+    "name" : "string",
+    "password" : "string",
+    "uid" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h4. 根据UID获取User,隐藏密码邮箱(测试完成) {anchor:getuserbyuidusingget}
+{noformat}
+GET /user/getuserbyuid
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*uid*\\ \\ _可选_||uid||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«User»|#1a0d4ca65a630c3c812d7e1c11e0cdd8]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/user/getuserbyuid
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "account" : "string",
+    "email" : "513317651@qq.com",
+    "name" : "string",
+    "password" : "string",
+    "uid" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h4. 注册账号(已测试) {anchor:singupusingpost}
+{noformat}
+POST /user/singup
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Body*|*user*\\ \\ _必填_||user||[User|#user]|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*102*||成功注册||无内容|
+|*108*||账号已被注册||无内容|
+|*109*||邮箱已被注册||无内容|
+|*200*||OK||[ResponseResult«User»|#1a0d4ca65a630c3c812d7e1c11e0cdd8]|
+|*201*||Created||无内容|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 消耗
+
+* {noformat}application/json{noformat}
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/user/singup
+{code}
+
+
+h6. 请求 body
+{code:language=json}
+{
+  "account" : "string",
+  "email" : "513317651@qq.com",
+  "name" : "string",
+  "password" : "string",
+  "uid" : 0
+}
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "account" : "string",
+    "email" : "513317651@qq.com",
+    "name" : "string",
+    "password" : "string",
+    "uid" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h3. 登录登出(测试完成) {anchor:e3ba93cf1d521794f6d97bf2a75caedd}
+Login Controller
+
+
+h4. 登录 {anchor:logintestusingget}
+{noformat}
+GET /login/in
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*account*\\ \\ _可选_||账号||string|
+|*Query*|*password*\\ \\ _可选_||密码||string|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*102*||成功登录||无内容|
+|*103*||密码错误||无内容|
+|*104*||账号错误||无内容|
+|*200*||OK||[ResponseResult«User»|#1a0d4ca65a630c3c812d7e1c11e0cdd8]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/login/in
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "account" : "string",
+    "email" : "513317651@qq.com",
+    "name" : "string",
+    "password" : "string",
+    "uid" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h4. 登出 {anchor:logoutusingget}
+{noformat}
+GET /login/out
+{noformat}
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*102*||成功登出||无内容|
+|*200*||OK||[ResponseResult«User»|#1a0d4ca65a630c3c812d7e1c11e0cdd8]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/login/out
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "account" : "string",
+    "email" : "513317651@qq.com",
+    "name" : "string",
+    "password" : "string",
+    "uid" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+h3. 购买资源 {anchor:4498c428919ea5caeaa0656fa6f53488}
+Purchase Controller
+
+
+h4. 获取请求用户购买过的资源数量 {anchor:getcountbyuidusingget}
+{noformat}
+GET /purchase/countbyuid
+{noformat}
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«int»|#3fe2e2379dbf233eedc7933fe7cf413b]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/purchase/countbyuid
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : 0,
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获取用户发布的某资源的购买记录 {anchor:getpurchasesbyridusingget}
+{noformat}
+GET /purchase/getpurchasesbyrid
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*pageindex*\\ \\ _可选_||页索引||integer (int32)|
+|*Query*|*pagesize*\\ \\ _可选_||页号码||integer (int32)|
+|*Query*|*rid*\\ \\ _可选_||资源RID||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*102*||请求成功||无内容|
+|*115*||请求资源不存在||无内容|
+|*120*||请求资源不属于此用户上传||无内容|
+|*200*||OK||[ResponseResult«List«Purchase»»|#b0ed0b1a956a48a8fe19ad33e3cf851b]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/purchase/getpurchasesbyrid
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ {
+    "PurchaseTime" : "string",
+    "id" : 0,
+    "price" : 0,
+    "purchaseTime" : "string",
+    "rid" : 0,
+    "uid" : 0
+  } ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. 获取用户的购买记录 {anchor:getpurchasesbyuidusingget}
+{noformat}
+GET /purchase/getpurchasesbyuid
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*pageindex*\\ \\ _可选_||页索引||integer (int32)|
+|*Query*|*pagesize*\\ \\ _可选_||页号码||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*200*||OK||[ResponseResult«List«Purchase»»|#b0ed0b1a956a48a8fe19ad33e3cf851b]|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/purchase/getpurchasesbyuid
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : [ {
+    "PurchaseTime" : "string",
+    "id" : 0,
+    "price" : 0,
+    "purchaseTime" : "string",
+    "rid" : 0,
+    "uid" : 0
+  } ],
+  "msg" : "string"
+}
+{code}
+
+
+h4. 购买资源 {anchor:purusingpost}
+{noformat}
+POST /purchase/purchase
+{noformat}
+
+
+h5. 参数
+
+||类型||名称||说明||类型||
+|*Query*|*rid*\\ \\ _可选_||购买资源的RID||integer (int32)|
+
+
+h5. 响应
+
+||HTTP代码||说明||类型||
+|*102*||成功购买||无内容|
+|*112*||请求资源不存在||无内容|
+|*116*||余额不足||无内容|
+|*117*||此资源已购买||无内容|
+|*125*||文章不需要购买||无内容|
+|*200*||OK||[ResponseResult«Purchase»|#1f5e32f207f2f322123647894a71a4ea]|
+|*201*||Created||无内容|
+|*401*||Unauthorized||无内容|
+|*403*||Forbidden||无内容|
+|*404*||Not Found||无内容|
+
+
+h5. 消耗
+
+* {noformat}application/json{noformat}
+
+
+h5. 生成
+
+* {noformat}\*/*{noformat}
+
+
+h5. HTTP请求示例
+
+h6. 请求 path
+{code}
+/purchase/purchase
+{code}
+
+
+h5. HTTP响应示例
+
+h6. 响应 200
+{code:language=json}
+{
+  "code" : 0,
+  "data" : {
+    "PurchaseTime" : "string",
+    "id" : 0,
+    "price" : 0,
+    "purchaseTime" : "string",
+    "rid" : 0,
+    "uid" : 0
+  },
+  "msg" : "string"
+}
+{code}
+
+
+

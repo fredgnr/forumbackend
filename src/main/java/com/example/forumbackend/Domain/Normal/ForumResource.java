@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 
 @Data
 @ToString
+@ApiModel(description = "资源")
 @TableName("resources")
 public class ForumResource implements Serializable {
     /*
@@ -62,10 +64,26 @@ public class ForumResource implements Serializable {
     @JsonFormat(locale = "zh",timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "资源上传时间",example = "2020-11-22 12:23:11")
     @TableField("resource_created_time")
-    private LocalDateTime Createdtime;
+    private LocalDateTime createdtime;
 
     @JsonFormat(locale = "zh",timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "最后评论时间",example = "")
     @TableField("resource_last_reply_time")
-    private LocalDateTime Lastreplytime;
+    private LocalDateTime lastreplytime;
+
+    public LocalDateTime getCreatedtime() {
+        return createdtime;
+    }
+
+    public void setCreatedtime(LocalDateTime createdtime) {
+        this.createdtime = createdtime;
+    }
+
+    public LocalDateTime getLastreplytime() {
+        return lastreplytime;
+    }
+
+    public void setLastreplytime(LocalDateTime lastreplytime) {
+        this.lastreplytime = lastreplytime;
+    }
 }

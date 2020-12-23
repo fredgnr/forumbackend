@@ -21,9 +21,4 @@ public class ForumbackendApplication {
         SpringApplication.run(ForumbackendApplication.class, args);
     }
 
-    @PostConstruct
-    void started() {
-        TimeZone.setDefault(TimeZone.getTimeZone("GMT+8"));
-    }
-
 }

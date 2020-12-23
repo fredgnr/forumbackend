@@ -1,0 +1,322 @@
+
+h2. 定义 {anchor:definitions}
+
+h3. Artical {anchor:artical}
+文章
+
+
+||名称||说明||类型||
+|*content*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+|*createdtime*\\ \\ _可选_||资源上传时间\\ \\ *样例* : {noformat}"2020-11-22 12:23:11"{noformat}||string (date-time)|
+|*id*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*introduction*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+|*keywords*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+|*lastreplytime*\\ \\ _可选_||最后评论时间\\ \\ *样例* : {noformat}"2020-11-22 12:23:11"{noformat}||string (date-time)|
+|*resourceID*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*title*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+|*view*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+
+
+h3. Chat {anchor:chat}
+聊天记录
+
+
+||名称||说明||类型||
+|*createTime*\\ \\ _可选_||发送时间\\ \\ *样例* : {noformat}"2020-12-22 01:35:00"{noformat}||string (date-time)|
+|*groupID*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*id*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*message*\\ \\ _可选_||消息内容\\ \\ *样例* : {noformat}"message test"{noformat}||string|
+|*mtype*\\ \\ _可选_||消息记录种类(群聊or私聊)\\ \\ *样例* : {noformat}0{noformat}||integer (int32)|
+|*receiveUID*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*sendUID*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+
+
+h3. ChatGroup {anchor:chatgroup}
+聊天群类
+
+
+||名称||说明||类型||
+|*createtime*\\ \\ _可选_||群创建时间\\ \\ *样例* : {noformat}"2020-12-22 01:35:00"{noformat}||string (date-time)|
+|*gid*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*introduce*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+|*name*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ForumResource {anchor:forumresource}
+资源
+
+
+||名称||说明||类型||
+|*createdtime*\\ \\ _可选_||资源上传时间\\ \\ *样例* : {noformat}"2020-11-22 12:23:11"{noformat}||string (date-time)|
+|*lastReplyUID*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*lastreplytime*\\ \\ _可选_||最后评论时间\\ \\ *样例* : {noformat}"string"{noformat}||string (date-time)|
+|*price*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*rid*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*sectionID*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*type*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*uid*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*zan*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+
+
+h3. GroupItem {anchor:groupitem}
+加入群记录
+
+
+||名称||说明||类型||
+|*gid*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*id*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*uid*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+
+
+h3. Purchase {anchor:purchase}
+用户购买记录
+
+
+||名称||说明||类型||
+|*PurchaseTime*\\ \\ _可选_||购买时间\\ \\ *样例* : {noformat}"string"{noformat}||string (date-time)|
+|*id*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*price*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*purchaseTime*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string (date-time)|
+|*rid*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*uid*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+
+
+h3. Reply {anchor:reply}
+评论
+
+
+||名称||说明||类型||
+|*content*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+|*id*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*rid*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*time*\\ \\ _可选_||评论时间\\ \\ *样例* : {noformat}"2020-11-22 12:23:11"{noformat}||string (date-time)|
+|*uid*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+
+
+h3. ResponseResult«Artical» {anchor:61e3f0cb484fc54999013e7b63698085}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}"[#artical]"{noformat}||[Artical|#artical]|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«ChatGroup» {anchor:e30ca2e1fbb092c982560abcffcf3bd6}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}"[#chatgroup]"{noformat}||[ChatGroup|#chatgroup]|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«Chat» {anchor:4b20c52ffaf425ee794978c9584e73a9}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}"[#chat]"{noformat}||[Chat|#chat]|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«ForumResource» {anchor:2306c090eda0ace4811155e2b2961fd9}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}"[#forumresource]"{noformat}||[ForumResource|#forumresource]|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«List«Artical»» {anchor:af4d76c2fd02cbff89dd897ee8435152}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}[ "[#artical]" ]{noformat}||< [Artical|#artical] > array|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«List«ChatGroup»» {anchor:99f690e40505fb2bd447c2d40ce02ad9}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}[ "[#chatgroup]" ]{noformat}||< [ChatGroup|#chatgroup] > array|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«List«Chat»» {anchor:d4fd7cedcb8c5dc04f176888e43cbb73}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}[ "[#chat]" ]{noformat}||< [Chat|#chat] > array|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«List«ForumResource»» {anchor:40c17371c2d3c0df11edd8708ee94302}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}[ "[#forumresource]" ]{noformat}||< [ForumResource|#forumresource] > array|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«List«GroupItem»» {anchor:010091f7244d323dc6c6282d31d5c2db}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}[ "[#groupitem]" ]{noformat}||< [GroupItem|#groupitem] > array|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«List«Purchase»» {anchor:b0ed0b1a956a48a8fe19ad33e3cf851b}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}[ "[#purchase]" ]{noformat}||< [Purchase|#purchase] > array|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«List«Reply»» {anchor:718a368ab83d8e8ae937319dbdec1ae5}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}[ "[#reply]" ]{noformat}||< [Reply|#reply] > array|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«List«Zan»» {anchor:ce985ad7d1f2ec7f4354e716a6c2b825}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}[ "[#zan]" ]{noformat}||< [Zan|#zan] > array|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«List«int»» {anchor:6f832e606553701536847de28df30e6d}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}[ 0 ]{noformat}||< integer (int32) > array|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«Purchase» {anchor:1f5e32f207f2f322123647894a71a4ea}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}"[#purchase]"{noformat}||[Purchase|#purchase]|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«Reply» {anchor:c01fdf3f9b88d406145d821dd854bd06}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}"[#reply]"{noformat}||[Reply|#reply]|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«Upfile» {anchor:65a4589c7cc60c7cdc4dc8c0ce8a6f4a}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}"[#upfile]"{noformat}||[Upfile|#upfile]|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«User_Info» {anchor:2fa1ffabb8c07cafb7a3ce222ff36c08}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}"[#user_info]"{noformat}||[User_Info|#user_info]|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«User» {anchor:1a0d4ca65a630c3c812d7e1c11e0cdd8}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}"[#user]"{noformat}||[User|#user]|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«Zan» {anchor:4007e9bcd76c9e8104d0d22a80839973}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}"[#zan]"{noformat}||[Zan|#zan]|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«boolean» {anchor:0a2261a69c68d1053ed2559c393cc527}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}true{noformat}||boolean|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«int» {anchor:3fe2e2379dbf233eedc7933fe7cf413b}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. ResponseResult«string» {anchor:2fcc07109ac56c98de62a28511fb6955}
+
+||名称||说明||类型||
+|*code*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*data*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+|*msg*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+
+
+h3. Upfile {anchor:upfile}
+上传的文件
+
+
+||名称||说明||类型||
+|*fileid*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*filename*\\ \\ _可选_||文件名\\ \\ *样例* : {noformat}"test.zip"{noformat}||string|
+|*intro*\\ \\ _可选_||文件介绍\\ \\ *样例* : {noformat}"test intro"{noformat}||string|
+|*keywords*\\ \\ _可选_||文件关键词\\ \\ *样例* : {noformat}"java"{noformat}||string|
+|*purchasetime*\\ \\ _可选_||文件被购买次数\\ \\ *样例* : {noformat}0{noformat}||integer (int32)|
+|*resourceid*\\ \\ _可选_||文件的资源ID\\ \\ *样例* : {noformat}0{noformat}||integer (int32)|
+|*title*\\ \\ _可选_||文件标题\\ \\ *样例* : {noformat}"test title"{noformat}||string|
+
+
+h3. User {anchor:user}
+用户类
+
+
+||名称||说明||类型||
+|*account*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+|*email*\\ \\ _可选_||邮箱\\ \\ *样例* : {noformat}"513317651@qq.com"{noformat}||string|
+|*name*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+|*password*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+|*uid*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+
+
+h3. User_Info {anchor:user_info}
+用户额外信息
+
+
+||名称||说明||类型||
+|*infoID*\\ \\ _可选_||info id\\ \\ *样例* : {noformat}0{noformat}||integer (int32)|
+|*userBalance*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*userID*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*userIntro*\\ \\ _可选_||*样例* : {noformat}"string"{noformat}||string|
+|*userPoint*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*userZan*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+
+
+h3. Zan {anchor:zan}
+赞
+
+
+||名称||说明||类型||
+|*id*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*rid*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*status*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+|*uid*\\ \\ _可选_||*样例* : {noformat}0{noformat}||integer (int32)|
+
+
+

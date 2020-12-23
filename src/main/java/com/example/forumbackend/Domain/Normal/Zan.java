@@ -24,11 +24,11 @@ public class Zan {
     @TableId(value = "zan_id",type = IdType.AUTO)
     private Integer ID;
 
-    @ApiModelProperty(example = "0")
+    @ApiModelProperty(value = "赞对应的资源的资源ID",example = "0")
     @TableField("zan_resource_id")
     private Integer RID;
 
-    @ApiModelProperty(example = "0")
+    @ApiModelProperty(value = "点赞者的UID",example = "0")
     @TableField("zan_uid")
     private Integer UID;
 

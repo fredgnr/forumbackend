@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 @Data
 @ToString
-@ApiModel("用户购买记录")
+@ApiModel(description = "用户购买记录")
 @TableName("purchase")
 public class Purchase {
     /*
@@ -27,15 +27,15 @@ public class Purchase {
     @TableId(value = "purchase_id",type = IdType.AUTO)
     private Integer ID;
 
-    @ApiModelProperty("购买资源RID")
+    @ApiModelProperty(value = "购买资源RID",example = "0")
     @TableField("purchase_resource_id")
     private Integer RID;
 
-    @ApiModelProperty("购买者UID")
+    @ApiModelProperty(value = "购买者UID",example = "0")
     @TableField("purchase_user_id")
     private Integer UID;
 
-    @ApiModelProperty("购买价格")
+    @ApiModelProperty(value = "购买价格",example = "0")
     @TableField("purchase_price")
     private Integer Price;
 

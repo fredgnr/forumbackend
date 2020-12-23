@@ -1,0 +1,604 @@
+
+[[_definitions]]
+== 定义
+
+[[_artical]]
+=== Artical
+文章
+
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**content** +
+__可选__|**样例** : `"string"`|string
+|**createdtime** +
+__可选__|资源上传时间 +
+**样例** : `"2020-11-22 12:23:11"`|string (date-time)
+|**id** +
+__可选__|**样例** : `0`|integer (int32)
+|**introduction** +
+__可选__|**样例** : `"string"`|string
+|**keywords** +
+__可选__|**样例** : `"string"`|string
+|**lastreplytime** +
+__可选__|最后评论时间 +
+**样例** : `"2020-11-22 12:23:11"`|string (date-time)
+|**resourceID** +
+__可选__|**样例** : `0`|integer (int32)
+|**title** +
+__可选__|**样例** : `"string"`|string
+|**view** +
+__可选__|**样例** : `0`|integer (int32)
+|===
+
+
+[[_chat]]
+=== Chat
+聊天记录
+
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**createTime** +
+__可选__|发送时间 +
+**样例** : `"2020-12-22 01:35:00"`|string (date-time)
+|**groupID** +
+__可选__|**样例** : `0`|integer (int32)
+|**id** +
+__可选__|**样例** : `0`|integer (int32)
+|**message** +
+__可选__|消息内容 +
+**样例** : `"message test"`|string
+|**mtype** +
+__可选__|消息记录种类(群聊or私聊) +
+**样例** : `0`|integer (int32)
+|**receiveUID** +
+__可选__|**样例** : `0`|integer (int32)
+|**sendUID** +
+__可选__|**样例** : `0`|integer (int32)
+|===
+
+
+[[_chatgroup]]
+=== ChatGroup
+聊天群类
+
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**createtime** +
+__可选__|群创建时间 +
+**样例** : `"2020-12-22 01:35:00"`|string (date-time)
+|**gid** +
+__可选__|**样例** : `0`|integer (int32)
+|**introduce** +
+__可选__|**样例** : `"string"`|string
+|**name** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_forumresource]]
+=== ForumResource
+资源
+
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**createdtime** +
+__可选__|资源上传时间 +
+**样例** : `"2020-11-22 12:23:11"`|string (date-time)
+|**lastReplyUID** +
+__可选__|**样例** : `0`|integer (int32)
+|**lastreplytime** +
+__可选__|最后评论时间 +
+**样例** : `"string"`|string (date-time)
+|**price** +
+__可选__|**样例** : `0`|integer (int32)
+|**rid** +
+__可选__|**样例** : `0`|integer (int32)
+|**sectionID** +
+__可选__|**样例** : `0`|integer (int32)
+|**type** +
+__可选__|**样例** : `0`|integer (int32)
+|**uid** +
+__可选__|**样例** : `0`|integer (int32)
+|**zan** +
+__可选__|**样例** : `0`|integer (int32)
+|===
+
+
+[[_groupitem]]
+=== GroupItem
+加入群记录
+
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**gid** +
+__可选__|**样例** : `0`|integer (int32)
+|**id** +
+__可选__|**样例** : `0`|integer (int32)
+|**uid** +
+__可选__|**样例** : `0`|integer (int32)
+|===
+
+
+[[_purchase]]
+=== Purchase
+用户购买记录
+
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**PurchaseTime** +
+__可选__|购买时间 +
+**样例** : `"string"`|string (date-time)
+|**id** +
+__可选__|**样例** : `0`|integer (int32)
+|**price** +
+__可选__|**样例** : `0`|integer (int32)
+|**purchaseTime** +
+__可选__|**样例** : `"string"`|string (date-time)
+|**rid** +
+__可选__|**样例** : `0`|integer (int32)
+|**uid** +
+__可选__|**样例** : `0`|integer (int32)
+|===
+
+
+[[_reply]]
+=== Reply
+评论
+
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**content** +
+__可选__|**样例** : `"string"`|string
+|**id** +
+__可选__|**样例** : `0`|integer (int32)
+|**rid** +
+__可选__|**样例** : `0`|integer (int32)
+|**time** +
+__可选__|评论时间 +
+**样例** : `"2020-11-22 12:23:11"`|string (date-time)
+|**uid** +
+__可选__|**样例** : `0`|integer (int32)
+|===
+
+
+[[_61e3f0cb484fc54999013e7b63698085]]
+=== ResponseResult«Artical»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : <<_artical>>|<<_artical,Artical>>
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_e30ca2e1fbb092c982560abcffcf3bd6]]
+=== ResponseResult«ChatGroup»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : <<_chatgroup>>|<<_chatgroup,ChatGroup>>
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_4b20c52ffaf425ee794978c9584e73a9]]
+=== ResponseResult«Chat»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : <<_chat>>|<<_chat,Chat>>
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_2306c090eda0ace4811155e2b2961fd9]]
+=== ResponseResult«ForumResource»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : <<_forumresource>>|<<_forumresource,ForumResource>>
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_af4d76c2fd02cbff89dd897ee8435152]]
+=== ResponseResult«List«Artical»»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `[ "<<_artical>>" ]`|< <<_artical,Artical>> > array
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_99f690e40505fb2bd447c2d40ce02ad9]]
+=== ResponseResult«List«ChatGroup»»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `[ "<<_chatgroup>>" ]`|< <<_chatgroup,ChatGroup>> > array
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_d4fd7cedcb8c5dc04f176888e43cbb73]]
+=== ResponseResult«List«Chat»»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `[ "<<_chat>>" ]`|< <<_chat,Chat>> > array
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_40c17371c2d3c0df11edd8708ee94302]]
+=== ResponseResult«List«ForumResource»»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `[ "<<_forumresource>>" ]`|< <<_forumresource,ForumResource>> > array
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_010091f7244d323dc6c6282d31d5c2db]]
+=== ResponseResult«List«GroupItem»»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `[ "<<_groupitem>>" ]`|< <<_groupitem,GroupItem>> > array
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_b0ed0b1a956a48a8fe19ad33e3cf851b]]
+=== ResponseResult«List«Purchase»»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `[ "<<_purchase>>" ]`|< <<_purchase,Purchase>> > array
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_718a368ab83d8e8ae937319dbdec1ae5]]
+=== ResponseResult«List«Reply»»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `[ "<<_reply>>" ]`|< <<_reply,Reply>> > array
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_ce985ad7d1f2ec7f4354e716a6c2b825]]
+=== ResponseResult«List«Zan»»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `[ "<<_zan>>" ]`|< <<_zan,Zan>> > array
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_6f832e606553701536847de28df30e6d]]
+=== ResponseResult«List«int»»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `[ 0 ]`|< integer (int32) > array
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_1f5e32f207f2f322123647894a71a4ea]]
+=== ResponseResult«Purchase»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : <<_purchase>>|<<_purchase,Purchase>>
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_c01fdf3f9b88d406145d821dd854bd06]]
+=== ResponseResult«Reply»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : <<_reply>>|<<_reply,Reply>>
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_65a4589c7cc60c7cdc4dc8c0ce8a6f4a]]
+=== ResponseResult«Upfile»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : <<_upfile>>|<<_upfile,Upfile>>
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_2fa1ffabb8c07cafb7a3ce222ff36c08]]
+=== ResponseResult«User_Info»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : <<_user_info>>|<<_user_info,User_Info>>
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_1a0d4ca65a630c3c812d7e1c11e0cdd8]]
+=== ResponseResult«User»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : <<_user>>|<<_user,User>>
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_4007e9bcd76c9e8104d0d22a80839973]]
+=== ResponseResult«Zan»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : <<_zan>>|<<_zan,Zan>>
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_0a2261a69c68d1053ed2559c393cc527]]
+=== ResponseResult«boolean»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `true`|boolean
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_3fe2e2379dbf233eedc7933fe7cf413b]]
+=== ResponseResult«int»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `0`|integer (int32)
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_2fcc07109ac56c98de62a28511fb6955]]
+=== ResponseResult«string»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `"string"`|string
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_upfile]]
+=== Upfile
+上传的文件
+
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**fileid** +
+__可选__|**样例** : `0`|integer (int32)
+|**filename** +
+__可选__|文件名 +
+**样例** : `"test.zip"`|string
+|**intro** +
+__可选__|文件介绍 +
+**样例** : `"test intro"`|string
+|**keywords** +
+__可选__|文件关键词 +
+**样例** : `"java"`|string
+|**purchasetime** +
+__可选__|文件被购买次数 +
+**样例** : `0`|integer (int32)
+|**resourceid** +
+__可选__|文件的资源ID +
+**样例** : `0`|integer (int32)
+|**title** +
+__可选__|文件标题 +
+**样例** : `"test title"`|string
+|===
+
+
+[[_user]]
+=== User
+用户类
+
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**account** +
+__可选__|**样例** : `"string"`|string
+|**email** +
+__可选__|邮箱 +
+**样例** : `"513317651@qq.com"`|string
+|**name** +
+__可选__|**样例** : `"string"`|string
+|**password** +
+__可选__|**样例** : `"string"`|string
+|**uid** +
+__可选__|**样例** : `0`|integer (int32)
+|===
+
+
+[[_user_info]]
+=== User_Info
+用户额外信息
+
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**infoID** +
+__可选__|info id +
+**样例** : `0`|integer (int32)
+|**userBalance** +
+__可选__|**样例** : `0`|integer (int32)
+|**userID** +
+__可选__|**样例** : `0`|integer (int32)
+|**userIntro** +
+__可选__|**样例** : `"string"`|string
+|**userPoint** +
+__可选__|**样例** : `0`|integer (int32)
+|**userZan** +
+__可选__|**样例** : `0`|integer (int32)
+|===
+
+
+[[_zan]]
+=== Zan
+赞
+
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|名称|说明|类型
+|**id** +
+__可选__|**样例** : `0`|integer (int32)
+|**rid** +
+__可选__|**样例** : `0`|integer (int32)
+|**status** +
+__可选__|**样例** : `0`|integer (int32)
+|**uid** +
+__可选__|**样例** : `0`|integer (int32)
+|===
+
+
+

@@ -1,0 +1,30 @@
+h1. springboot利用swagger构建api文档
+
+
+h2. 概览 {anchor:overview}
+简单优雅的restfun风格
+
+
+h3. 版本信息
+_版本_ : 1.0
+
+
+h3. URI scheme
+_域名_ : 127.0.0.1:8080\\ 
+_基础路径_ : /
+
+
+h3. 标签
+
+* chat-controller : Chat Controller
+* resource-controller : Resource Controller
+* 回复API(测试完成) : Reply Controller
+* 文件API(完成测试) : Upfile Controller
+* 文章相关API : Artical Controller
+* 点赞相关api(测试完成) : Zan Controller
+* 用户信息(测试完成) : User Controller
+* 登录登出(测试完成) : Login Controller
+* 购买资源 : Purchase Controller
+
+
+

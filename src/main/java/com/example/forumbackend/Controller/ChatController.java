@@ -1,4 +1,4 @@
-package com.example.forumbackend.Contoller;
+package com.example.forumbackend.Controller;
 
 import com.example.forumbackend.Domain.ChatRoom.Chat;
 import com.example.forumbackend.Domain.ChatRoom.ChatGroup;

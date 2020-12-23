@@ -17,51 +17,58 @@ import java.time.LocalDateTime;
 @TableName("article")
 @ApiModel(description = "文章")
 public class Artical {
-    /*
-   artical_id          int  auto_increment not null,
-   article_resource_id  int  not null,
-   article_title        varchar(200) not null,
-   article_keywords     varchar(100) ,
-   article_intro        varchar(300) not null,
-   article_content      longtext not null,
-   article_view         int not null,
-     */
+
     @TableId(value = "artical_id",type = IdType.AUTO)
     @ApiModelProperty(example = "0")
     private Integer ID;
 
-    @ApiModelProperty(example = "0")
+    @ApiModelProperty(value = "文章对应的资源号",example = "0")
     @TableField("article_resource_id")
     private Integer ResourceID;
 
-    @ApiModelProperty(example = "test_title")
+    @ApiModelProperty(value = "文章标题",example = "test_title")
     @TableField("article_title")
     private String Title;
 
-    @ApiModelProperty(example = "")
+    @ApiModelProperty(value = "文章关键词",example = "")
     @TableField("article_keywords")
     private String Keywords;
 
-    @ApiModelProperty(example = "introduction test")
+    @ApiModelProperty(value = "文章介绍",example = "introduction test")
     @TableField("article_intro")
     private String Introduction;
 
-    @ApiModelProperty(example = "content test")
+    @ApiModelProperty(value = "文章正文",example = "content test")
     @TableField("article_content")
     private String Content;
 
-    @ApiModelProperty(example = "0")
+    @ApiModelProperty(value = "文章被浏览次数",example = "0")
     @TableField("article_view")
     private Integer View;
 
     @JsonFormat(locale = "zh",timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "资源上传时间",example = "2020-11-22 12:23:11")
     @TableField("created_time")
-    private LocalDateTime Createdtime;
+    private LocalDateTime createdtime;
 
     @JsonFormat(locale = "zh",timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "最后评论时间",example = "2020-11-22 12:23:11")
     @TableField("last_reply_time")
-    private LocalDateTime Lastreplytime;
+    private LocalDateTime lastreplytime;
 
+    public LocalDateTime getCreatedtime() {
+        return createdtime;
+    }
+
+    public void setCreatedtime(LocalDateTime createdtime) {
+        this.createdtime = createdtime;
+    }
+
+    public LocalDateTime getLastreplytime() {
+        return lastreplytime;
+    }
+
+    public void setLastreplytime(LocalDateTime lastreplytime) {
+        this.lastreplytime = lastreplytime;
+    }
 }
